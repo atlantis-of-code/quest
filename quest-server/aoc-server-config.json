@@ -1,0 +1,161 @@
+{
+  "$schema": "../../aoc/aoc-server/aoc-server-config.schema.json",
+  "base": {
+    "appId": "quest",
+    "programName": "Quest",
+    "locale": "es",
+    "multiTenancy": false,
+    "node": {
+      "port": 3000,
+      "logLevel": "trace",
+      "requestLimit": "10mb",
+      "useAuthHelper": true,
+      "sessionSecret": "m4v3rm4",
+      "corsOrigin": "http://localhost:4200"
+    },
+    "postgres": {
+      "host": "gesvip2.jeronibrunet.com",
+      "port": 55557,
+      "username": "postgres",
+      "password": "pichon",
+      "db": "maverma",
+      "debug": false
+    },
+    "mail": {
+      "options": {
+        "host": "smtp.zoho.eu",
+        "port": 587,
+        "secure": false,
+        "auth": {
+          "user": "aoc@atlantisofcode.com",
+          "pass": "7w3ewjRSsz6k"
+        },
+        "tls": {
+          "rejectUnauthorized": false
+        }
+      },
+      "defaults": {
+        "from": "aoc@atlantisofcode.com"
+      }
+    },
+    "reports": {
+      "wkhtmltopdfAbsolutePath": "H:\\Code\\quest\\quest-server\\bin\\wkhtmltopdf.exe",
+      "wkhtmltopdfDefaultArgs": ["--enable-local-file-access"],
+      "htmlBaseHref": "",
+      "pdfCache": false,
+      "pdfCacheDirectory": "H:\\pdfs",
+      "workflows": {
+        "qpdfAbsolutePath": "H:\\Code\\quest\\quest-server\\bin\\qpdf-9.1.0\\bin\\qpdf.exe"
+      }
+    },
+    "custom": {
+      "pathFicheros": "H:\\quest\\ficheros"
+    }
+  },
+  "jeroni": {
+    "node": {
+      "requestLimit": "1tb"
+    },
+    "postgres": {
+      "host": "192.168.2.12",
+      "port": 55557,
+      "username": "postgres",
+      "password": "pichon",
+      "db": "maverma",
+      "debug": true
+    },
+    "reports": {
+      "wkhtmltopdfAbsolutePath": "/usr/bin/wkhtmltopdf",
+      "wkhtmltopdfDefaultArgs": ["--enable-local-file-access"],
+      "htmlBaseHref": "",
+      "pdfCache": false,
+      "pdfCacheDirectory": "/tmp",
+      "workflows": {
+        "qpdfAbsolutePath": "/usr/bin/qpdf"
+      }
+    },
+    "custom": {
+      "pathFicheros": "/home/jeroni/Dropbox/Management/Atlantis of Code/Quest/ficheros"
+    }
+  },
+  "jeroni-win": {
+    "node": {
+      "requestLimit": "1tb"
+    },
+    "postgres": {
+      "host": "192.168.2.12",
+      "port": 55557,
+      "username": "postgres",
+      "password": "pichon",
+      "db": "maverma",
+      "debug": true
+    },
+    "reports": {
+      "wkhtmltopdfAbsolutePath": "C:\\Users\\jeroni\\Tools\\wkhtmltox\\bin\\wkhtmltopdf.exe",
+      "wkhtmltopdfDefaultArgs": [
+        "--enable-local-file-access"
+      ],
+      "htmlBaseHref": "",
+      "pdfCache": false,
+      "pdfCacheDirectory": "C:\\Users\\jeroni\\Documents\\DevFiles\\Quest\\pdf",
+      "workflows": {
+        "qpdfAbsolutePath": "C:\\Users\\jeroni\\Tools\\qpdf\\bin\\qpdf.exe"
+      }
+    },
+    "custom": {
+      "pathFicheros": "C:\\Users\\jeroni\\Dropbox\\Management\\Atlantis of Code\\Quest\\ficheros"
+    }
+  },
+  "prod-jeroni": {
+    "node": {
+      "requestLimit": "1tb",
+      "sessionSecret": "ASDALSKDLAskdasldkasld**ASD!!$%%&&"
+    },
+    "postgres": {
+      "host": "192.168.2.12",
+      "port": 55557,
+      "username": "postgres",
+      "password": "pichon",
+      "db": "maverma"
+    },
+    "reports": {
+      "wkhtmltopdfAbsolutePath": "/usr/local/bin/wkhtmltopdf",
+      "wkhtmltopdfDefaultArgs": ["--enable-local-file-access"],
+      "htmlBaseHref": "",
+      "pdfCache": false,
+      "pdfCacheDirectory": "/tmp",
+      "workflows": {
+        "qpdfAbsolutePath": "/usr/bin/qpdf"
+      }
+    },
+    "custom": {
+      "pathFicheros": "/ficheros"
+    }
+  },
+  "prod-quest": {
+    "node": {
+      "requestLimit": "1tb",
+      "sessionSecret": "K3U>ruFV*/S6o*R;(qO$KU}u*VJ_K#J?"
+    },
+    "postgres": {
+      "host": "pgbouncer",
+      "port": 6432,
+      "username": "postgres",
+      "password": "",
+      "db": "maverma"
+    },
+    "reports": {
+      "wkhtmltopdfAbsolutePath": "/usr/local/bin/wkhtmltopdf",
+      "wkhtmltopdfDefaultArgs": ["--enable-local-file-access"],
+      "htmlBaseHref": "",
+      "pdfCache": false,
+      "pdfCacheDirectory": "/tmp",
+      "workflows": {
+        "qpdfAbsolutePath": "/usr/bin/qpdf"
+      }
+    },
+    "custom": {
+      "pathFicheros": "/ficheros"
+    }
+  }
+}

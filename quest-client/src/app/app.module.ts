@@ -1,0 +1,62 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AocAppInitializerFactory, AocAppModule } from '@atlantis-of-code/aoc-client/components/aoc-app';
+import { AocDirectivesModule } from '@atlantis-of-code/aoc-client/core/directives';
+import { AocUiButtonModule } from '@atlantis-of-code/aoc-client/ui/button/aoc-ui-button';
+import { AocUiAutocompleteModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-autocomplete';
+import { AocUiDatetimePickerModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-datetime-picker';
+import { Config } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NaceComponent } from './components/nace/nace.component';
+import { Usuario } from './models/usuarios/usuario';
+import { AocUserConfig } from '@atlantis-of-code/aoc-client/aoc-common';
+
+// Set Big.js to strict mode. By this way only Big numbers or strings will be accepted as BigSource.
+// @ts-ignore
+// Big.strict = true; Tenim marrons per Albarà, antes d'aplicar strict s'ha de revisar bé
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    NaceComponent
+  ],
+  imports: [
+    CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    AocDirectivesModule,
+    AocUiButtonModule,
+    AocUiDatetimePickerModule,
+    AocUiAutocompleteModule,
+    AocAppModule.forRoot(
+      Config,
+      new AocUserConfig(Usuario, { fieldMap: { username: 'nombre', password: 'contrasenya' }}),
+      {
+        autoConvertEmptyStringsToNullInControls: true,
+        autoTrimStringsInControls: true,
+        dateTimePicker: {
+          mode: 'dateTime',
+          formats: {
+            date: 'dd/MM/y',
+            dateTime: 'dd/MM/y HH:mm:ss',
+            time: 'HH:mm:ss'
+          }
+        }
+      }
+    ),
+  ],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: AocAppInitializerFactory(Config), multi: true }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

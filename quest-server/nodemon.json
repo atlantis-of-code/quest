@@ -1,0 +1,9 @@
+{
+  "execMap": {
+    "ts": "ts-node --files --transpile-only -r tsconfig-paths/register"
+  },
+  "ignore": ["test/**/*.ts", "test/**/*.spec.ts", ".git"],
+  "ignoreRoot": [],
+  "watch": ["src", "aoc-server-config.json", "../../aoc/aoc-server/src", "../../aoc/aoc-common/src"],
+  "ext": "ts,js,json,yaml,yml,pug"
+}

@@ -1,0 +1,96 @@
+extends ../layout-preprint
+block content
+  table.container
+    thead
+      tr
+        td(colspan='7')
+          table.header
+            tr
+              td.logo-quest
+                include ../_includes/logo-quest.pug
+              td.spacer
+              td.customer
+                p
+                  strong PRESUPUESTO Nº
+                  |  #{presupuesto.serie}#{presupuesto.anyoFiscal.anyo}#{presupuesto.numero.toString().padStart(4, '0')}
+                p Fecha: #{dateFns.format(presupuesto.fecha, 'dd/MM/yyyy')}
+                hr
+                .header-cliente
+                  p #{presupuesto.cliente.embDatosFiscales.tipoDocumento.nombre}: #{presupuesto.cliente.embDatosFiscales.numero_documento}
+                  p
+                    strong #{presupuesto.cliente.embDatosFiscales.nombre_fiscal} #{presupuesto.cliente.embDatosFiscales.apellido_1} #{presupuesto.cliente.embDatosFiscales.apellido_2}
+                  p
+                    | #{presupuesto.direccionFiscal.denominacionVia.nombre}
+                    | #{presupuesto.direccionFiscal.nombre_via}
+                    | #{presupuesto.direccionFiscal.numero}
+                    | #{presupuesto.direccionFiscal.portal}
+                    | #{presupuesto.direccionFiscal.escalera ? 'esc ' + presupuesto.direccionFiscal.escalera : ''}
+                    | #{presupuesto.direccionFiscal.piso ? 'piso ' + presupuesto.direccionFiscal.piso : ''}
+                    | #{presupuesto.direccionFiscal.puerta ? 'puerta ' + presupuesto.direccionFiscal.puerta : ''}
+                  p
+                    | #{presupuesto.direccionFiscal.codigo_postal}
+                    | #{presupuesto.direccionFiscal.localidad}
+                    | #{presupuesto.direccionFiscal.provincia ? '('+presupuesto.direccionFiscal.provincia+')' : '' }
+                  .header-cliente-telefonos-fas
+                    p Tfno.: #{presupuesto.cliente.embInfoContacto.telefono1} #{presupuesto.cliente.embInfoContacto.telefono2} #{presupuesto.cliente.embInfoContacto.telefono3}
+                  p Cód. Cliente: #{presupuesto.cliente.codigo}
+                  if presupuesto.direccionObra
+                    p
+                      strong OBRA:
+                    p
+                      | #{presupuesto.direccionFiscal.denominacionVia.nombre}
+                      | #{presupuesto.direccionFiscal.nombre_via}
+                      | #{presupuesto.direccionFiscal.numero}
+                      | #{presupuesto.direccionFiscal.portal}
+                      | #{presupuesto.direccionFiscal.escalera ? 'esc ' + presupuesto.direccionFiscal.escalera : ''}
+                      | #{presupuesto.direccionFiscal.piso ? 'piso ' + presupuesto.direccionFiscal.piso : ''}
+                      | #{presupuesto.direccionFiscal.puerta ? 'puerta ' + presupuesto.direccionFiscal.puerta : ''}
+                    p
+                      | #{presupuesto.direccionFiscal.codigo_postal}
+                      | #{presupuesto.direccionFiscal.localidad}
+                      | #{presupuesto.direccionFiscal.provincia ? '(' + presupuesto.direccionFiscal.provincia + ')' : '' }
+            if presupuesto.observaciones != null && presupuesto.observaciones != ''
+              tr
+                td(colspan='3')
+                  p Observaciones: #{presupuesto.observaciones}
+    tbody.rows
+      tr
+        th Cód.
+        th Descripción
+        th Cant.
+        th Precio
+        th % Dto.
+        th Total
+
+      each linea, index in presupuesto.lineaPresupuestoCollection
+        tr
+          td #{linea.codigo_articulo}
+          td.description #{linea.nombre_articulo}
+          td.align-right #{numberFormat(linea.cantidad)}
+          td.align-right #{numberFormat(linea.precio_base)}
+          td.align-right #{numberFormat(linea.descuento)}
+          td.align-right #{numberFormat(linea.total_base)}
+      tr
+        td(colspan='6')
+          table.summary
+            tbody
+              tr
+                td.summary-left
+                td.summary-right
+                  table.totales
+                    tbody
+                      tr
+                        td Base Imponible:
+                        td #{numberFormat(presupuesto.total_base)} €
+                      tr
+                        td Total Imp. (#{numberFormat(presupuesto.iva)}%):
+                        td #{numberFormat(presupuesto.total_impuestos)} €
+                      tr
+                        td Total:
+                        td #{numberFormat(presupuesto.total)} €
+    tfoot
+      tr
+        td(colspan='6')
+          // table.footer
+          p
+          p

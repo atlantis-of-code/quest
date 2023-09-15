@@ -1,0 +1,54 @@
+body {
+  font-size: 13px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.pages {
+  width: 100%;
+
+  /* When setting borders, borders are repeated randomly for new pages.
+   * Use border-collapse: separate; border-spacing: 0px; and set borders in td's (not in tr's)
+   */
+  table {border-collapse: collapse;}
+  thead {display: table-header-group;}
+  tfoot {display: table-footer-group;}
+  tbody {display: table-row-group;}
+  .align-right {text-align: right;}
+  .align-left {text-align: left;}
+  .align-center {text-align: center;}
+  .italic {font-style: italic;}
+
+  table.container {
+    width: 100%;
+    thead {
+      table.header {
+        width: 100%;
+      }
+    }
+    tbody.rows {
+      tr {
+        th {
+          background-color: #808080;
+          color: white;
+          border: 1px solid black;
+        }
+        td {
+          word-wrap: break-word;
+          vertical-align: top;
+        }
+      }
+    }
+  }
+}
+
+.final-page {
+  page-break-before: always;
+}
+

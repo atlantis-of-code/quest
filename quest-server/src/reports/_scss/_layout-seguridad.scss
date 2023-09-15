@@ -1,0 +1,42 @@
+
+.pages {
+
+  .medidas-seguridad {
+    position: relative;
+    h1 {
+      letter-spacing: -1px;
+      font-size: 14pt;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 7px;
+      margin-bottom: 0;
+    }
+
+    h3 {
+      margin-top: 5px;
+      margin-bottom: 0;
+    }
+
+    .banner {
+      position: absolute;
+      font-weight: bold;
+      top: 5.25cm;
+      left: 17cm;
+      text-align: center;
+      -webkit-transform: rotate(30deg)
+    }
+
+    .seguridad {
+      position: absolute;
+      top: 11cm;
+      left: 16cm;
+      width: 5cm;
+    }
+  }
+}
+

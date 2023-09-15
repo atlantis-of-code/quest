@@ -1,0 +1,29 @@
+      // tr
+        td(colspan='7')
+          table.summary
+            thead
+              tr(class=enb ? 'enb' : '')
+                th Palet
+                th(style='width: 3cm') Cant. Salida
+                th(style='width: 3cm') Cant. Entrada
+                th(style='width: 3cm') Subt. Salida
+                th(style='width: 3cm') Subt. Entrada
+                th(style='width: 3cm') Subtotal
+                // th(style='width: 3cm') Obra
+                // th(style='width: 3cm') Total Empresa
+            tbody
+              - var lineas_de_palets = 0
+              each palet, index in albaran.__palet_albaran$
+                if Number(palet.palet_albaran_cantidad_salida) != 0 || Number(palet.palet_albaran_cantidad_entrada) != 0
+                  - lineas_de_palets++;
+                  tr
+                    td #{palet.__palet.palet_descripcion}
+                    td.align-right #{numberFormat(palet.palet_albaran_cantidad_salida)} Uds.
+                    td.align-right #{Number(palet.palet_albaran_cantidad_entrada) < 0 ? '-' : ''}#{numberFormat(palet.palet_albaran_cantidad_entrada)} Uds.
+                    td.align-right #{numberFormat(palet.palet_albaran_subtotal_salida)} €
+                    td.align-right #{Number(palet.palet_albaran_subtotal_entrada) < 0 ? '-' : ''}#{numberFormat(palet.palet_albaran_subtotal_entrada)} €
+                    td.align-right #{numberFormat(palet.palet_albaran_subtotal)} €
+              if lineas_de_palets === 0
+                tr
+                  td(colspan=6)
+                    p(style='text-align: center') Este albarán no tiene palets ni barras asociados

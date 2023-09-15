@@ -1,0 +1,97 @@
+body {
+  font-size: 13px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.pages {
+  width: 100%;
+  /* When setting borders, borders are repeated randomly for new pages.
+   * Use border-collapse: separate; border-spacing: 0px; and set borders in td's (not in tr's)
+   */
+}
+.pages table {
+  border-collapse: collapse;
+}
+.pages thead {
+  display: table-header-group;
+}
+.pages tfoot {
+  display: table-footer-group;
+}
+.pages tbody {
+  display: table-row-group;
+}
+.pages .align-right {
+  text-align: right;
+}
+.pages .align-left {
+  text-align: left;
+}
+.pages .align-center {
+  text-align: center;
+}
+.pages .italic {
+  font-style: italic;
+}
+.pages table.container {
+  width: 100%;
+}
+.pages table.container thead table.header {
+  width: 100%;
+}
+.pages table.container tbody.rows tr th {
+  background-color: #808080;
+  color: white;
+  border: 1px solid black;
+}
+.pages table.container tbody.rows tr td {
+  word-wrap: break-word;
+  vertical-align: top;
+}
+
+.final-page {
+  page-break-before: always;
+}
+
+.pages .medidas-seguridad {
+  position: relative;
+}
+.pages .medidas-seguridad h1 {
+  letter-spacing: -1px;
+  font-size: 14pt;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.pages .medidas-seguridad h2 {
+  text-align: center;
+  margin-top: 7px;
+  margin-bottom: 0;
+}
+.pages .medidas-seguridad h3 {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.pages .medidas-seguridad .banner {
+  position: absolute;
+  font-weight: bold;
+  top: 5.25cm;
+  left: 17cm;
+  text-align: center;
+  -webkit-transform: rotate(30deg);
+}
+.pages .medidas-seguridad .seguridad {
+  position: absolute;
+  top: 11cm;
+  left: 16cm;
+  width: 5cm;
+}
+
+/*# sourceMappingURL=layout-seguridad.css.map */

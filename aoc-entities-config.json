@@ -1,0 +1,282 @@
+{
+  "$schema": "../aoc/aoc-cli/src/lib/entity-generator/config/aoc-entities-config.schema.json",
+  "schemas": ["clientes", "common", "abstract", "contactos", "contratos", "articulos", "configuracion", "facturacion", "ficheros", "tecnicos", "pedidos", "usuarios"],
+  "entityBaseClass": {
+    "name": "QuestEntity",
+    "path": "../quest-entity",
+    "implementedProperties": [
+      "id", "creation_user", "creation_time","modification_time", "modification_user"
+    ]
+  },
+  "modelBaseClass": {
+    "name": "QuestModel",
+    "path": "../quest-model",
+    "implementedProperties": [
+      "id", "creation_user", "creation_time", "modification_time", "modification_user"
+    ]
+  },
+  "pivotTables": {
+    "contactos.contacto_cliente": {
+      "owningSideColumn": "cliente_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "facturacion.presupuesto_fichero": {
+      "owningSideColumn": "presupuesto_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "facturacion.albaran_fichero": {
+      "owningSideColumn": "albaran_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "facturacion.factura_fichero": {
+      "owningSideColumn": "factura_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "facturacion.ticket_fichero": {
+      "owningSideColumn": "ticket_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "tecnicos.vehiculo_fichero_inspeccion_tecnica": {
+      "owningSideColumn": "vehiculo_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "facturacion.albaran_linea_albaran": {
+      "owningSideColumn": "albaran_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "facturacion.ticket_linea_albaran": {
+      "owningSideColumn": "ticket_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "tecnicos.vehiculo_fichero_facturas": {
+      "owningSideColumn": "vehiculo_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "tecnicos.vehiculo_fichero_otros": {
+      "owningSideColumn": "vehiculo_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "tecnicos.tecnico_fichero": {
+      "owningSideColumn": "tecnico_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "clientes.cliente_fichero": {
+      "owningSideColumn": "cliente_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "articulos.articulo_fichero": {
+      "owningSideColumn": "articulo_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "contratos.contrato_fichero": {
+      "owningSideColumn": "contrato_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "pedidos.repartidor_fichero": {
+      "owningSideColumn": "repartidor_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "usuarios.usuario_grupo": {
+      "owningSideColumn": "usuario_id",
+      "keepEntity": false
+    }
+  },
+  "virtualProperties": {
+    "ficheros.fichero": {
+      "raw": {
+        "type": "string"
+      }
+    }
+  },
+  "eager": {
+    "abstract.emb_direccion": ["denominacion_via_id", "pais_id"],
+    "abstract.emb_datos_fiscales": ["tipo_documento_id"],
+    "abstract.emb_documento": ["anyo_fiscal_id", "cliente_id", "direccion_fiscal_id", "direccion_obra_id"],
+    "abstract.emb_linea_documento": ["articulo_id"],
+    "common.direccion": ["denominacion_via_id", "pais_id"],
+    "common.datos_fiscales": ["tipo_documento_id"],
+    "tecnicos.tecnico": ["tipo_documento_id"]
+  },
+  "enums": {
+    "clientes.cliente.idioma": {
+      "enumName": "IdiomaEnum",
+      "useConstantObjects": true,
+      "items": [
+        {
+          "name": "ESPAÑOL",
+          "value": "Español",
+          "isDefault": true
+        },
+        {
+          "name": "INGLES",
+          "value": "Inglés"
+        }
+      ]
+    },
+    "clientes.cliente.sexo": {
+      "enumName": "SexoEnum",
+      "useConstantObjects": true,
+      "items": [
+        {
+          "name": "HOMBRE",
+          "value": "Hombre",
+          "isDefault": true
+        },
+        {
+          "name": "MUJER",
+          "value": "Mujer"
+        }
+      ]
+    },
+    "contratos.contrato.tipo_suministro": {
+      "enumName": "TipoSuministroEnum",
+      "useConstantObjects": true,
+      "items": [
+        {
+          "name": "DOMICILIARIO",
+          "value": "Domiciliario",
+          "isDefault": true
+        },
+        {
+          "name": "NO_DOMICILIARIO",
+          "value": "No domiciliario"
+        }
+      ]
+    },
+    "contratos.contrato.vehiculo": {
+      "enumName": "VehiculoEnum",
+      "useConstantObjects": true,
+      "items": [
+        {
+          "name": "AUTOCARAVANA",
+          "value": "Autocaravana"
+        },
+        {
+          "name": "ITINERANTE",
+          "value": "Itinerante"
+        }
+      ]
+    },
+    "articulos.movimiento_estoc.tipo": {
+      "enumName": "Tipo",
+      "useConstantObjects": true,
+      "items": [
+        {
+          "name": "ALBARAN",
+          "value": "Albarán"
+        },
+        {
+          "name": "TICKET",
+          "value": "Ticket"
+        },
+        {
+          "name": "TRASPASO",
+          "value": "Traspaso"
+        },
+        {
+          "name": "RECUENTO",
+          "value": "Recuento"
+        }
+      ]
+    }
+  },
+  "embedTables": ["abstract.emb_datos_fiscales", "abstract.emb_direccion", "abstract.emb_info_contacto", "abstract.emb_documento", "abstract.emb_linea_documento"],
+  "embedMap": {
+    "clientes.cliente": [
+      { "embedTable": "abstract.emb_datos_fiscales", "inline":  false },
+      { "embedTable": "abstract.emb_direccion", "inline":  false },
+      { "embedTable": "abstract.emb_info_contacto", "inline":  false }
+    ],
+    "common.direccion": [
+      { "embedTable": "abstract.emb_direccion", "inline":  true }
+    ],
+    "common.datos_fiscales": [
+      { "embedTable": "abstract.emb_datos_fiscales", "inline": true }
+    ],
+    "contactos.contacto": [
+      { "embedTable":  "abstract.emb_info_contacto", "inline": true }
+    ],
+    "contratos.contrato": [
+      { "embedTable":  "abstract.emb_info_contacto", "inline":  false }
+    ],
+    "configuracion.empresa": [
+      { "embedTable":  "abstract.emb_datos_fiscales", "inline":  false },
+      { "embedTable":  "abstract.emb_direccion", "inline":  false },
+      { "embedTable":  "abstract.emb_info_contacto", "inline":  false }
+    ],
+    "facturacion.presupuesto": [
+      { "embedTable":  "abstract.emb_documento", "inline": true }
+    ],
+    "facturacion.linea_presupuesto": [
+      { "embedTable": "abstract.emb_linea_documento", "inline": true }
+    ],
+    "facturacion.albaran": [
+      { "embedTable":  "abstract.emb_documento", "inline": true }
+    ],
+    "facturacion.linea_albaran": [
+      { "embedTable": "abstract.emb_linea_documento", "inline": true }
+    ],
+    "facturacion.factura": [
+      { "embedTable":  "abstract.emb_documento", "inline": true }
+    ],
+    "facturacion.ticket": [
+      { "embedTable": "abstract.emb_documento", "inline": true }
+    ],
+    "tecnicos.tecnico": [
+      { "embedTable": "abstract.emb_info_contacto", "inline": true},
+      { "embedTable": "abstract.emb_datos_fiscales", "inline":  true}
+    ]
+  },
+  "cascades": {
+    "clientes.cliente": {
+      "direccion_id": ["remove"],
+      "datos_fiscales_id": ["remove"],
+      "info_contacto_id": ["remove"]
+    },
+    "contactos.contacto": {
+      "info_contacto_id": ["remove"]
+    },
+    "contratos.contrato": {
+      "datos_fiscales_id": ["remove"],
+      "direccion_correspondencia_id": ["remove"],
+      "direccion_fiscal_id": ["remove"],
+      "direccion_suministro_id": ["remove"],
+      "pagador_alternativo_datos_fiscales_id": ["remove"],
+      "pagador_alternativo_direccion_id": ["remove"]
+    },
+    "facturacion.presupuesto": {
+      "direccion_fiscal_id": ["remove"],
+      "direccion_obra_id": ["remove"]
+    },
+    "facturacion.albaran": {
+      "direccion_fiscal_id": ["remove"],
+      "direccion_obra_id": ["remove"]
+    },
+    "facturacion.factura": {
+      "direccion_fiscal_id": ["remove"],
+      "direccion_obra_id": ["remove"]
+    },
+    "facturacion.ticket": {
+      "direccion_fiscal_id": ["remove"],
+      "direccion_obra_id": ["remove"]
+    },
+    "articulos.articulo": {
+      "foto_id": ["remove"]
+    }
+  }
+}

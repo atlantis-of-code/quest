@@ -1,0 +1,33 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "target": "es2020",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types"],
+    "emitDecoratorMetadata": true,
+    "outDir": "dist",
+    "paths": {
+      "@atlantis-of-code/aoc-server": ["../../aoc/aoc-server/src" ],
+      "@atlantis-of-code/aoc-server/*": ["../../aoc/aoc-server/src/*" ],
+      "@atlantis-of-code/aoc-common": [ "../../aoc/aoc-common/src" ],
+      "@atlantis-of-code/aoc-common/*": [ "../../aoc/aoc-common/src/*" ],
+      "@mikro-orm/core": ["node_modules/@mikro-orm/core"],
+      "@mikro-orm/postgresql": ["node_modules/@mikro-orm/postgresql"],
+      "big.js": ["node_modules/big.js"],
+      "express": ["node_modules/express"],
+      "express-async-errors": ["node_modules/express-async-errors"],
+      "gesvip2-common": ["../gesvip2-common"]
+    }
+  },
+  "include": [
+    "typings.d.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,39 @@
+.pages {
+  table {
+    border-collapse: separate;
+    border-spacing: 0px;
+  }
+
+  tbody.rows {
+    tr {
+      page-break-inside: avoid !important; // Per evitar espais raros dins un tr a files alteaatories... // https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3405
+    }
+
+    tr.albaran {
+      font-weight: bold;
+      td:first-child {
+        border-left: 1px solid black;
+      }
+      td {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+      }
+      td:last-child {
+        border-right: 1px solid black;
+      }
+    }
+
+    tr.factura {
+      /*td:first-child {
+        border-left: 1px solid black;
+      }
+      td {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+      }
+      td:last-child {
+        border-right: 1px solid black;
+      }*/
+    }
+  }
+}

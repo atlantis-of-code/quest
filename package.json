@@ -1,0 +1,19 @@
+{
+  "name": "quest",
+  "version": "1.0.0",
+  "private": true,
+  "description": "«Quest for atlantis» is a tiny ERP for humble businesses. It's also a demo project for «The aoc framework»",
+  "homepage": "https://quest.atlantisofcode.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atlantis-of-code/quest.git"
+  },
+  "author": "https://atlantisofcode.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atlantis-of-code/quest/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

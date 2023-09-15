@@ -1,0 +1,4 @@
+// for users development and also for production, no need of fileReplacements and only 1 theme.scss is enough
+@forward "../../node_modules/@atlantis-of-code/aoc-client/aoc-design/misc/variables/variables";
+@use 'sass:meta';
+@include meta.load-css("../../node_modules/@atlantis-of-code/aoc-client/aoc-design/aoc.scss");

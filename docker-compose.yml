@@ -1,0 +1,112 @@
+version: "3.7"
+services:
+  app:
+    image: quest
+    networks:
+      - quest-net
+    restart: unless-stopped
+    stop_grace_period: 5s
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./deploy/logs:/logs
+      - ./ficheros:/ficheros      
+    environment:
+      - AOC_CONFIG_ENV=prod-quest
+      - NODE_ENV=production
+      - TZ=Europe/Madrid
+    entrypoint: "/bin/sh -c \"npm run start 2>&1 | tee -a /logs/quest-server.log\""
+    
+  report:
+    image: quest
+    networks:
+      - quest-net
+    restart: unless-stopped
+    stop_grace_period: 5s
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./deploy/logs:/logs
+      - ./ficheros:/ficheros
+    environment:
+      - AOC_CONFIG_ENV=prod-quest
+      - NODE_ENV=production
+      - TZ=Europe/Madrid
+    entrypoint: "/bin/sh -c \"npm run start 2>&1 | tee -a /logs/quest-server_reports.log\""
+    
+  pgbouncer:
+    image: pgbouncer/pgbouncer
+    restart: unless-stopped
+    stop_grace_period: 10s
+    environment:
+      - DATABASES_HOST=192.168.1.12
+      - DATABASES_PORT=5432
+      - DATABASES_USER=postgres
+      - DATABASES_PASSWORD=colossal5-fund-stew2-feminist3-aides-shuffle4-hebe-petri
+      - DATABASES_POOL_MODE=session
+      - PGBOUNCER_LISTEN_PORT=6432
+      - DATABASES_POOL_SIZE=100
+      - DATABASES_MAX_DB_CONNECTION=500
+    networks:
+      - quest-net
+  
+  nginx:
+    image: nginx:1.22.1
+    restart: unless-stopped
+    stop_grace_period: 5s
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/logs:/var/log/nginx
+      - ./deploy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./deploy/certs/out/.:/certs:ro
+      # - /etc/munin/static/:/etc/munin/static/
+      # - /var/cache/munin/www/:/var/cache/munin/www/
+    depends_on:
+      - app
+      - report
+    networks:
+      - quest-net
+  
+  log-viewer:
+    image: zhora87/logviewer:latest
+    restart: unless-stopped
+    # user: 1000:1000 # should be owner of volumes
+    volumes:
+      - "./deploy/logs:/root/logs"
+      - "./deploy/log-viewer.conf:/usr/src/myapp/config.conf"
+    # ports:
+      # - "8111:8111"
+    networks:
+      - quest-net
+    
+  logrotate:
+    image: blacklabelops/logrotate:latest
+    restart: unless-stopped
+    environment:
+      LOGS_DIRECTORIES: /logs
+      LOGS_INTERVAL: daily
+      LOGROTATE_COPIES: 30
+      LOGROTATE_STATUSFILE: /logs/logrotate.status
+    volumes:
+      - "./deploy/logs:/logs"
+    networks:
+      - quest-net
+  
+  logger-backend:
+    image: node:18
+    restart: unless-stopped
+    volumes:
+      - "./deploy/logs:/logs"
+      - "./aoc-client-logger-backend:/app"
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
+    working_dir: "/app"
+    command: "npm start /logs/quest-client.log"
+    networks:
+      - quest-net
+
+networks:
+  quest-net:

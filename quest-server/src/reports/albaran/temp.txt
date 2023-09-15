@@ -1,0 +1,125 @@
+    // tbody.rows
+      tr(class=enb ? 'enb' : '')
+        th Código
+        th Descripción
+        th Nr. Serie
+        th Cantidad
+        if conValoracion
+          th Precio
+          if conDescuento
+            th Dto.
+          th Total
+      each linea, index in albaran.lineaAlbaranCollection
+        tr
+          td #{linea.codigo_articulo}
+          if linea.articulo != null
+            td.description #{ReportUtils.formatDescLineaAlb(linea.descripcion_articulo, linea.resistencia, linea.articulo.resistencia, linea.articulo.familia.id)}
+          else
+            td.description #{ReportUtils.formatDescLineaAlb(linea.descripcion_articulo, linea.resistencia)}
+          td #{linea.numero_serie}
+          if linea.metros && +linea.metros !== 0
+            td.align-right #{numberFormat(linea.cantidad)} x #{numberFormat(linea.metros)}m
+          else
+            td.align-right #{numberFormat(linea.cantidad)}
+          if conValoracion
+            if precioNeto && +linea.cantidad !== 0
+              td.align-right #{numberFormat(Big(linea.subtotal).div(linea.cantidad).round(2, 2))}
+            else
+              td.align-right #{numberFormat(linea.precio_base)}
+            if conDescuento
+              td.align-right #{precioNeto ? '' : numberFormat(linea.descuento)}
+              td.align-right #{numberFormat(linea.subtotal)}
+            else
+              td.align-right #{numberFormat(linea.subtotal_sin_descuento)}
+      each palet in albaran.paletAlbaranCollection
+        if palet.origen_precio === 'palet'
+          - var palet_descripcion = palet.palet.descripcion;
+          - var codigo_salida = '';
+          - var codigo_entrada = '';
+        if palet.origen_precio === 'cliente'
+          - var cliente_palet =  Array.from(albaran.cliente.clientePaletCollection).find(cp => cp.palet.id  === palet.palet.id);
+          - var palet_descripcion = cliente_palet.descripcion;
+          - var codigo_salida = cliente_palet.codigo_salida;
+          - var codigo_entrada = cliente_palet.codigo_entrada;
+        if palet.palet_albaran_origen_precio === 'obra'
+          - var obra_palet =  Array.from(albaran.obra.obraPaletCollection).find(op => (op.palet.id ?? op.palet) === (palet.palet.id ?? palet.palet));
+          - var palet_descripcion = obra_palet.descripcion;
+          - var codigo_salida = obra_palet.codigo_salida;
+          - var codigo_entrada = obra_palet.codigo_entrada;
+
+        if palet.cantidad_salida > 0
+          tr
+            td #{codigo_salida}
+            td #{palet_descripcion}
+            td
+            td.align-right #{numberFormat(palet.cantidad_salida)}
+            if conValoracion
+              td.align-right #{numberFormat(palet.precio_salida)}
+              td
+              td.align-right #{numberFormat(palet.subtotal_salida)}
+        if palet.cantidad_entrada < 0
+          tr
+            td #{codigo_entrada}
+            td #{palet_descripcion}
+            td
+            td.align-right #{numberFormat(palet.cantidad_entrada)}
+            if conValoracion
+              td.align-right #{numberFormat(palet.precio_entrada)}
+              td
+              td.align-right #{numberFormat(palet.subtotal_entrada)}
+      if conValoracion
+        tr
+          td(colspan='7')
+            table.summary
+              tbody
+                tr
+                  td.summary-left
+                    // div CONFIRM. 60D
+                    // table.vencimientos
+                      tbody
+                        tr
+                          td Vencimientos:
+                          td 30/12/2019
+                          td 31/12/2019
+                        tr
+                          td
+                          td 476,00 €
+                          td 400,27 €
+                  td.summary-right
+                    table.totales
+                      tbody
+                        tr
+                          td Base Imponible
+                          if conDescuento
+                            td #{numberFormat(albaran.total_base)} €
+                          else
+                            td #{numberFormat(albaran.total_base_sin_descuento)} €
+                        tr
+                          td IVA #{numberFormat(albaran.iva)} %
+                          if conDescuento
+                            td #{numberFormat(albaran.total_impuestos)} €
+                          else
+                            td #{numberFormat(albaran.total_impuestos_sin_descuento)} €
+                        tr(class=enb ? 'enb' : '')
+                          td Total:
+                          if conDescuento
+                            td #{numberFormat(albaran.total)} €
+                          else
+                            td #{numberFormat(albaran.total_sin_descuento)} €
+      tr
+        td(colspan='7')
+          table.palets-obra-empresa
+            thead
+              tr
+                th Saldo de palets y barras
+                if albaran.obra != null
+                  th Obra
+                else
+                  th Sin obra asignada
+                th Total empresa
+            tbody
+              each totales, descPalet in saldosTotales
+                tr
+                  td.align-center #{descPalet}
+                  td.align-center #{totales.obra}
+                  td.align-center #{totales.total}

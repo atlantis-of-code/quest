@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script>
+        function substitutePdfVariables() {
+
+            function getParameterByName(name) {
+                var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+                return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+            }
+
+            function substitute(name) {
+                var value = getParameterByName(name);
+                var elements = document.getElementsByClassName(name);
+
+                for (var i = 0; elements && i < elements.length; i++) {
+                    elements[i].textContent = value;
+                }
+            }
+
+            ['frompage', 'topage', 'page', 'webpage', 'section', 'subsection', 'subsubsection']
+                .forEach(function(param) {
+                    substitute(param);
+                });
+        }
+    </script>
+  </head>
+<body onload="substitutePdfVariables()">
+  <div style="font-family: Arial, sans-serif; font-size: 7pt;">
+    En vista del cumplimiento de la normativa europea 2016/679 sobre Protección de datos (RGPD) le informamos que el tratamiento de los datos proporcionados por Ud. será responsabilidad de Maversa Marimon S.A. con el objetivo de llevar a cago la gestión administrativa, fiscal y contable y conservarla mientras haya un interés mututio en matener la final del tratamiento, y que además se compromete a no ceder o comunicar la información a terceros. Puede ejercer sus derechos de acceso, rectificación, cancelación o supresión del tratamiento a través de maversa@maversa.com.
+    <br/>
+    <div style="text-align: right;">Pág. <span class="page"></span> / <span class="topage"></span></div>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,11 @@
+branchName: '${issue.number}-${issue.title}'
+autoCloseIssue: true
+branches:
+  - label: bug
+    prefix: bug/
+  - label: enhancement
+    prefix: enhancement/
+  - label: task
+    prefix: task/
+  - label: sync
+    prefix: sync/
