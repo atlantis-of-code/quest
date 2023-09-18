@@ -45,18 +45,18 @@ create table articulos.recuento_estoc (
 ) inherits (public.meta);
  */
 
-create table articles.stock_transfer (
+create table articles.manual_stock_transfer (
     id bigserial primary key ,
     date timestamp with time zone not null default now(),
     origin_store_id bigint not null references articles.store on update cascade on delete restrict ,
     target_store_id bigint not null references articles.store on update cascade on delete restrict
 ) inherits (public.meta);
 
-create table articles.stock_transfer_line (
+create table articles.manual_stock_transfer_line (
     id bigserial primary key ,
     quantity numeric not null,
     article_id bigint references articles.article on update cascade on delete restrict ,
-    stock_transfer_id bigint references articles.stock_transfer on update cascade on delete cascade
+    stock_transfer_id bigint references articles.manual_stock_transfer on update cascade on delete cascade
 ) inherits (public.meta);
 
 

@@ -133,9 +133,9 @@ create table invoicing.ticket_line (
 
 
 /*
-    stock transfer for documents
+    stock transfer for documents. Done here because we need the ref to stock_line
  */
-create table articulos.movimiento_estoc (
+create table articles.stock_transfer (
     id bigserial primary key ,
     date timestamp with time zone not null default now(),
     type text not null check ( type in ('Delivery note', 'Re-count', 'Transfer', 'Ticket') ),
@@ -148,7 +148,7 @@ create table articulos.movimiento_estoc (
     article_id bigint not null references articles.article on update cascade on delete cascade ,
     store_id bigint not null references articles.store on update cascade on delete cascade ,
     aux_store_id bigint references articles.store on update cascade on delete set null,
-    stock_line_id bigint references invoicing.store_lline on update cascade on delete set null,
-    stock_transfer_line_id bigint references articles.stock_transfer_line on update cascade on delete set null
+    stock_line_id bigint references invoicing.stock_line_id on update cascade on delete set null,
+    manual_stock_transfer_line_id bigint references articles.manual_stock_transfer_line on update cascade on delete set null
     -- recuento_estoc_id bigint references articulos.recuento_estoc on update cascade on delete cascade
 ) inherits (public.meta);
