@@ -1,9 +1,9 @@
 
 -- Separamos este fichero porque depende de campos abstractos
 
-create table common.direccion ( id bigserial primary key  ) inherits (public.meta, abstract.emb_direccion);
-alter table common.direccion add foreign key (denominacion_via_id) references common.denominacion_via on update cascade on delete restrict;
-alter table common.direccion add foreign key (pais_id) references common.pais on update cascade on delete restrict;
+create table common.address ( id bigserial primary key  ) inherits (public.meta, templates.address_template);
+alter table common.address add foreign key (street_name_id) references common.street_name on update cascade on delete restrict;
+alter table common.address add foreign key (country_id) references common.country on update cascade on delete restrict;
 
-create table common.datos_fiscales ( id bigserial primary key ) inherits (public.meta, abstract.emb_datos_fiscales);
-alter table common.datos_fiscales add foreign key (tipo_documento_id) references common.tipo_documento on update cascade on delete restrict;
+create table common.fiscal_data ( id bigserial primary key ) inherits (public.meta, templates.fiscal_data_template);
+alter table common.fiscal_data add foreign key (document_type_id) references common.document_type on update cascade on delete restrict;

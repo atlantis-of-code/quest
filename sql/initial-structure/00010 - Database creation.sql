@@ -1,6 +1,6 @@
 
 
-CREATE DATABASE maverma
+CREATE DATABASE quest
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
