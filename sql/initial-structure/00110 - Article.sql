@@ -56,7 +56,7 @@ create table articles.manual_stock_transfer_line (
     id bigserial primary key ,
     quantity numeric not null,
     article_id bigint references articles.article on update cascade on delete restrict ,
-    stock_transfer_id bigint references articles.manual_stock_transfer on update cascade on delete cascade
+    manual_stock_transfer_id bigint references articles.manual_stock_transfer on update cascade on delete cascade
 ) inherits (public.meta);
 
 
