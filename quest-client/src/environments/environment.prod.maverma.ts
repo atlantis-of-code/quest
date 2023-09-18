@@ -6,7 +6,7 @@ export const environment = {
 
 export const Config: AocAppConfig = {
   APP_ID: 'quest',
-  PROGRAM_NAME: 'Quest',
+  PROGRAM_NAME: 'Quest for atlantis',
   SERVER_URL: '',
   BASE_HREF: '/',
   MULTI_TENANCY: false,

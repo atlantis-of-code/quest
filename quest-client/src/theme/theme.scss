@@ -7,7 +7,9 @@
  *
  */
 
-@forward 'theme.forward' with (
+@forward 'theme.forward';
+
+/*@forward 'theme.forward' with (
   $aocPrimaryColor: #dfdfec,
   $aocPrimaryLightColor: #f6f6f9, //#ecedf2,
   $aocPrimaryDarkColor: #b6b6d3, // #c8c7c6,
@@ -15,4 +17,4 @@
   $aocInputFocusBorderColor: #ffaa00, // #3500ff #3808ed
   $aocInputFocusBoxShadowColor: #ffd980,
   $aocAppBackgroundColor: #fefeff
-);
+);*/
