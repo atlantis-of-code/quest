@@ -47,13 +47,6 @@ alter table invoicing.invoice
 alter table invoicing.invoice
     add foreign key (fiscal_year_id) references common.fiscal_year on update cascade on delete restrict;
 
-/*
-create table facturacion.linea_factura (
-   id bigserial primary key,
-   factura_id bigint references facturacion.factura on update cascade on delete cascade
-) inherits (public.meta, abstract.emb_linea_documento);
-alter table facturacion.linea_factura add foreign key (articulo_id) references articulos.articulo on update cascade on delete set null;
- */
 
 -- pivot table for invoice files
 create table invoicing.invoice_file
@@ -80,7 +73,7 @@ alter table invoicing.ticket
     add foreign key (fiscal_year_id) references common.fiscal_year on update cascade on delete restrict;
 
 -- pivot table for ticket files
-create table invoicng.ticket_file
+create table invoicing.ticket_file
 (
     id         bigserial primary key,
     ticket_id  bigint references invoicing.ticket on update cascade on delete cascade,
@@ -90,13 +83,13 @@ create table invoicng.ticket_file
 create table invoicing.delivery_note
 (
     id         bigserial primary key,
-    invoice_id bigint references facturacion.factura on update cascade on delete set null
+    invoice_id bigint references invoicing.invoice on update cascade on delete set null
 ) inherits (public.meta, templates.document_template);
 alter table invoicing.delivery_note
     add foreign key (client_id) references clients.client on update cascade on delete restrict;
 alter table invoicing.delivery_note
     add foreign key (series_id) references common.series on update cascade on delete restrict;
-alter table facturacion.albaran
+alter table invoicing.delivery_note
     add foreign key (fiscal_year_id) references common.fiscal_year on update cascade on delete restrict;
 
 -- pivot table for delivery note files
@@ -148,7 +141,7 @@ create table articles.stock_transfer (
     article_id bigint not null references articles.article on update cascade on delete cascade ,
     store_id bigint not null references articles.store on update cascade on delete cascade ,
     aux_store_id bigint references articles.store on update cascade on delete set null,
-    stock_line_id bigint references invoicing.stock_line_id on update cascade on delete set null,
+    stock_line_id bigint references invoicing.stock_line on update cascade on delete set null,
     manual_stock_transfer_line_id bigint references articles.manual_stock_transfer_line on update cascade on delete set null
     -- recuento_estoc_id bigint references articulos.recuento_estoc on update cascade on delete cascade
 ) inherits (public.meta);

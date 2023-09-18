@@ -16,7 +16,7 @@ create table templates.address_template (
     building_or_complex text, -- edificio o urbanización
     geoposition text, -- el lleva,?
     additional_data text, -- ??? info random supòs tipo "ses claus estan damunt es cossiol XD
-    street_name_id bigint not null references common.street_name on update cascade on delete restrict,
+    road_name_id bigint not null references common.road_name on update cascade on delete restrict,
     country_id bigint not null references common.country on update cascade on delete restrict
 );
 

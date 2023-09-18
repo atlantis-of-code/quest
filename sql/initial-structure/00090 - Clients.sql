@@ -9,7 +9,7 @@ CREATE TABLE clients.client (
     language_id bigint references common.language on update cascade on delete restrict
 ) INHERITS (public.meta, templates.address_template, templates.fiscal_data_template, templates.contact_template);
 
-alter table clients.client add foreign key (street_name_id) references common.street_name on update cascade on delete restrict;
+alter table clients.client add foreign key (road_name_id) references common.road_name on update cascade on delete restrict;
 alter table clients.client add foreign key (country_id) references common.country on update cascade on delete restrict;
 alter table clients.client add foreign key (document_type_id) references common.document_type on update cascade on delete restrict;
 
