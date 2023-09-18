@@ -1,4 +1,4 @@
-CREATE SCHEMA clientes;
+CREATE SCHEMA clients;
 
 CREATE TABLE clients.client (
     id bigserial primary key,
@@ -21,7 +21,7 @@ create table clients.client_file(
 ) inherits(public.meta);
 
 -- Pivot table for client contact
-CREATE TABLE contacts.client_contact (
+CREATE TABLE clients.client_contact (
     id bigserial primary key ,
     client_id bigint references clients.client on update cascade on delete cascade ,
     contact_id bigint references contacts.contact on update cascade on delete cascade
