@@ -59,6 +59,6 @@ create table articles.manual_stock_transfer_line (
     manual_stock_transfer_id bigint references articles.manual_stock_transfer on update cascade on delete cascade
 ) inherits (public.meta);
 
-
+-- stock transfer in Invoicing script as some deps are needed
 
 

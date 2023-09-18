@@ -140,7 +140,7 @@ create table articles.stock_transfer (
     date timestamp with time zone not null default now(),
     type text not null check ( type in ('Delivery note', 'Re-count', 'Transfer', 'Ticket') ),
     document_name text,
-    document_operation text, -- estado_documento
+    document_operation text, -- document state
     client_name text,
     description text,
     quantity numeric(20, 0) not null default '0.00',
