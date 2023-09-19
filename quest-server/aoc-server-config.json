@@ -10,7 +10,7 @@
       "logLevel": "trace",
       "requestLimit": "10mb",
       "useAuthHelper": true,
-      "sessionSecret": "m4v3rm4",
+      "sessionSecret": "3T3RjXAUwmXxCuBN",
       "corsOrigin": "http://localhost:4200"
     },
     "postgres": {

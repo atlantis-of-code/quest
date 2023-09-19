@@ -1,16 +1,17 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+       
+-- creates users schema
+create schema users;
 
-CREATE EXTENSION pgcrypto;
-
-CREATE TABLE public.user (
+-- create table users.user
+CREATE TABLE users."aoc_user" (
     id bigserial PRIMARY KEY ,
-    name text not null,
-    mail text not null,
-    password text not null,
+    username text not null,
+    email text not null,
+    pass text not null,
     full_name text
 ) INHERITS (public.meta);
 
--- TODO: remove this
-
-INSERT INTO public.user (name, mail, full_name, password) VALUES
-    ('jeroni', 'jeroni@gmail.com', 'Jeroni Brunet Rosselló', '$2a$06$8PVs3L90bCzSWboRa/IlgOQuaJ5KmEmtWtn6vyNZv3D4v4KcrCoBi'),
-    ('josep', 'jlg.hrtc@gmail.com', 'Josep Llodrà Grimalt', '$2a$06$fAZS3uggHNTYiCdwDopwW.ixl8FclrGFEA0FtirLnR9cQcESFmisG');
+-- add a user named "dev" with password "dev"
+insert into users."aoc_user" (username, email, pass)
+values ('dev', 'dev@mail.to', crypt('dev', gen_salt('bf')));

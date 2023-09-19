@@ -39,7 +39,7 @@ import { AocUserConfig } from '@atlantis-of-code/aoc-client/aoc-common';
     AocUiAutocompleteModule,
     AocAppModule.forRoot(
       Config,
-      new AocUserConfig(Usuario, { fieldMap: { username: 'nombre', password: 'contrasenya' }}),
+      new AocUserConfig(Usuario, { fieldMap: { username: 'username', password: 'pass' }}),
       {
         autoConvertEmptyStringsToNullInControls: true,
         autoTrimStringsInControls: true,
