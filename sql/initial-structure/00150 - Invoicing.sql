@@ -6,7 +6,7 @@ create table invoicing.budget
 ) inherits (public.meta, templates.document_template);
 -- Bind inherited foreign keys
 alter table invoicing.budget
-    add foreign key (client_id) references clients.client on update cascade on delete restrict;
+    add foreign key (customer_id) references customers.customer on update cascade on delete restrict;
 alter table invoicing.budget
     add foreign key (series_id) references common.series on update cascade on delete restrict;
 alter table invoicing.budget
@@ -35,13 +35,13 @@ create table invoicing.budget_file
 create table invoicing.invoice
 (
     id                     bigserial primary key,
-    client_fiscal_data_id bigint references common.fiscal_data on update cascade on delete restrict , -- copy of client fiscal data
-    client_address_id bigint references common.address on update cascade on delete restrict , -- copy of client address
-    company_fiscal_data_id bigint references common.fiscal_data on update cascade on delete restrict, -- copy of company fiscal data
+    customer_legal_data_id bigint references common.legal_data on update cascade on delete restrict , -- copy of customer fiscal data
+    customer_address_id bigint references common.address on update cascade on delete restrict , -- copy of customer address
+    company_legal_data_id bigint references common.legal_data on update cascade on delete restrict, -- copy of company fiscal data
     company_address_id bigint references common.address on update cascade on delete restrict -- copy of company address
 ) inherits (public.meta, templates.document_template);
 alter table invoicing.invoice
-    add foreign key (client_id) references clients.client on update cascade on delete restrict;
+    add foreign key (customer_id) references customers.customer on update cascade on delete restrict;
 alter table invoicing.invoice
     add foreign key (series_id) references common.series on update cascade on delete restrict;
 alter table invoicing.invoice
@@ -60,13 +60,13 @@ create table invoicing.invoice_file
 create table invoicing.ticket
 (
     id                     bigserial primary key,
-    client_fiscal_data_id bigint references common.fiscal_data on update cascade on delete restrict , -- copy of client fiscal data
-    client_address_id bigint references common.address on update cascade on delete restrict , -- copy of client address
-    company_fiscal_data_id bigint references common.fiscal_data on update cascade on delete restrict, -- copy of company fiscal data
+    customer_legal_data_id bigint references common.legal_data on update cascade on delete restrict , -- copy of customer fiscal data
+    customer_address_id bigint references common.address on update cascade on delete restrict , -- copy of customer address
+    company_legal_data_id bigint references common.legal_data on update cascade on delete restrict, -- copy of company fiscal data
     company_address_id bigint references common.address on update cascade on delete restrict -- copy of company address
 ) inherits (public.meta, templates.document_template);
 alter table invoicing.ticket
-    add foreign key (client_id) references clients.client on update cascade on delete restrict;
+    add foreign key (customer_id) references customers.customer on update cascade on delete restrict;
 alter table invoicing.ticket
     add foreign key (series_id) references common.series on update cascade on delete restrict;
 alter table invoicing.ticket
@@ -86,7 +86,7 @@ create table invoicing.delivery_note
     invoice_id bigint references invoicing.invoice on update cascade on delete set null
 ) inherits (public.meta, templates.document_template);
 alter table invoicing.delivery_note
-    add foreign key (client_id) references clients.client on update cascade on delete restrict;
+    add foreign key (customer_id) references customers.customer on update cascade on delete restrict;
 alter table invoicing.delivery_note
     add foreign key (series_id) references common.series on update cascade on delete restrict;
 alter table invoicing.delivery_note
@@ -134,7 +134,7 @@ create table articles.stock_transfer (
     type text not null check ( type in ('Delivery note', 'Re-count', 'Transfer', 'Ticket') ),
     document_name text,
     document_operation text, -- document state
-    client_name text,
+    customer_name text,
     description text,
     quantity numeric(20, 0) not null default '0.00',
     previous_stock numeric(20, 0) not null default '0.00',

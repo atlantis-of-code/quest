@@ -6,7 +6,7 @@ create table templates.document_template (
     total_base numeric(20,2),
     total_taxes numeric(20, 2),
     total numeric(20, 2),
-    client_id bigint not null references clients.client on update cascade on delete restrict ,
+    customer_id bigint not null references customers.customer on update cascade on delete restrict ,
     series_id bigint references common.series on update cascade on delete restrict ,
     fiscal_year_id bigint references common.fiscal_year on update cascade on delete restrict
 );
