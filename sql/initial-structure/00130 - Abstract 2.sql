@@ -13,12 +13,12 @@ create table templates.document_template (
 
 create table templates.document_line_template (
     "order" integer,
-    article_code text, -- copy of article code
-    article_name text, -- copy of article name
+    item_code text, -- copy of item code
+    item_name text, -- copy of item name
     base_price numeric not null,
     quantity numeric not null,
     discount numeric not null default 0.00,
     total_base numeric not null,
-    article_id bigint references articles.article on update cascade on delete set null,
-    store_id bigint references articles.store on update cascade on delete restrict
+    item_id bigint references items.item on update cascade on delete set null,
+    store_id bigint references items.store on update cascade on delete restrict
 );

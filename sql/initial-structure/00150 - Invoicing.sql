@@ -19,9 +19,9 @@ create table invoicing.budget_line
 ) inherits (public.meta, templates.document_line_template);
 -- Bind inherited foreign keys
 alter table invoicing.budget_line
-    add foreign key (article_id) references articles.article on update cascade on delete set null;
+    add foreign key (item_id) references items.item on update cascade on delete set null;
 alter table invoicing.budget_line
-    add foreign key (store_id) references articles.store on update cascade on delete set null;
+    add foreign key (store_id) references items.store on update cascade on delete set null;
 
 -- Pivot table for files
 create table invoicing.budget_file
@@ -106,9 +106,9 @@ create table invoicing.stock_line
     id         bigserial primary key
 ) inherits (public.meta, templates.document_line_template);
 alter table invoicing.stock_line
-    add foreign key (article_id) references articles.article on update cascade on delete set null;
+    add foreign key (item_id) references items.item on update cascade on delete set null;
 alter table invoicing.stock_line
-    add foreign key (store_id) references articles.store on update cascade on delete restrict;
+    add foreign key (store_id) references items.store on update cascade on delete restrict;
 
 -- pivot tables for stock lines with delivery notes and tickets
 
@@ -128,7 +128,7 @@ create table invoicing.ticket_line (
 /*
     stock transfer for documents. Done here because we need the ref to stock_line
  */
-create table articles.stock_transfer (
+create table items.stock_transfer (
     id bigserial primary key ,
     date timestamp with time zone not null default now(),
     type text not null check ( type in ('Delivery note', 'Re-count', 'Transfer', 'Ticket') ),
@@ -138,10 +138,10 @@ create table articles.stock_transfer (
     description text,
     quantity numeric(20, 0) not null default '0.00',
     previous_stock numeric(20, 0) not null default '0.00',
-    article_id bigint not null references articles.article on update cascade on delete cascade ,
-    store_id bigint not null references articles.store on update cascade on delete cascade ,
-    aux_store_id bigint references articles.store on update cascade on delete set null,
+    item_id bigint not null references items.item on update cascade on delete cascade ,
+    store_id bigint not null references items.store on update cascade on delete cascade ,
+    aux_store_id bigint references items.store on update cascade on delete set null,
     stock_line_id bigint references invoicing.stock_line on update cascade on delete set null,
-    manual_stock_transfer_line_id bigint references articles.manual_stock_transfer_line on update cascade on delete set null
+    manual_stock_transfer_line_id bigint references items.manual_stock_transfer_line on update cascade on delete set null
     -- recuento_estoc_id bigint references articulos.recuento_estoc on update cascade on delete cascade
 ) inherits (public.meta);
