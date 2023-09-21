@@ -60,3 +60,6 @@ config.ts
 !/deploy/logs/.gitkeep
 /deploy/files/*
 !/deploy/files/.gitkeep
+
+# Secrets
+aoc-entities-secrets.json
