@@ -6,7 +6,7 @@ export class QuestModel extends AocModel<string> {
 
   creation_time: string;
 
-  modification_user: string;
+  // modification_user: string; already in AocModel, is a mistake, should be here, the same for time
 
-  modification_time: string;
+  // modification_time: string;
 }
