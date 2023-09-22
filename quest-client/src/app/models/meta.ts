@@ -1,801 +1,516 @@
 import { AocModelMetaMap } from '@atlantis-of-code/aoc-client/core/models';
 
-import { Cliente } from './clientes/cliente';
-import { Sector } from './common/sector';
-import { Subsector } from './common/subsector';
-import { Albaran } from './facturacion/albaran';
-import { Contacto } from './contactos/contacto';
-import { Contrato } from './contratos/contrato';
-import { Factura } from './facturacion/factura';
-import { Fichero } from './ficheros/fichero';
-import { Presupuesto } from './facturacion/presupuesto';
-import { Ticket } from './facturacion/ticket';
-import { EmbDatosFiscales } from './abstract/emb-datos-fiscales';
-import { EmbDireccion } from './abstract/emb-direccion';
-import { EmbInfoContacto } from './abstract/emb-info-contacto';
-import { DatosFiscales } from './common/datos-fiscales';
-import { TipoDocumento } from './common/tipo-documento';
-import { DenominacionVia } from './common/denominacion-via';
-import { Direccion } from './common/direccion';
-import { Pais } from './common/pais';
-import { Repartidor } from './pedidos/repartidor';
-import { Tecnico } from './tecnicos/tecnico';
-import { AnyoFiscal } from './common/anyo-fiscal';
-import { ModoDePago } from './common/modo-de-pago';
-import { Pedido } from './pedidos/pedido';
-import { EmbDocumento } from './abstract/emb-documento';
-import { EmbLineaDocumento } from './abstract/emb-linea-documento';
-import { Almacen } from './articulos/almacen';
-import { Articulo } from './articulos/articulo';
-import { Aparato } from './contratos/aparato';
-import { EstacionDeServicio } from './contratos/estacion-de-servicio';
-import { Revision } from './contratos/revision';
-import { Visita } from './contratos/visita';
-import { AlmacenGas } from './configuracion/almacen-gas';
-import { ContratoBombona } from './contratos/contrato-bombona';
-import { Descuento } from './contratos/descuento';
-import { Bombona } from './articulos/bombona';
-import { Vehiculo } from './tecnicos/vehiculo';
-import { Estoc } from './articulos/estoc';
-import { LineaAlbaran } from './facturacion/linea-albaran';
-import { LineaPresupuesto } from './facturacion/linea-presupuesto';
-import { MovimientoEstoc } from './articulos/movimiento-estoc';
-import { TraspasoEstoc } from './articulos/traspaso-estoc';
-import { Categoria } from './articulos/categoria';
-import { LineaTraspasoEstoc } from './articulos/linea-traspaso-estoc';
-import { RecuentoEstoc } from './articulos/recuento-estoc';
-import { LineaPedido } from './pedidos/linea-pedido';
-import { Empresa } from './configuracion/empresa';
-import { PedidoFichero } from './pedidos/pedido-fichero';
-import { Usuario } from './usuarios/usuario';
-import { Ruta } from './pedidos/ruta';
-import { Grupo } from './usuarios/grupo';
+import { Address } from './common/address';
+import { Country } from './common/country';
+import { StreetSuffix } from './common/street-suffix';
+import { Invoice } from './invoicing/invoice';
+import { Ticket } from './invoicing/ticket';
+import { FiscalYear } from './common/fiscal-year';
+import { Budget } from './invoicing/budget';
+import { DeliveryNote } from './invoicing/delivery-note';
+import { Gender } from './common/gender';
+import { Customer } from './customers/customer';
+import { IdentityDocumentType } from './common/identity-document-type';
+import { LegalData } from './common/legal-data';
+import { Language } from './common/language';
+import { PaymentSystem } from './common/payment-system';
+import { Series } from './common/series';
+import { Tax } from './common/tax';
+import { Item } from './items/item';
+import { Company } from './configuration/company';
+import { AddressTemplate } from './templates/address-template';
+import { ContactTemplate } from './templates/contact-template';
+import { LegalDataTemplate } from './templates/legal-data-template';
+import { Contact } from './contacts/contact';
+import { File } from './files/file';
+import { BudgetLine } from './invoicing/budget-line';
+import { Store } from './items/store';
+import { StockLine } from './invoicing/stock-line';
+import { StockTransfer } from './items/stock-transfer';
+import { Category } from './items/category';
+import { ManualStockTransferLine } from './items/manual-stock-transfer-line';
+import { Stock } from './items/stock';
+import { ManualStockTransfer } from './items/manual-stock-transfer';
+import { Meta } from './public/meta';
+import { DocumentLineTemplate } from './templates/document-line-template';
+import { DocumentTemplate } from './templates/document-template';
+import { AocUser } from './users/aoc-user';
 
 export const meta: AocModelMetaMap = new Map();
 
-meta.set(Cliente, {
-  tableName: 'clientes.cliente',
+meta.set(Address, {
+  tableName: 'common.address',
   fields: {
-    codigo: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    fecha_nacimiento: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    idioma: { type: 'string', enum: 'IdiomaEnumType', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_comercial: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    sexo: { type: 'string', enum: 'SexoEnumType', isEntity: false, isCollection: false, isEmbedded: false,  },
-    sector: { type: Sector, isEntity: true, isCollection: false, isEmbedded: false,  },
-    subsector: { type: Subsector, isEntity: true, isCollection: false, isEmbedded: false,  },
-    albaranCollection: { type: Albaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contactoCollection: { type: Contacto, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    facturaCollection: { type: Factura, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ficheroCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    presupuestoCollection: { type: Presupuesto, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ticketCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false,  },
-    embDatosFiscales: { type: EmbDatosFiscales, isEntity: false, isCollection: false, isEmbedded: true,  },
-    embDireccion: { type: EmbDireccion, isEntity: false, isCollection: false, isEmbedded: true,  },
-    embInfoContacto: { type: EmbInfoContacto, isEntity: false, isCollection: false, isEmbedded: true,  },
+    additional_data: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    area: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    block: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    city: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    coordinates: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    door: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    floor: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    state: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    street_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    street_number: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    zip_code: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    country: { type: Country, isEntity: true, isCollection: false, isEmbedded: false, },
+    streetSuffix: { type: StreetSuffix, isEntity: true, isCollection: false, isEmbedded: false, },
+    invoiceAddressCompanyCollection: { type: Invoice, isEntity: false, isCollection: true, isEmbedded: false, },
+    invoiceAddressCustomerCollection: { type: Invoice, isEntity: false, isCollection: true, isEmbedded: false, },
+    ticketAddressCompanyCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false, },
+    ticketAddressCustomerCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(DatosFiscales, {
-  tableName: 'common.datos_fiscales',
+meta.set(Country, {
+  tableName: 'common.country',
   fields: {
-    apellido_1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    apellido_2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_fiscal: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero_documento: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    tipoDocumento: { type: TipoDocumento, isEntity: true, isCollection: false, isEmbedded: false,  },
-    contratoCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoDatosFiscalesPagadorAlternativoCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    facturaDatosFiscalesCopiaClienteCollection: { type: Factura, isEntity: false, isCollection: true, isEmbedded: false,  },
-    facturaDatosFiscalesCopiaEmpresaCollection: { type: Factura, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ticketDatosFiscalesCopiaClienteCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ticketDatosFiscalesCopiaEmpresaCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false,  },
+    is_default: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false, },
+    iso_code2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    iso_code3: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    addressCollection: { type: Address, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(DenominacionVia, {
-  tableName: 'common.denominacion_via',
+meta.set(FiscalYear, {
+  tableName: 'common.fiscal_year',
   fields: {
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    direccionCollection: { type: Direccion, isEntity: false, isCollection: true, isEmbedded: false,  },
+    is_current: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false, },
+    year: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    budgetCollection: { type: Budget, isEntity: false, isCollection: true, isEmbedded: false, },
+    deliveryNoteCollection: { type: DeliveryNote, isEntity: false, isCollection: true, isEmbedded: false, },
+    invoiceCollection: { type: Invoice, isEntity: false, isCollection: true, isEmbedded: false, },
+    ticketCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Direccion, {
-  tableName: 'common.direccion',
+meta.set(Gender, {
+  tableName: 'common.gender',
   fields: {
-    bloque: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    codigo_postal: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    datos_adicionales: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    edificio_o_urbanizacion: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    escalera: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    geoposicion: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    localidad: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    municipio: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_via: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    piso: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    portal: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    provincia: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    puerta: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    denominacionVia: { type: DenominacionVia, isEntity: true, isCollection: false, isEmbedded: false,  },
-    pais: { type: Pais, isEntity: true, isCollection: false, isEmbedded: false,  },
-    albaranDireccionFiscalCollection: { type: Albaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    albaranDireccionObraCollection: { type: Albaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoDireccionCorrespondenciaCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoDireccionFiscalCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoDireccionPagadorAlternativoCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoDireccionSuministroCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    facturaDireccionFiscalCollection: { type: Factura, isEntity: false, isCollection: true, isEmbedded: false,  },
-    facturaDireccionObraCollection: { type: Factura, isEntity: false, isCollection: true, isEmbedded: false,  },
-    presupuestoDireccionFiscalCollection: { type: Presupuesto, isEntity: false, isCollection: true, isEmbedded: false,  },
-    presupuestoDireccionObraCollection: { type: Presupuesto, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ticketDireccionFiscalCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ticketDireccionObraCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false,  },
+    is_default: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false, },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    customerCollection: { type: Customer, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Subsector, {
-  tableName: 'common.subsector',
+meta.set(IdentityDocumentType, {
+  tableName: 'common.identity_document_type',
   fields: {
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    sector: { type: Sector, isEntity: true, isCollection: false, isEmbedded: false,  },
-    clienteCollection: { type: Cliente, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
+    is_default: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false, },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    legalDataCollection: { type: LegalData, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Pais, {
-  tableName: 'common.pais',
+meta.set(Language, {
+  tableName: 'common.language',
   fields: {
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    direccionCollection: { type: Direccion, isEntity: false, isCollection: true, isEmbedded: false,  },
+    is_default: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false, },
+    iso_code2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    iso_code3: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    customerCollection: { type: Customer, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(TipoDocumento, {
-  tableName: 'common.tipo_documento',
+meta.set(LegalData, {
+  tableName: 'common.legal_data',
   fields: {
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    datosFiscalesCollection: { type: DatosFiscales, isEntity: false, isCollection: true, isEmbedded: false,  },
-    repartidorCollection: { type: Repartidor, isEntity: false, isCollection: true, isEmbedded: false,  },
-    tecnicoCollection: { type: Tecnico, isEntity: false, isCollection: true, isEmbedded: false,  },
+    document_number: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    legal_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    identityDocumentType: { type: IdentityDocumentType, isEntity: true, isCollection: false, isEmbedded: false, },
+    invoiceLegalDataCompanyCollection: { type: Invoice, isEntity: false, isCollection: true, isEmbedded: false, },
+    invoiceLegalDataCustomerCollection: { type: Invoice, isEntity: false, isCollection: true, isEmbedded: false, },
+    ticketLegalDataCompanyCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false, },
+    ticketLegalDataCustomerCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Sector, {
-  tableName: 'common.sector',
+meta.set(PaymentSystem, {
+  tableName: 'common.payment_system',
   fields: {
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    clienteCollection: { type: Cliente, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    subsectorCollection: { type: Subsector, isEntity: false, isCollection: true, isEmbedded: false,  },
+    is_default: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false, },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
   }
 });
 
-meta.set(AnyoFiscal, {
-  tableName: 'common.anyo_fiscal',
+meta.set(Series, {
+  tableName: 'common.series',
   fields: {
-    actual: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    anyo: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    albaranCollection: { type: Albaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    facturaCollection: { type: Factura, isEntity: false, isCollection: true, isEmbedded: false,  },
-    presupuestoCollection: { type: Presupuesto, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ticketCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false,  },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    type: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    budgetCollection: { type: Budget, isEntity: false, isCollection: true, isEmbedded: false, },
+    deliveryNoteCollection: { type: DeliveryNote, isEntity: false, isCollection: true, isEmbedded: false, },
+    invoiceCollection: { type: Invoice, isEntity: false, isCollection: true, isEmbedded: false, },
+    ticketCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(ModoDePago, {
-  tableName: 'common.modo_de_pago',
+meta.set(StreetSuffix, {
+  tableName: 'common.street_suffix',
   fields: {
-    codigo_nace: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    pedidoCollection: { type: Pedido, isEntity: false, isCollection: true, isEmbedded: false,  },
+    abbrv: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    is_default: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false, },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    addressCollection: { type: Address, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(EmbDocumento, {
-  tableName: 'abstract.emb_documento',
+meta.set(Tax, {
+  tableName: 'common.tax',
   fields: {
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    iva: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    observaciones: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    serie: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_impuestos: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    anyoFiscal: { type: AnyoFiscal, isEntity: true, isCollection: false, isEmbedded: false,  },
-    cliente: { type: Cliente, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionFiscal: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionObra: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    percent: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    itemCollection: { type: Item, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(EmbLineaDocumento, {
-  tableName: 'abstract.emb_linea_documento',
+meta.set(Company, {
+  tableName: 'configuration.company',
   fields: {
-    cantidad: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    codigo_articulo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    descuento: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_articulo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    orden: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    precio_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    almacen: { type: Almacen, isEntity: true, isCollection: false, isEmbedded: false,  },
-    articulo: { type: Articulo, isEntity: true, isCollection: false, isEmbedded: false,  },
+    trade_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    addressTemplate: { type: AddressTemplate, isEntity: false, isCollection: false, isEmbedded: true, },
+    contactTemplate: { type: ContactTemplate, isEntity: false, isCollection: false, isEmbedded: true, },
+    legalDataTemplate: { type: LegalDataTemplate, isEntity: false, isCollection: false, isEmbedded: true, },
   }
 });
 
-meta.set(EmbInfoContacto, {
-  tableName: 'abstract.emb_info_contacto',
+meta.set(Contact, {
+  tableName: 'contacts.contact',
   fields: {
-    email: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono3: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
+    email: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    fax: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    phone1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    phone2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    customerCollection: { type: Customer, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(EmbDatosFiscales, {
-  tableName: 'abstract.emb_datos_fiscales',
+meta.set(Customer, {
+  tableName: 'customers.customer',
   fields: {
-    apellido_1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    apellido_2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_fiscal: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero_documento: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    tipoDocumento: { type: TipoDocumento, isEntity: true, isCollection: false, isEmbedded: false,  },
+    birthdate: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
+    code: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    email: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    fax: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    phone1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    phone2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    trade_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    gender: { type: Gender, isEntity: true, isCollection: false, isEmbedded: false, },
+    language: { type: Language, isEntity: true, isCollection: false, isEmbedded: false, },
+    budgetCollection: { type: Budget, isEntity: false, isCollection: true, isEmbedded: false, },
+    contactCollection: { type: Contact, isEntity: false, isCollection: true, isEmbedded: false, },
+    deliveryNoteCollection: { type: DeliveryNote, isEntity: false, isCollection: true, isEmbedded: false, },
+    fileCollection: { type: File, isEntity: false, isCollection: true, isEmbedded: false, },
+    invoiceCollection: { type: Invoice, isEntity: false, isCollection: true, isEmbedded: false, },
+    ticketCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false, },
+    addressTemplate: { type: AddressTemplate, isEntity: false, isCollection: false, isEmbedded: true, },
+    legalDataTemplate: { type: LegalDataTemplate, isEntity: false, isCollection: false, isEmbedded: true, },
   }
 });
 
-meta.set(EmbDireccion, {
-  tableName: 'abstract.emb_direccion',
+meta.set(File, {
+  tableName: 'files.file',
   fields: {
-    bloque: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    codigo_postal: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    datos_adicionales: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    edificio_o_urbanizacion: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    escalera: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    geoposicion: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    localidad: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    municipio: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_via: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    piso: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    portal: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    provincia: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    puerta: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    denominacionVia: { type: DenominacionVia, isEntity: true, isCollection: false, isEmbedded: false,  },
-    pais: { type: Pais, isEntity: true, isCollection: false, isEmbedded: false,  },
+    directory: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    mime: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    ref_class: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    ref_id: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    subdirectory: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    budgetCollection: { type: Budget, isEntity: false, isCollection: true, isEmbedded: false, },
+    customerCollection: { type: Customer, isEntity: false, isCollection: true, isEmbedded: false, },
+    deliveryNoteCollection: { type: DeliveryNote, isEntity: false, isCollection: true, isEmbedded: false, },
+    invoiceCollection: { type: Invoice, isEntity: false, isCollection: true, isEmbedded: false, },
+    itemCollection: { type: Item, isEntity: false, isCollection: true, isEmbedded: false, },
+    itemFilePhotoCollection: { type: Item, isEntity: false, isCollection: true, isEmbedded: false, },
+    ticketCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false, },
+    raw: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
   }
 });
 
-meta.set(Contacto, {
-  tableName: 'contactos.contacto',
+meta.set(Budget, {
+  tableName: 'invoicing.budget',
   fields: {
-    email: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono3: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    clienteCollection: { type: Cliente, isEntity: false, isCollection: true, isEmbedded: false,  },
+    date: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
+    number: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    observations: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_taxes: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    customer: { type: Customer, isEntity: true, isCollection: false, isEmbedded: false, },
+    fiscalYear: { type: FiscalYear, isEntity: true, isCollection: false, isEmbedded: false, },
+    series: { type: Series, isEntity: true, isCollection: false, isEmbedded: false, },
+    budgetLineCollection: { type: BudgetLine, isEntity: false, isCollection: true, isEmbedded: false, },
+    fileCollection: { type: File, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Aparato, {
-  tableName: 'contratos.aparato',
+meta.set(BudgetLine, {
+  tableName: 'invoicing.budget_line',
   fields: {
-    anyo: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    marca: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    modelo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    potencia: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    tipo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    contrato: { type: Contrato, isEntity: true, isCollection: false, isEmbedded: false,  },
+    base_price: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    discount: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    item_code: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    item_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    order: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    quantity: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    budget: { type: Budget, isEntity: true, isCollection: false, isEmbedded: false, },
+    item: { type: Item, isEntity: true, isCollection: false, isEmbedded: false, },
+    store: { type: Store, isEntity: true, isCollection: false, isEmbedded: false, },
   }
 });
 
-meta.set(EstacionDeServicio, {
-  tableName: 'contratos.estacion_de_servicio',
+meta.set(DeliveryNote, {
+  tableName: 'invoicing.delivery_note',
   fields: {
-    codigo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    direccion: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    localidad: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    contratoCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
+    date: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
+    number: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    observations: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_taxes: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    customer: { type: Customer, isEntity: true, isCollection: false, isEmbedded: false, },
+    fiscalYear: { type: FiscalYear, isEntity: true, isCollection: false, isEmbedded: false, },
+    invoice: { type: Invoice, isEntity: true, isCollection: false, isEmbedded: false, },
+    series: { type: Series, isEntity: true, isCollection: false, isEmbedded: false, },
+    fileCollection: { type: File, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockLineLineCollection: { type: StockLine, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Revision, {
-  tableName: 'contratos.revision',
+meta.set(Invoice, {
+  tableName: 'invoicing.invoice',
   fields: {
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    numero: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    resultado: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    tipo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    contrato: { type: Contrato, isEntity: true, isCollection: false, isEmbedded: false,  },
+    date: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
+    number: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    observations: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_taxes: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    companyAddress: { type: Address, isEntity: true, isCollection: false, isEmbedded: false, },
+    companyLegalData: { type: LegalData, isEntity: true, isCollection: false, isEmbedded: false, },
+    customer: { type: Customer, isEntity: true, isCollection: false, isEmbedded: false, },
+    customerAddress: { type: Address, isEntity: true, isCollection: false, isEmbedded: false, },
+    customerLegalData: { type: LegalData, isEntity: true, isCollection: false, isEmbedded: false, },
+    fiscalYear: { type: FiscalYear, isEntity: true, isCollection: false, isEmbedded: false, },
+    series: { type: Series, isEntity: true, isCollection: false, isEmbedded: false, },
+    deliveryNoteCollection: { type: DeliveryNote, isEntity: false, isCollection: true, isEmbedded: false, },
+    fileCollection: { type: File, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Visita, {
-  tableName: 'contratos.visita',
+meta.set(StockLine, {
+  tableName: 'invoicing.stock_line',
   fields: {
-    descripcion: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    contrato: { type: Contrato, isEntity: true, isCollection: false, isEmbedded: false,  },
-  }
-});
-
-meta.set(Contrato, {
-  tableName: 'contratos.contrato',
-  fields: {
-    fecha_alta: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    fecha_baja: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    fecha_proxima_revision: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    fecha_vencimiento_revision: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    firmado: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    matricula: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero_poliza: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    persona_contacto: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    tipo_suministro: { type: 'string', enum: 'TipoSuministroEnumType', isEntity: false, isCollection: false, isEmbedded: false,  },
-    vehiculo: { type: 'string', enum: 'VehiculoEnumType', isEntity: false, isCollection: false, isEmbedded: false,  },
-    almacenGas: { type: AlmacenGas, isEntity: true, isCollection: false, isEmbedded: false,  },
-    cliente: { type: Cliente, isEntity: true, isCollection: false, isEmbedded: false,  },
-    datosFiscales: { type: DatosFiscales, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionCorrespondencia: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionFiscal: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionSuministro: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    estacionDeServicio: { type: EstacionDeServicio, isEntity: true, isCollection: false, isEmbedded: false,  },
-    pagadorAlternativoDatosFiscales: { type: DatosFiscales, isEntity: true, isCollection: false, isEmbedded: false,  },
-    pagadorAlternativoDireccion: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    sector: { type: Sector, isEntity: true, isCollection: false, isEmbedded: false,  },
-    subsector: { type: Subsector, isEntity: true, isCollection: false, isEmbedded: false,  },
-    aparatoCollection: { type: Aparato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoBombonaCollection: { type: ContratoBombona, isEntity: false, isCollection: true, isEmbedded: false,  },
-    descuentoCollection: { type: Descuento, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ficheroCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    pedidoCollection: { type: Pedido, isEntity: false, isCollection: true, isEmbedded: false,  },
-    revisionCollection: { type: Revision, isEntity: false, isCollection: true, isEmbedded: false,  },
-    visitaCollection: { type: Visita, isEntity: false, isCollection: true, isEmbedded: false,  },
-    embInfoContacto: { type: EmbInfoContacto, isEntity: false, isCollection: false, isEmbedded: true,  },
-  }
-});
-
-meta.set(ContratoBombona, {
-  tableName: 'contratos.contrato_bombona',
-  fields: {
-    cantidad_contratada: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    cantidad_entregada: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    fianza: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    bombona: { type: Bombona, isEntity: true, isCollection: false, isEmbedded: false,  },
-    contrato: { type: Contrato, isEntity: true, isCollection: false, isEmbedded: false,  },
-  }
-});
-
-meta.set(Descuento, {
-  tableName: 'contratos.descuento',
-  fields: {
-    descuento_euros: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    descuento_maximo: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    descuento_porcentaje: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    fecha_fin: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    fecha_inicio: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    porcentaje_agencia: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    porcentaje_repsol: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    bombona: { type: Bombona, isEntity: true, isCollection: false, isEmbedded: false,  },
-    contrato: { type: Contrato, isEntity: true, isCollection: false, isEmbedded: false,  },
-  }
-});
-
-meta.set(Almacen, {
-  tableName: 'articulos.almacen',
-  fields: {
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    vehiculo: { type: Vehiculo, isEntity: false, isCollection: false, isEmbedded: false,  },
-    estocCollection: { type: Estoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-    lineaAlbaranCollection: { type: LineaAlbaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    lineaPresupuestoCollection: { type: LineaPresupuesto, isEntity: false, isCollection: true, isEmbedded: false,  },
-    movimientoEstocCollection: { type: MovimientoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-    traspasoEstocAlmacenDestinoCollection: { type: TraspasoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-    traspasoEstocAlmacenOrigenCollection: { type: TraspasoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(Articulo, {
-  tableName: 'articulos.articulo',
-  fields: {
-    codigo: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    de_alta: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    precio_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    categoria: { type: Categoria, isEntity: true, isCollection: false, isEmbedded: false,  },
-    foto: { type: Fichero, isEntity: true, isCollection: false, isEmbedded: false,  },
-    estocCollection: { type: Estoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ficheroCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    lineaAlbaranCollection: { type: LineaAlbaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    lineaPresupuestoCollection: { type: LineaPresupuesto, isEntity: false, isCollection: true, isEmbedded: false,  },
-    lineaTraspasoEstocCollection: { type: LineaTraspasoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-    movimientoEstocCollection: { type: MovimientoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(Categoria, {
-  tableName: 'articulos.categoria',
-  fields: {
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    articuloCollection: { type: Articulo, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(Estoc, {
-  tableName: 'articulos.estoc',
-  fields: {
-    cantidad: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    almacen: { type: Almacen, isEntity: true, isCollection: false, isEmbedded: false,  },
-    articulo: { type: Articulo, isEntity: true, isCollection: false, isEmbedded: false,  },
-  }
-});
-
-meta.set(MovimientoEstoc, {
-  tableName: 'articulos.movimiento_estoc',
-  fields: {
-    cantidad: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    descripcion: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    estoc_anterior: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    nombre_cliente: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_documento: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    operacion_documento: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    tipo: { type: 'string', enum: 'TipoType', isEntity: false, isCollection: false, isEmbedded: false,  },
-    almacen: { type: Almacen, isEntity: true, isCollection: false, isEmbedded: false,  },
-    articulo: { type: Articulo, isEntity: true, isCollection: false, isEmbedded: false,  },
-    lineaAlbaran: { type: LineaAlbaran, isEntity: true, isCollection: false, isEmbedded: false,  },
-    lineaTraspasoEstoc: { type: LineaTraspasoEstoc, isEntity: true, isCollection: false, isEmbedded: false,  },
-    recuentoEstoc: { type: RecuentoEstoc, isEntity: true, isCollection: false, isEmbedded: false,  },
-  }
-});
-
-meta.set(RecuentoEstoc, {
-  tableName: 'articulos.recuento_estoc',
-  fields: {
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    fichero: { type: Fichero, isEntity: true, isCollection: false, isEmbedded: false,  },
-    movimientoEstocCollection: { type: MovimientoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(Bombona, {
-  tableName: 'articulos.bombona',
-  fields: {
-    codigo_maverma: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    codigo_nace: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    fianza: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    peso: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    contratoBombonaCollection: { type: ContratoBombona, isEntity: false, isCollection: true, isEmbedded: false,  },
-    descuentoCollection: { type: Descuento, isEntity: false, isCollection: true, isEmbedded: false,  },
-    lineaPedidoCollection: { type: LineaPedido, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(TraspasoEstoc, {
-  tableName: 'articulos.traspaso_estoc',
-  fields: {
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    almacenDestino: { type: Almacen, isEntity: true, isCollection: false, isEmbedded: false,  },
-    almacenOrigen: { type: Almacen, isEntity: true, isCollection: false, isEmbedded: false,  },
-    lineaTraspasoEstocCollection: { type: LineaTraspasoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(LineaTraspasoEstoc, {
-  tableName: 'articulos.linea_traspaso_estoc',
-  fields: {
-    cantidad: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    articulo: { type: Articulo, isEntity: true, isCollection: false, isEmbedded: false,  },
-    traspasoEstoc: { type: TraspasoEstoc, isEntity: true, isCollection: false, isEmbedded: false,  },
-    movimientoEstocCollection: { type: MovimientoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(Empresa, {
-  tableName: 'configuracion.empresa',
-  fields: {
-    iva: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    maximo_cliente_anonimo: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    serie_actual_facturas: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    embDatosFiscales: { type: EmbDatosFiscales, isEntity: false, isCollection: false, isEmbedded: true,  },
-    embDireccion: { type: EmbDireccion, isEntity: false, isCollection: false, isEmbedded: true,  },
-    embInfoContacto: { type: EmbInfoContacto, isEntity: false, isCollection: false, isEmbedded: true,  },
-  }
-});
-
-meta.set(AlmacenGas, {
-  tableName: 'configuracion.almacen_gas',
-  fields: {
-    codigo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    contratoCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(Factura, {
-  tableName: 'facturacion.factura',
-  fields: {
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    iva: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    observaciones: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    serie: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_impuestos: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    anyoFiscal: { type: AnyoFiscal, isEntity: true, isCollection: false, isEmbedded: false,  },
-    cliente: { type: Cliente, isEntity: true, isCollection: false, isEmbedded: false,  },
-    copiaDatosCliente: { type: DatosFiscales, isEntity: true, isCollection: false, isEmbedded: false,  },
-    copiaDatosEmpresa: { type: DatosFiscales, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionFiscal: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionObra: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    tecnico: { type: Tecnico, isEntity: true, isCollection: false, isEmbedded: false,  },
-    albaranCollection: { type: Albaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ficheroCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(Presupuesto, {
-  tableName: 'facturacion.presupuesto',
-  fields: {
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    iva: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    observaciones: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    serie: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_impuestos: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    anyoFiscal: { type: AnyoFiscal, isEntity: true, isCollection: false, isEmbedded: false,  },
-    cliente: { type: Cliente, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionFiscal: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionObra: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    ficheroCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    lineaPresupuestoCollection: { type: LineaPresupuesto, isEntity: false, isCollection: true, isEmbedded: false,  },
-  }
-});
-
-meta.set(LineaPresupuesto, {
-  tableName: 'facturacion.linea_presupuesto',
-  fields: {
-    cantidad: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    codigo_articulo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    descuento: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_articulo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    orden: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    precio_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    almacen: { type: Almacen, isEntity: true, isCollection: false, isEmbedded: false,  },
-    articulo: { type: Articulo, isEntity: true, isCollection: false, isEmbedded: false,  },
-    presupuesto: { type: Presupuesto, isEntity: true, isCollection: false, isEmbedded: false,  },
+    base_price: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    discount: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    item_code: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    item_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    order: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    quantity: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    item: { type: Item, isEntity: true, isCollection: false, isEmbedded: false, },
+    store: { type: Store, isEntity: true, isCollection: false, isEmbedded: false, },
+    deliveryNoteLineCollection: { type: DeliveryNote, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockTransferCollection: { type: StockTransfer, isEntity: false, isCollection: true, isEmbedded: false, },
+    ticketLineCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
 meta.set(Ticket, {
-  tableName: 'facturacion.ticket',
+  tableName: 'invoicing.ticket',
   fields: {
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    iva: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    observaciones: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    serie: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_impuestos: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    anyoFiscal: { type: AnyoFiscal, isEntity: true, isCollection: false, isEmbedded: false,  },
-    cliente: { type: Cliente, isEntity: true, isCollection: false, isEmbedded: false,  },
-    copiaDatosCliente: { type: DatosFiscales, isEntity: true, isCollection: false, isEmbedded: false,  },
-    copiaDatosEmpresa: { type: DatosFiscales, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionFiscal: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionObra: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    ficheroCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    lineaAlbaranCollection: { type: LineaAlbaran, isEntity: false, isCollection: true, isEmbedded: false,  },
+    date: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
+    number: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    observations: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_taxes: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    companyAddress: { type: Address, isEntity: true, isCollection: false, isEmbedded: false, },
+    companyLegalData: { type: LegalData, isEntity: true, isCollection: false, isEmbedded: false, },
+    customer: { type: Customer, isEntity: true, isCollection: false, isEmbedded: false, },
+    customerAddress: { type: Address, isEntity: true, isCollection: false, isEmbedded: false, },
+    customerLegalData: { type: LegalData, isEntity: true, isCollection: false, isEmbedded: false, },
+    fiscalYear: { type: FiscalYear, isEntity: true, isCollection: false, isEmbedded: false, },
+    series: { type: Series, isEntity: true, isCollection: false, isEmbedded: false, },
+    fileCollection: { type: File, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockLineLineCollection: { type: StockLine, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(LineaAlbaran, {
-  tableName: 'facturacion.linea_albaran',
+meta.set(Category, {
+  tableName: 'items.category',
   fields: {
-    cantidad: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    codigo_articulo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    descuento: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_articulo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    orden: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    precio_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    almacen: { type: Almacen, isEntity: true, isCollection: false, isEmbedded: false,  },
-    articulo: { type: Articulo, isEntity: true, isCollection: false, isEmbedded: false,  },
-    albaranCollection: { type: Albaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    movimientoEstocCollection: { type: MovimientoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ticketCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false,  },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    itemCollection: { type: Item, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Albaran, {
-  tableName: 'facturacion.albaran',
+meta.set(Item, {
+  tableName: 'items.item',
   fields: {
-    fecha: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    iva: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    observaciones: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    serie: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_impuestos: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    anyoFiscal: { type: AnyoFiscal, isEntity: true, isCollection: false, isEmbedded: false,  },
-    cliente: { type: Cliente, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionFiscal: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    direccionObra: { type: Direccion, isEntity: true, isCollection: false, isEmbedded: false,  },
-    factura: { type: Factura, isEntity: true, isCollection: false, isEmbedded: false,  },
-    tecnico: { type: Tecnico, isEntity: true, isCollection: false, isEmbedded: false,  },
-    ficheroCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    lineaAlbaranCollection: { type: LineaAlbaran, isEntity: false, isCollection: true, isEmbedded: false,  },
+    base_price: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    code: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    is_enabled: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false, },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    category: { type: Category, isEntity: true, isCollection: false, isEmbedded: false, },
+    photo: { type: File, isEntity: true, isCollection: false, isEmbedded: false, },
+    tax: { type: Tax, isEntity: true, isCollection: false, isEmbedded: false, },
+    budgetLineCollection: { type: BudgetLine, isEntity: false, isCollection: true, isEmbedded: false, },
+    fileCollection: { type: File, isEntity: false, isCollection: true, isEmbedded: false, },
+    manualStockTransferLineCollection: { type: ManualStockTransferLine, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockCollection: { type: Stock, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockLineCollection: { type: StockLine, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockTransferCollection: { type: StockTransfer, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Fichero, {
-  tableName: 'ficheros.fichero',
+meta.set(ManualStockTransfer, {
+  tableName: 'items.manual_stock_transfer',
   fields: {
-    directorio: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    mime: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    referencia_classe: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    referencia_id: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    subdirectorio: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    albaranCollection: { type: Albaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    articuloCollection: { type: Articulo, isEntity: false, isCollection: true, isEmbedded: false,  },
-    articuloFicheroFotoCollection: { type: Articulo, isEntity: false, isCollection: true, isEmbedded: false,  },
-    clienteCollection: { type: Cliente, isEntity: false, isCollection: true, isEmbedded: false,  },
-    contratoCollection: { type: Contrato, isEntity: false, isCollection: true, isEmbedded: false,  },
-    facturaCollection: { type: Factura, isEntity: false, isCollection: true, isEmbedded: false,  },
-    pedidoFicheroCollection: { type: PedidoFichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    presupuestoCollection: { type: Presupuesto, isEntity: false, isCollection: true, isEmbedded: false,  },
-    recuentoEstocCollection: { type: RecuentoEstoc, isEntity: false, isCollection: true, isEmbedded: false,  },
-    repartidorCollection: { type: Repartidor, isEntity: false, isCollection: true, isEmbedded: false,  },
-    tecnicoCollection: { type: Tecnico, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ticketCollection: { type: Ticket, isEntity: false, isCollection: true, isEmbedded: false,  },
-    vehiculoFacturasCollection: { type: Vehiculo, isEntity: false, isCollection: true, isEmbedded: false,  },
-    vehiculoInspeccionTecnicaCollection: { type: Vehiculo, isEntity: false, isCollection: true, isEmbedded: false,  },
-    vehiculoOtrosCollection: { type: Vehiculo, isEntity: false, isCollection: true, isEmbedded: false,  },
-    raw: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
+    date: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
+    originStore: { type: Store, isEntity: true, isCollection: false, isEmbedded: false, },
+    targetStore: { type: Store, isEntity: true, isCollection: false, isEmbedded: false, },
+    manualStockTransferLineCollection: { type: ManualStockTransferLine, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Tecnico, {
-  tableName: 'tecnicos.tecnico',
+meta.set(ManualStockTransferLine, {
+  tableName: 'items.manual_stock_transfer_line',
   fields: {
-    apellido_1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    apellido_2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    email: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_fiscal: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero_documento: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    serie_en_facturas: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono3: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    tipoDocumento: { type: TipoDocumento, isEntity: true, isCollection: false, isEmbedded: false,  },
-    usuario: { type: Usuario, isEntity: false, isCollection: false, isEmbedded: false,  },
-    albaranCollection: { type: Albaran, isEntity: false, isCollection: true, isEmbedded: false,  },
-    facturaCollection: { type: Factura, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ficheroCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    vehiculoCollection: { type: Vehiculo, isEntity: false, isCollection: true, isEmbedded: false,  },
+    quantity: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    item: { type: Item, isEntity: true, isCollection: false, isEmbedded: false, },
+    manualStockTransfer: { type: ManualStockTransfer, isEntity: true, isCollection: false, isEmbedded: false, },
+    stockTransferCollection: { type: StockTransfer, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Vehiculo, {
-  tableName: 'tecnicos.vehiculo',
+meta.set(Stock, {
+  tableName: 'items.stock',
   fields: {
-    habilitado: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    matricula: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    almacen: { type: Almacen, isEntity: false, isCollection: false, isEmbedded: false,  },
-    tecnico: { type: Tecnico, isEntity: true, isCollection: false, isEmbedded: false,  },
-    ficheroFacturasCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ficheroInspeccionTecnicaCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    ficheroOtrosCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
+    quantity: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    item: { type: Item, isEntity: true, isCollection: false, isEmbedded: false, },
+    store: { type: Store, isEntity: true, isCollection: false, isEmbedded: false, },
   }
 });
 
-meta.set(LineaPedido, {
-  tableName: 'pedidos.linea_pedido',
+meta.set(StockTransfer, {
+  tableName: 'items.stock_transfer',
   fields: {
-    cantidad: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    descuento: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    iva: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    orden: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false,  },
-    precio_unitario: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    pvp: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    suplemento: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_linea: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    bombona: { type: Bombona, isEntity: true, isCollection: false, isEmbedded: false,  },
-    pedido: { type: Pedido, isEntity: true, isCollection: false, isEmbedded: false,  },
+    customer_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    date: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
+    description: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    document_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    document_operation: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    previous_stock: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    quantity: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    type: { type: 'string', enum: 'StockTransferTypeType', isEntity: false, isCollection: false, isEmbedded: false, },
+    auxStore: { type: Store, isEntity: true, isCollection: false, isEmbedded: false, },
+    item: { type: Item, isEntity: true, isCollection: false, isEmbedded: false, },
+    manualStockTransferLine: { type: ManualStockTransferLine, isEntity: true, isCollection: false, isEmbedded: false, },
+    stockLine: { type: StockLine, isEntity: true, isCollection: false, isEmbedded: false, },
+    store: { type: Store, isEntity: true, isCollection: false, isEmbedded: false, },
   }
 });
 
-meta.set(Repartidor, {
-  tableName: 'pedidos.repartidor',
+meta.set(Store, {
+  tableName: 'items.store',
   fields: {
-    apellido_1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    apellido_2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    email: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_fiscal: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    numero_documento: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    telefono3: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    tipoDocumento: { type: TipoDocumento, isEntity: true, isCollection: false, isEmbedded: false,  },
-    usuario: { type: Usuario, isEntity: false, isCollection: false, isEmbedded: false,  },
-    ficheroCollection: { type: Fichero, isEntity: false, isCollection: true, isEmbedded: false,  },
-    pedidoCollection: { type: Pedido, isEntity: false, isCollection: true, isEmbedded: false,  },
+    name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    budgetLineCollection: { type: BudgetLine, isEntity: false, isCollection: true, isEmbedded: false, },
+    manualStockTransferStoreOriginCollection: { type: ManualStockTransfer, isEntity: false, isCollection: true, isEmbedded: false, },
+    manualStockTransferStoreTargetCollection: { type: ManualStockTransfer, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockCollection: { type: Stock, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockLineCollection: { type: StockLine, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockTransferCollection: { type: StockTransfer, isEntity: false, isCollection: true, isEmbedded: false, },
+    stockTransferStoreAuxCollection: { type: StockTransfer, isEntity: false, isCollection: true, isEmbedded: false, },
   }
 });
 
-meta.set(Ruta, {
-  tableName: 'pedidos.ruta',
+meta.set(Meta, {
+  tableName: 'public.meta',
   fields: {
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    pedidoCollection: { type: Pedido, isEntity: false, isCollection: true, isEmbedded: false,  },
   }
 });
 
-meta.set(Pedido, {
-  tableName: 'pedidos.pedido',
+meta.set(AddressTemplate, {
+  tableName: 'templates.address_template',
   fields: {
-    alta_en_nace: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    entregado: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    envio_inmediato_movilidad: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    fecha_creacion: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    fecha_entrega: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
-    observaciones_cliente: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    observaciones_pedido: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    peticion_factura: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    ruta_de_guardia: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    suministro_express: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    total_iva: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false,  },
-    urgente: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false,  },
-    contrato: { type: Contrato, isEntity: true, isCollection: false, isEmbedded: false,  },
-    modoDePago: { type: ModoDePago, isEntity: true, isCollection: false, isEmbedded: false,  },
-    repartidor: { type: Repartidor, isEntity: true, isCollection: false, isEmbedded: false,  },
-    ruta: { type: Ruta, isEntity: true, isCollection: false, isEmbedded: false,  },
-    lineaPedidoCollection: { type: LineaPedido, isEntity: false, isCollection: true, isEmbedded: false,  },
-    pedidoFicheroCollection: { type: PedidoFichero, isEntity: false, isCollection: true, isEmbedded: false,  },
+    additional_data: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    area: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    block: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    city: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    coordinates: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    door: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    floor: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    state: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    street_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    street_number: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    zip_code: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    country: { type: Country, isEntity: true, isCollection: false, isEmbedded: false, },
+    streetSuffix: { type: StreetSuffix, isEntity: true, isCollection: false, isEmbedded: false, },
   }
 });
 
-meta.set(PedidoFichero, {
-  tableName: 'pedidos.pedido_fichero',
+meta.set(ContactTemplate, {
+  tableName: 'templates.contact_template',
   fields: {
-    fichero: { type: Fichero, isEntity: true, isCollection: false, isEmbedded: false,  },
-    pedido: { type: Pedido, isEntity: true, isCollection: false, isEmbedded: false,  },
+    email: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    fax: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    phone1: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    phone2: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
   }
 });
 
-meta.set(Usuario, {
-  tableName: 'usuarios.usuario',
+meta.set(DocumentLineTemplate, {
+  tableName: 'templates.document_line_template',
   fields: {
-    contrasenya: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    mail: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    nombre_completo: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    repartidor: { type: Repartidor, isEntity: false, isCollection: false, isEmbedded: false,  },
-    tecnico: { type: Tecnico, isEntity: false, isCollection: false, isEmbedded: false,  },
-    grupoCollection: { type: Grupo, isEntity: false, isCollection: true, isEmbedded: false,  },
+    base_price: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    discount: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    item_code: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    item_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    order: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    quantity: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    item: { type: Item, isEntity: true, isCollection: false, isEmbedded: false, },
+    store: { type: Store, isEntity: true, isCollection: false, isEmbedded: false, },
   }
 });
 
-meta.set(Grupo, {
-  tableName: 'usuarios.grupo',
+meta.set(DocumentTemplate, {
+  tableName: 'templates.document_template',
   fields: {
-    nombre: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false,  },
-    usuarioCollection: { type: Usuario, isEntity: false, isCollection: true, isEmbedded: false,  },
+    date: { type: 'date', isEntity: false, isCollection: false, isEmbedded: false, transform: (v: any) => v ? new Date(v) : v, },
+    number: { type: 'number', isEntity: false, isCollection: false, isEmbedded: false, },
+    observations: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    total: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_base: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    total_taxes: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
+    customer: { type: Customer, isEntity: true, isCollection: false, isEmbedded: false, },
+    fiscalYear: { type: FiscalYear, isEntity: true, isCollection: false, isEmbedded: false, },
+    series: { type: Series, isEntity: true, isCollection: false, isEmbedded: false, },
   }
 });
 
+meta.set(LegalDataTemplate, {
+  tableName: 'templates.legal_data_template',
+  fields: {
+    document_number: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    legal_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    identityDocumentType: { type: IdentityDocumentType, isEntity: true, isCollection: false, isEmbedded: false, },
+  }
+});
+
+meta.set(AocUser, {
+  tableName: 'users.aoc_user',
+  fields: {
+    email: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    full_name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    pass: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+    username: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
+  }
+});
 
