@@ -11,7 +11,7 @@ import { Sector } from '../../../../models/common/sector';
 import { Subsector } from '../../../../models/common/subsector';
 import { AocFormController, AocFormModule } from '@atlantis-of-code/aoc-client/components/aoc-form';
 import { MavermaDefaultsService } from '../../../../services/maverma-defaults.service';
-import { MavermaUtilsService } from '../../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { AocUiTabPanelModule } from '@atlantis-of-code/aoc-client/ui/panel/aoc-ui-tab-panel';
 import { AocUiFormModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-form';
 import { ClienteSelectComponent } from '../../clientes/cliente/cliente-select.component';
@@ -260,7 +260,7 @@ export default class ContratoFormComponent implements OnInit, OnDestroy {
     public modelConfig: ContratoModelConfig,
     private fb: UntypedFormBuilder,
     private aocFormController: AocFormController<Contrato>,
-    private mavermaUtils: MavermaUtilsService,
+    private mavermaUtils: QuestUtilsService,
     private mavermaDefaults: MavermaDefaultsService
   ) { }
 

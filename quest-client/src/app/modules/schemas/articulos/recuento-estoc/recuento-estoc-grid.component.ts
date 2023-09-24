@@ -13,7 +13,7 @@ import { Estoc } from '../../../../models/articulos/estoc';
 import { EstocModelConfig } from '../../../../model-configs/articulos/estoc-model-config';
 import { Articulo } from '../../../../models/articulos/articulo';
 import { HttpClient } from '@angular/common/http';
-import { MavermaUtilsService } from '../../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { AocConfig } from '@atlantis-of-code/aoc-client/core/configs';
 import { aocUiTplRef } from '@atlantis-of-code/aoc-client/ui/common/types';
 import { AocGridModule } from '@atlantis-of-code/aoc-client/components/aoc-grid';
@@ -123,7 +123,7 @@ export class RecuentoEstocGridComponent implements OnInit, OnDestroy {
     public estocModelConfig: EstocModelConfig,
     private fechaPipe: FechaPipe,
     private httpClient: HttpClient,
-    private mavermaUtils: MavermaUtilsService,
+    private mavermaUtils: QuestUtilsService,
     private aocConfig: AocConfig
   ) { }
 

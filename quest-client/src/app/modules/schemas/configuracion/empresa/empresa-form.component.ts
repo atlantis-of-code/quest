@@ -3,7 +3,7 @@ import { EmpresaModelConfig } from '../../../../model-configs/configuracion/empr
 import { Empresa } from '../../../../models/configuracion/empresa';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AocFormController, AocFormModule } from '@atlantis-of-code/aoc-client/components/aoc-form';
-import { MavermaUtilsService } from '../../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { AocUiValidators } from '@atlantis-of-code/aoc-client/ui/common/validators';
 import { AocUiFormModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-form';
 import {
@@ -76,7 +76,7 @@ export default class EmpresaFormComponent implements OnInit {
   constructor(
     public modelConfig: EmpresaModelConfig,
     private fb: UntypedFormBuilder,
-    private mavermaUtils: MavermaUtilsService
+    private mavermaUtils: QuestUtilsService
   ) { }
 
   ngOnInit(): void {

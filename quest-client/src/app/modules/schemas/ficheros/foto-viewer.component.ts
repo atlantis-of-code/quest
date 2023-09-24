@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Fichero } from '../../../models/ficheros/fichero';
 import { AocRestService } from '@atlantis-of-code/aoc-client/core/services';
-import { FicheroUtilsService } from '../../../services/fichero-utils.service';
+import { FilesService } from '../../../services/files.service';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -33,7 +33,7 @@ export class FotoViewerComponent {
 
   constructor(
     private aocRestService: AocRestService,
-    private ficheroUtilsService: FicheroUtilsService
+    private ficheroUtilsService: FilesService
   ) { }
 
   async procesarFichero(fichero: Fichero) {

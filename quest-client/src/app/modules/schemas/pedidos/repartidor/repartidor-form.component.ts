@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AocFormController, AocFormModule } from '@atlantis-of-code/aoc-client/components/aoc-form';
 import { RepartidorModelConfig } from '../../../../model-configs/pedidos/repartidor-model-config';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { MavermaUtilsService } from '../../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { AocUiFormModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-form';
 import { AocRestOptions } from '@atlantis-of-code/aoc-client/aoc-common';
 import { Repartidor } from '../../../../models/pedidos/repartidor';
@@ -57,7 +57,7 @@ export default class RepartidorFormComponent implements OnInit {
   constructor(
     protected modelConfig: RepartidorModelConfig,
     private fb: UntypedFormBuilder,
-    private mavermaUtils: MavermaUtilsService
+    private mavermaUtils: QuestUtilsService
   ) { }
 
   ngOnInit() {

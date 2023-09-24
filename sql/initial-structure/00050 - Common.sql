@@ -3,6 +3,7 @@ CREATE SCHEMA common;
 CREATE TABLE common.country (
     id bigserial primary key ,
     name text not null,
+    is_default boolean not null default false,
     iso_code2 text,
     iso_code3 text,
     is_default boolean not null default false -- overridden by customer default
@@ -56,6 +57,7 @@ CREATE TABLE common.tax (
 CREATE TABLE common.series (
     id bigserial primary key ,
     name text not null unique ,
-    type text not null check (type in ('Invoice', 'Delivery note', 'Budget', 'Ticket'))
+    type text not null check (type in ('Invoice', 'Delivery note', 'Budget', 'Ticket')),
+    is_default boolean not null default false
 ) inherits (public.meta);
 

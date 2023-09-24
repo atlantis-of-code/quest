@@ -1,12 +1,12 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { MavermaUtilsService } from '../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../services/quest-utils.service';
 import { AocUiShareService } from '@atlantis-of-code/aoc-client/ui/common/services';
 import { Router } from '@angular/router';
 import { AocUiWindowDynRef } from '@atlantis-of-code/aoc-client/ui/overlay/aoc-ui-window';
 import { AocUiToastMessageService } from '@atlantis-of-code/aoc-client/ui/overlay/aoc-ui-toast';
 import { AocModel, AocModelManager } from '@atlantis-of-code/aoc-client/core/models';
-import { FicheroUtilsService } from '../../../services/fichero-utils.service';
+import { FilesService } from '../../../services/files.service';
 import { AocUiDropModule } from '@atlantis-of-code/aoc-client/ui/common/directives/aoc-ui-drop';
 import { AocUiFileSelectModule } from '@atlantis-of-code/aoc-client/ui/common/directives/aoc-ui-file-select';
 import { Fichero } from '../../../models/ficheros/fichero';
@@ -61,8 +61,8 @@ export class FotoFieldComponent implements ControlValueAccessor {
     private router: Router,
     private aocUiWindowDynRef: AocUiWindowDynRef,
     private aocUiToastMessageService: AocUiToastMessageService,
-    private ficheroUtilsService: FicheroUtilsService,
-    private mavermaUtils: MavermaUtilsService
+    private ficheroUtilsService: FilesService,
+    private mavermaUtils: QuestUtilsService
   ) { }
 
   registerOnChange(fn: any): void {

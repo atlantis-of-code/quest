@@ -3,7 +3,7 @@ import { AocModelEmitter } from '@atlantis-of-code/aoc-client/core/utils';
 import { AlbaranModelConfig } from '../../../../model-configs/facturacion/albaran-model-config';
 import { AocGridColumn } from '@atlantis-of-code/aoc-client/core/types';
 import { Albaran } from '../../../../models/facturacion/albaran';
-import { MavermaUtilsService } from '../../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { AocFilterQuery, AocRestOptions } from '@atlantis-of-code/aoc-client/aoc-common';
 import { DatosFiscalesPipe } from '../../../../pipes/datos-fiscales.pipe';
 import { DocumentoPipe } from '../../../../pipes/documento.pipe';
@@ -76,7 +76,7 @@ export class AlbaranGridComponent implements OnInit {
   constructor(
     public modelConfig: AlbaranModelConfig,
     private facturaModelConfig: FacturaModelConfig,
-    private mavermaUtils: MavermaUtilsService,
+    private mavermaUtils: QuestUtilsService,
     private datosFiscalesPipe: DatosFiscalesPipe,
     private documentoPipe: DocumentoPipe,
     private restService: AocRestService,

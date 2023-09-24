@@ -4,7 +4,7 @@ import { AbstractControl, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGr
 import { Tecnico } from '../../../../models/tecnicos/tecnico';
 import { AocRestOptions } from '@atlantis-of-code/aoc-client/aoc-common';
 import { AocFormController, AocFormModule } from '@atlantis-of-code/aoc-client/components/aoc-form';
-import { MavermaUtilsService } from '../../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { AocRestService } from '@atlantis-of-code/aoc-client/core/services';
 import { Factura } from '../../../../models/facturacion/factura';
 import { merge, Subject } from 'rxjs';
@@ -75,7 +75,7 @@ export default class TecnicoFormComponent implements OnInit, OnDestroy {
   constructor(
     public modelConfig: TecnicoModelConfig,
     private fb: UntypedFormBuilder,
-    private mavermaUtils: MavermaUtilsService,
+    private mavermaUtils: QuestUtilsService,
     private formController: AocFormController<Tecnico>,
     private restService: AocRestService
   ) { }

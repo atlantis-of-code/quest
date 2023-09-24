@@ -3,7 +3,7 @@ import { ContactoModelConfig } from '../../../../model-configs/contactos/contact
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Contacto } from '../../../../models/contactos/contacto';
 import { AocFormController, AocFormModule } from '@atlantis-of-code/aoc-client/components/aoc-form';
-import { MavermaUtilsService } from '../../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { AocUiFormModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-form';
 import { AocUiInputTextModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-input-text';
 import {
@@ -46,7 +46,7 @@ export default class ContactoFormComponent implements OnInit {
 
   constructor(
     public modelConfig: ContactoModelConfig,
-    private mavermaUtils: MavermaUtilsService,
+    private mavermaUtils: QuestUtilsService,
     private fb: UntypedFormBuilder
   ) { }
 

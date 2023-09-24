@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { TicketModelConfig } from '../../../../model-configs/facturacion/ticket-model-config';
 import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Ticket } from '../../../../models/facturacion/ticket';
-import { MavermaUtilsService } from '../../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { AocRestOptions } from '@atlantis-of-code/aoc-client/aoc-common';
 import { AocFormController, AocFormModule } from '@atlantis-of-code/aoc-client/components/aoc-form';
 import { LineaAlbaranModelConfig } from '../../../../model-configs/facturacion/linea-albaran-model-config';
@@ -126,7 +126,7 @@ export default class TicketFormComponent implements OnInit, OnDestroy {
     public modelConfig: TicketModelConfig,
     public lineaAlbaranModelConfig: LineaAlbaranModelConfig,
     private fb: UntypedFormBuilder,
-    private mavermaUtils: MavermaUtilsService,
+    private mavermaUtils: QuestUtilsService,
     private restService: AocRestService,
     private formController: AocFormController<Ticket>,
     private mavermaDefaults: MavermaDefaultsService,

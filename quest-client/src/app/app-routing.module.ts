@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AocLoginComponent } from '@atlantis-of-code/aoc-client/components/aoc-login';
 import { AocPdfViewerComponent } from '@atlantis-of-code/aoc-client/components/aoc-pdf-viewer';
-import { AocAuthGuard, AocLoginGuard, AocWindowGuard } from '@atlantis-of-code/aoc-client/core/guards';
-import { of } from 'rxjs';
 import { AocTabConfig } from '@atlantis-of-code/aoc-client/core/configs';
+import { AocAuthGuard, AocLoginGuard, AocWindowGuard } from '@atlantis-of-code/aoc-client/core/guards';
 import { AocUiWindowDynConfig } from '@atlantis-of-code/aoc-client/ui/overlay/aoc-ui-window';
-import { NaceComponent } from './components/nace/nace.component';
-import { PreloadServicesGuard } from './guards/preload-services.guard';
+import { of } from 'rxjs';
+import { questDefaultsGuard } from './services/quest-defaults-service';
 
 const routes: Routes = [
   {
@@ -20,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AocAuthGuard, PreloadServicesGuard],
+    canActivate: [AocAuthGuard, questDefaultsGuard],
     children: [
       // EMPTY COMPONENT: we don't need it because we want the dashboard to be always open
       // {
@@ -73,16 +72,6 @@ const routes: Routes = [
       {
         path: 'usuarios',
         loadChildren: () => import('./modules/schemas/usuarios/usuario-routing.module')
-      },
-      {
-        path: 'nace',
-        component: NaceComponent,
-        data: {
-          header: 'Instrucciones de Instalación y de Actualización del Conector Nace',
-          width: 0.75,
-          height: 0.75
-        } as AocUiWindowDynConfig,
-        canActivate: [AocWindowGuard]
       },
       {
         path: 'print_pdf_window',

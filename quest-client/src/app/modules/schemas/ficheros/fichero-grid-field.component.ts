@@ -3,14 +3,14 @@ import { FicheroModelConfig } from '../../../model-configs/ficheros/fichero-mode
 import { AocGridColumn } from '@atlantis-of-code/aoc-client/core/types';
 import { Fichero } from '../../../models/ficheros/fichero';
 import { AocModel, AocModelManager } from '@atlantis-of-code/aoc-client/core/models';
-import { MavermaUtilsService } from '../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../services/quest-utils.service';
 import { NgControl, ReactiveFormsModule, UntypedFormControl, Validators } from '@angular/forms';
 import { AocUiDialogService } from '@atlantis-of-code/aoc-client/ui/overlay/aoc-ui-dialog';
 import { AocUiWindowDynRef } from '@atlantis-of-code/aoc-client/ui/overlay/aoc-ui-window';
 import { AocUiShareService } from '@atlantis-of-code/aoc-client/ui/common/services';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FicheroUtilsService } from '../../../services/fichero-utils.service';
+import { FilesService } from '../../../services/files.service';
 import { aocUiTplRef } from '@atlantis-of-code/aoc-client/ui/common/types';
 import { AocGridModule } from '@atlantis-of-code/aoc-client/components/aoc-grid';
 import { AocUiToolbarModule } from '@atlantis-of-code/aoc-client/ui/panel/aoc-ui-toolbar';
@@ -100,8 +100,8 @@ export class FicheroGridFieldComponent implements OnInit {
     private aocUiDialogService: AocUiDialogService,
     private aocUiShareService: AocUiShareService,
     private aocUiWindowDynRef: AocUiWindowDynRef,
-    private ficheroUtilsService: FicheroUtilsService,
-    private mavermaUtils: MavermaUtilsService
+    private ficheroUtilsService: FilesService,
+    private mavermaUtils: QuestUtilsService
   ) {}
 
   ngOnInit(): void {

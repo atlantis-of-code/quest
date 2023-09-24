@@ -4,7 +4,7 @@ import { Articulo } from '../../../../models/articulos/articulo';
 import { AocFilterQuery, AocRestOptions } from '@atlantis-of-code/aoc-client/aoc-common';
 import { ArticuloModelConfig } from '../../../../model-configs/articulos/articulo-model-config';
 import { aocUiTplRef } from '@atlantis-of-code/aoc-client/ui/common/types';
-import { MavermaUtilsService } from '../../../../services/maverma-utils.service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { Fichero } from '../../../../models/ficheros/fichero';
 import { AocRestService } from '@atlantis-of-code/aoc-client/core/services';
 import { AocModelManager } from '@atlantis-of-code/aoc-client/core/models';
@@ -76,7 +76,7 @@ export default class ArticuloFotoGridComponent implements OnInit {
 
   constructor(
     public modelConfig: ArticuloModelConfig,
-    private mavermaUtils: MavermaUtilsService,
+    private mavermaUtils: QuestUtilsService,
     private restService: AocRestService
   ) { }
 
