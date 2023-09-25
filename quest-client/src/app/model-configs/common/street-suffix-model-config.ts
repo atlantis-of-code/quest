@@ -41,7 +41,14 @@ export class StreetSuffixModelConfig extends AocModelConfig<StreetSuffix> {
   // Filter definition for payloads sent by grids and autocompletes
   // AocModelConfigClientPayload is used to define here the AocFilterQuery for a given payload search term
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
-  readonly payload: AocModelConfigClientPayload<StreetSuffix> | AocModelConfigServerPayload;
+  readonly payload: AocModelConfigClientPayload<StreetSuffix> | AocModelConfigServerPayload = p => {
+    return {
+      $or: [
+        { abbrv: { $startsWith: p }},
+        { name: { $startsWith: p }}
+      ]
+    }
+  };
 
   // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
   transform(streetSuffix: StreetSuffix): string {

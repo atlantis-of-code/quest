@@ -31,7 +31,7 @@ export class StreetSuffix extends QuestModel {
   //region CUSTOM
   // TODO: Implement your own toString method
   toString(): string {
-    return `StreetSuffix_${this.id}`;
+    return this.name ?? '';
   }
   //endregion
 }

@@ -45,7 +45,7 @@ export class QuestUtilsService {
     formGroup.addControl(AddressTemplate.field.ZIP_CODE, new FormControl<string>(null));
     formGroup.addControl(AddressTemplate.entity.COUNTRY, new FormControl(this.questDefaultsService.country, Validators.required));
     formGroup.addControl(AddressTemplate.entity.STREET_SUFFIX, new FormControl(this.questDefaultsService.streetSuffix, Validators.required));
-    return formGroup;
+    return formGroup as AbstractControl;
   }
 
   addControlsForLegalDataTemplate(formGroup: FormGroup<AocFormGroupType<LegalDataTemplate>>) {

@@ -17,7 +17,7 @@ import { StreetSuffix } from '../../../../models/common/street-suffix';
 export class StreetSuffixAutocompleteComponent {
     protected restOptions: AocRestOptions<StreetSuffix> = {
         orderBy: {
-            name: 'desc'
+            name: 'asc'
         }
     };
 

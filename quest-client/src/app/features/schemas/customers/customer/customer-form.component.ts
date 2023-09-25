@@ -16,6 +16,8 @@ import {LegalDataTemplate} from '../../../../models/templates/legal-data-templat
 import {
   LegalDataTemplateSubformComponent
 } from '../../templates/legal-data-template/legal-data-template-subform.component';
+import {AddressTemplate} from '../../../../models/templates/address-template';
+import {AddressTemplateSubformComponent} from '../../templates/address-template/address-template-subform.component';
 
 @Component({
   selector: 'app-customer-form',
@@ -29,7 +31,8 @@ import {
     AocUiDatetimePickerModule,
     GenderAutocompleteComponent,
     LanguageAutocompleteComponent,
-    LegalDataTemplateSubformComponent
+    LegalDataTemplateSubformComponent,
+    AddressTemplateSubformComponent
   ],
   template: `
     <aoc-form [modelConfig]="modelConfig" [formGroup]="formGroup" [restOptions]="restOptions">
@@ -45,6 +48,7 @@ import {
             <input aocUiInputText aocUiFormField="Trade name" [span]="18" [formControlName]="CustomerClass.field.TRADE_NAME" placeholder="Just for companies, not mandatory...">
             <aoc-ui-datetime-picker aocUiFormField="Birthdate" [formControlName]="CustomerClass.field.BIRTHDATE" mode="date"></aoc-ui-datetime-picker>
           </aoc-ui-form-row>
+          <app-address-template-subform [formGroupName]="CustomerClass.embedded.ADDRESS_TEMPLATE"></app-address-template-subform>
         </aoc-ui-form-page>
       </ng-template>
     </aoc-form>
@@ -72,6 +76,7 @@ export default class CustomerFormComponent implements OnInit {
       gender: new FormControl(this.questDefaultsService.gender),
       language: new FormControl(this.questDefaultsService.language, Validators.required),
       legalDataTemplate: this.questUtilsService.addControlsForLegalDataTemplate(new FormGroup({})),
+      addressTemplate: this.questUtilsService.addControlsForAddressTemplate(new FormGroup({}))
     });
 
     this.formController.addBeforeSaveAction(action => {
