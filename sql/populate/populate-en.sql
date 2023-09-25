@@ -206,3 +206,71 @@ VALUES
     ('Way', 'Wy', false),
     ('Well', 'Wl', false),
     ('Wells', 'Wls', false);
+
+INSERT INTO common.country (name, iso_code2, iso_code3, is_default)
+VALUES
+  ('Albania', 'AL', 'ALB', false),
+  ('Andorra', 'AD', 'AND', false),
+  ('Austria', 'AT', 'AUT', false),
+  ('Belarus', 'BY', 'BLR', false),
+  ('Belgium', 'BE', 'BEL', false),
+  ('Bulgaria', 'BG', 'BGR', false),
+  ('Croatia', 'HR', 'HRV', false),
+  ('Cyprus', 'CY', 'CYP', false),
+  ('Czech Republic', 'CZ', 'CZE', false),
+  ('Denmark', 'DK', 'DNK', false),
+  ('Estonia', 'EE', 'EST', false),
+  ('Finland', 'FI', 'FIN', false),
+  ('France', 'FR', 'FRA', false),
+  ('Germany', 'DE', 'DEU', false),
+  ('Greece', 'GR', 'GRC', false),
+  ('Hungary', 'HU', 'HUN', false),
+  ('Iceland', 'IS', 'ISL', false),
+  ('Ireland', 'IE', 'IRL', false),
+  ('Italy', 'IT', 'ITA', false),
+  ('Latvia', 'LV', 'LVA', false),
+  ('Liechtenstein', 'LI', 'LIE', false),
+  ('Lithuania', 'LT', 'LTU', false),
+  ('Luxembourg', 'LU', 'LUX', false),
+  ('Malta', 'MT', 'MLT', false),
+  ('Moldova', 'MD', 'MDA', false),
+  ('Monaco', 'MC', 'MCO', false),
+  ('Montenegro', 'ME', 'MNE', false),
+  ('Netherlands', 'NL', 'NLD', false),
+  ('North Macedonia', 'MK', 'MKD', false),
+  ('Norway', 'NO', 'NOR', false),
+  ('Poland', 'PL', 'POL', false),
+  ('Portugal', 'PT', 'PRT', false),
+  ('Romania', 'RO', 'ROU', false),
+  ('Russia', 'RU', 'RUS', false),
+  ('San Marino', 'SM', 'SMR', false),
+  ('Serbia', 'RS', 'SRB', false),
+  ('Slovakia', 'SK', 'SVK', false),
+  ('Slovenia', 'SI', 'SVN', false),
+  ('Spain', 'ES', 'ESP', false),
+  ('Sweden', 'SE', 'SWE', false),
+  ('Switzerland', 'CH', 'CHE', false),
+  ('Ukraine', 'UA', 'UKR', false),
+  ('United Kingdom', 'GB', 'GBR', false),
+  ('United States', 'US', 'USA', true),
+  ('Canada', 'CA', 'CAN', false);
+
+-- Insert the top 10 most spoken languages, with English as the default language
+INSERT INTO common.language (name, iso_code2, iso_code3, is_default)
+VALUES
+    ('Mandarin Chinese', 'zh', 'zho', false),
+    ('Spanish', 'es', 'spa', false),
+    ('English', 'en', 'eng', true), -- English is the default language
+    ('Hindi', 'hi', 'hin', false),
+    ('Arabic', 'ar', 'ara', false),
+    ('Bengali', 'bn', 'ben', false),
+    ('Portuguese', 'pt', 'por', false),
+    ('Russian', 'ru', 'rus', false),
+    ('Japanese', 'ja', 'jpn', false),
+    ('Punjabi', 'pa', 'pan', false);
+
+INSERT INTO common.gender (name, is_default)
+VALUES
+    ('Male', false),
+    ('Female', false),
+    ('Neuter', true); -- Neuter is the default gender

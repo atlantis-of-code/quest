@@ -14,7 +14,7 @@ import { IdentityDocumentType } from '../../../../models/common/identity-documen
     <aoc-autocomplete [modelConfig]="modelConfig" [restOptions]="restOptions"></aoc-autocomplete>
   `
 })
-export class IdentityDocumentTypeAutocomplete {
+export class IdentityDocumentTypeAutocompleteComponent {
   restOptions: AocRestOptions<IdentityDocumentType> = {
     orderBy: {
       name: 'desc'

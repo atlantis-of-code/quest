@@ -1,16 +1,13 @@
-import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AocFormGroupType } from '@atlantis-of-code/aoc-client/core/types';
-import { SeriesTypeType } from '../models/common/series';
-import { Customer } from '../models/customers/customer';
-import { AddressTemplate } from '../models/templates/address-template';
-import { ContactTemplate } from '../models/templates/contact-template';
-import { DocumentTemplate } from '../models/templates/document-template';
-import { LegalDataTemplate } from '../models/templates/legal-data-template';
-import { DatosFiscalesPipe } from '../pipes/datos-fiscales.pipe';
-import { FechaPipe } from '../pipes/fecha.pipe';
-import { PrecioPipe } from '../pipes/precio.pipe';
-import { QuestDefaultsService } from './quest-defaults-service';
+import {Injectable} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AocFormGroupType} from '@atlantis-of-code/aoc-client/core/types';
+import {SeriesTypeType} from '../models/common/series';
+import {Customer} from '../models/customers/customer';
+import {AddressTemplate} from '../models/templates/address-template';
+import {ContactTemplate} from '../models/templates/contact-template';
+import {DocumentTemplate} from '../models/templates/document-template';
+import {LegalDataTemplate} from '../models/templates/legal-data-template';
+import {QuestDefaultsService} from './quest-defaults-service';
 
 
 @Injectable({
@@ -19,9 +16,6 @@ import { QuestDefaultsService } from './quest-defaults-service';
 export class QuestUtilsService {
 
   constructor(
-    private datosFiscalesPipe: DatosFiscalesPipe,
-    private fechaPipe: FechaPipe,
-    private precioPipe: PrecioPipe,
     private questDefaultsService: QuestDefaultsService
   ) {}
 
@@ -34,6 +28,7 @@ export class QuestUtilsService {
     formGroup.addControl(DocumentTemplate.entity.FISCAL_YEAR, new FormControl(this.questDefaultsService.fiscalYear, Validators.required));
     formGroup.addControl(DocumentTemplate.entity.SERIES, new FormControl(this.questDefaultsService.seriesFor(seriesType)));
     formGroup.addControl(DocumentTemplate.entity.CUSTOMER, new FormControl<Customer>(null, Validators.required));
+    return formGroup;
   }
 
   addControlsForAddressTemplate(formGroup: FormGroup<AocFormGroupType<AddressTemplate>>) {
@@ -50,12 +45,14 @@ export class QuestUtilsService {
     formGroup.addControl(AddressTemplate.field.ZIP_CODE, new FormControl<string>(null));
     formGroup.addControl(AddressTemplate.entity.COUNTRY, new FormControl(this.questDefaultsService.country, Validators.required));
     formGroup.addControl(AddressTemplate.entity.STREET_SUFFIX, new FormControl(this.questDefaultsService.streetSuffix, Validators.required));
+    return formGroup;
   }
 
   addControlsForLegalDataTemplate(formGroup: FormGroup<AocFormGroupType<LegalDataTemplate>>) {
     formGroup.addControl(LegalDataTemplate.field.DOCUMENT_NUMBER, new FormControl<string>(null));
     formGroup.addControl(LegalDataTemplate.field.LEGAL_NAME, new FormControl<string>(null));
     formGroup.addControl(LegalDataTemplate.entity.IDENTITY_DOCUMENT_TYPE, new FormControl(this.questDefaultsService.identityDocumentType));
+    return formGroup as AbstractControl;
   }
 
   addControlsForContactTemplate(formGroup: FormGroup<AocFormGroupType<ContactTemplate>>) {
@@ -63,6 +60,7 @@ export class QuestUtilsService {
     formGroup.addControl(ContactTemplate.field.FAX, new FormControl<string>(null));
     formGroup.addControl(ContactTemplate.field.PHONE1, new FormControl<string>(null));
     formGroup.addControl(ContactTemplate.field.PHONE2, new FormControl<string>(null));
+    return formGroup;
   }
 
   /*

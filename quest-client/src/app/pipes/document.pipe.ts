@@ -1,8 +1,8 @@
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
-import { Factura } from '../models/facturacion/factura';
-import { Albaran } from '../models/facturacion/albaran';
-import { Presupuesto } from '../models/facturacion/presupuesto';
-import { Ticket } from '../models/facturacion/ticket';
+import { Budget } from '../models/invoicing/budget';
+import { DeliveryNote } from '../models/invoicing/delivery-note';
+import { Invoice } from '../models/invoicing/invoice';
+import { Ticket } from '../models/invoicing/ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,8 @@ import { Ticket } from '../models/facturacion/ticket';
   pure: true,
   standalone: true
 })
-export class DocumentoPipe implements PipeTransform {
-
-  transform<T>(documento: Albaran | Factura | Presupuesto | Ticket/*Pick<EmbDocumento, 'anyoFiscal' | 'serie' | 'numero'>*/): string {
-    return `${documento.anyoFiscal?.anyo}/${documento.serie ?? ''}${documento.numero?.toString().padStart(4, '0')}`;
+export class DocumentPipe implements PipeTransform {
+  transform(document: Invoice | DeliveryNote | Budget | Ticket): string {
+    return `${document.fiscalYear.year}/${document.series.name ?? ''}${document.number.toString().padStart(4, '0')}`;
   }
-
 }

@@ -29,7 +29,7 @@ export class Gender extends QuestModel {
   //region CUSTOM
   // TODO: Implement your own toString method
   toString(): string {
-    return `Gender_${this.id}`;
+    return this.name ?? '';
   }
   //endregion
 }

@@ -6,6 +6,8 @@ import { FiscalYear } from '../models/common/fiscal-year';
 import { IdentityDocumentType } from '../models/common/identity-document-type';
 import { Series, SeriesTypeType } from '../models/common/series';
 import { StreetSuffix } from '../models/common/street-suffix';
+import {Gender} from '../models/common/gender';
+import {Language} from '../models/common/language';
 
 // Guard to be sure default values are loaded when starting the application
 export const questDefaultsGuard = () => {
@@ -32,6 +34,12 @@ export class QuestDefaultsService {
   // Street suffix
   streetSuffix: StreetSuffix;
 
+  // Gender
+  gender: Gender;
+
+  // Language
+  language: Language;
+
   // Determines if values are already loaded. Useful when logout / login is performed
   // as the guard will fire again and this value will be already true
   #ready = false;
@@ -54,7 +62,9 @@ export class QuestDefaultsService {
           this.aocRestService.findOne$(Series, { is_default: true, type: 'Ticket' }),
           this.aocRestService.findOne$(FiscalYear, { is_current: true }),
           this.aocRestService.findOne$(Country, { is_default: true }),
-          this.aocRestService.findOne$(StreetSuffix, { is_default: true })
+          this.aocRestService.findOne$(StreetSuffix, { is_default: true }),
+          this.aocRestService.findOne$(Gender, { is_default: true }),
+          this.aocRestService.findOne$(Language, { is_default: true })
         ]).subscribe({
           next: results => {
             this.identityDocumentType = results[0];
@@ -65,6 +75,8 @@ export class QuestDefaultsService {
             this.fiscalYear = results[5];
             this.country = results[6];
             this.streetSuffix = results[7];
+            this.gender = results[8];
+            this.language = results[9];
             if (!this.#ready) {
               this.#ready = true;
               resolve(true);

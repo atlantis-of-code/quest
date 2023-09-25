@@ -4,6 +4,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AocUserConfig } from '@atlantis-of-code/aoc-client/aoc-common';
 import { AocAppInitializerFactory, AocAppModule } from '@atlantis-of-code/aoc-client/components/aoc-app';
 import { AocDirectivesModule } from '@atlantis-of-code/aoc-client/core/directives';
 import { AocUiButtonModule } from '@atlantis-of-code/aoc-client/ui/button/aoc-ui-button';
@@ -12,9 +13,7 @@ import { AocUiDatetimePickerModule } from '@atlantis-of-code/aoc-client/ui/form/
 import { Config } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NaceComponent } from './components/nace/nace.component';
-import { Usuario } from './models/usuarios/usuario';
-import { AocUserConfig } from '@atlantis-of-code/aoc-client/aoc-common';
+import { AocUser } from './models/users/aoc-user';
 
 // Set Big.js to strict mode. By this way only Big numbers or strings will be accepted as BigSource.
 // @ts-ignore
@@ -22,8 +21,7 @@ import { AocUserConfig } from '@atlantis-of-code/aoc-client/aoc-common';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NaceComponent
+    AppComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +37,7 @@ import { AocUserConfig } from '@atlantis-of-code/aoc-client/aoc-common';
     AocUiAutocompleteModule,
     AocAppModule.forRoot(
       Config,
-      new AocUserConfig(Usuario, { fieldMap: { username: 'username', password: 'pass' }}),
+      new AocUserConfig(AocUser, { fieldMap: { username: 'username', password: 'pass' }}),
       {
         autoConvertEmptyStringsToNullInControls: true,
         autoTrimStringsInControls: true,

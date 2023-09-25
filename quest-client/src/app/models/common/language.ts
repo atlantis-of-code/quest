@@ -33,7 +33,7 @@ export class Language extends QuestModel {
   //region CUSTOM
   // TODO: Implement your own toString method
   toString(): string {
-    return `Language_${this.id}`;
+    return this.name ?? '';
   }
   //endregion
 }

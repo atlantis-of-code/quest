@@ -14,29 +14,12 @@
       "corsOrigin": "http://localhost:4200"
     },
     "postgres": {
-      "host": "gesvip2.jeronibrunet.com",
-      "port": 55557,
+      "host": "jeronibrunet.com",
+      "port": 55333,
       "username": "postgres",
       "password": "pichon",
-      "db": "maverma",
+      "db": "quest",
       "debug": false
-    },
-    "mail": {
-      "options": {
-        "host": "smtp.zoho.eu",
-        "port": 587,
-        "secure": false,
-        "auth": {
-          "user": "aoc@atlantisofcode.com",
-          "pass": "7w3ewjRSsz6k"
-        },
-        "tls": {
-          "rejectUnauthorized": false
-        }
-      },
-      "defaults": {
-        "from": "aoc@atlantisofcode.com"
-      }
     },
     "reports": {
       "wkhtmltopdfAbsolutePath": "H:\\Code\\quest\\quest-server\\bin\\wkhtmltopdf.exe",
@@ -58,10 +41,10 @@
     },
     "postgres": {
       "host": "192.168.2.12",
-      "port": 55557,
+      "port": 55333,
       "username": "postgres",
       "password": "pichon",
-      "db": "maverma",
+      "db": "quest",
       "debug": true
     },
     "reports": {

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { AocUiDataMenu } from '@atlantis-of-code/aoc-client/ui/common/types';
 import { AocModelManager } from '@atlantis-of-code/aoc-client/core/models';
+import { AocUiDataMenu } from '@atlantis-of-code/aoc-client/ui/common/types';
 import { meta } from './models/meta';
-import { AocUiLoggerService } from '@atlantis-of-code/aoc-client/ui/common/services';
-import { NaceConnectorService } from './utils/nace-connector.service';
 
 @Component({
   selector: 'app-root',
@@ -12,16 +10,12 @@ import { NaceConnectorService } from './utils/nace-connector.service';
 })
 export class AppComponent {
 
-  // mobilePlatform = false; // Not necessary yet
-
-  // loggedInSubscription: Subscription; // Not necessary because of guard?
-
   mainMenu: AocUiDataMenu = [
     {
-      label: 'Clientes',
+      label: 'Customers',
       icon: 'groups',
       items: [
-        {label: 'Panel de clientes', routerLink: ['clientes', 'cliente', 'panel']},
+        {label: 'Customers panel', routerLink: ['customers', 'customer', 'panel']},
       ]
     },
     {
@@ -73,27 +67,6 @@ export class AppComponent {
         {label: 'Tickets', routerLink: ['facturacion', 'ticket', 'panel']}
       ]
     },
-    /*
-    {
-      type: 'separator'
-    },
-    {
-      label: 'Estadísticas',
-      icon: 'bar_chart',
-      items: [
-        {label: 'Albaranes', items: [
-            {label: 'Últimos 30 días', routerLink: ['estadisticas', 'albaranes', 'ultimos-30-dias']},
-            {label: 'Últimos 12 meses', routerLink: ['estadisticas', 'albaranes', 'ultimos-12-meses']}
-          ]},
-        {
-          label: 'Facturas',
-          items: [
-            { label: 'Por meses', routerLink: ['estadisticas', 'facturas', 'por-meses']}
-          ]
-        }
-      ]
-    },
-     */
     {
       type: 'separator'
     },
@@ -113,30 +86,6 @@ export class AppComponent {
         }
       ]
     },
-    /*
-    {
-      type: 'separator'
-    },
-    {
-      label: 'Listados',
-      icon: 'print',
-      items: [
-        {label: 'Listado de albaranes', routerLink: ['facturacion', 'albaran', 'filter']},
-        {label: 'Listado de facturas', routerLink: ['facturacion', 'factura', 'filter']},
-        {label: 'Listado de artículos en albaranes', routerLink: ['listados', 'articulos-albaranes']}
-      ]
-    },
-    {
-      type: 'separator'
-    },
-    {
-      label: 'Correos',
-      icon: 'mail',
-      items: [
-        {label: 'Enviados', routerLink: ['mailing', 'mail', 'panel']}
-      ]
-    },
-     */
     {
       type: 'separator'
     },
@@ -167,25 +116,9 @@ export class AppComponent {
   ];
 
   headerMenu: AocUiDataMenu = [
-    /*{
-      label: 'Cambiar punto de venta / puesto de trabajo',
-      icon: 'fas fa-home',
-      items: [
-        {label: 'Puesto 1'},
-        {label: 'Puesto 2'}
-      ]
-    },*/
-    /*{
-      label: 'Descargar mis datos',
-      icon: 'fas fa-download'
-    }*/
   ];
 
-  constructor(
-    private logger: AocUiLoggerService,
-    public naceConnectorService: NaceConnectorService
-  ) {
-    this.logger.info('Starting maverma app.component.ts');
+  constructor() {
     AocModelManager.registerMeta(meta);
   }
 }

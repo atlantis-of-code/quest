@@ -3,18 +3,5 @@
     <img style="height: 60px" src="assets/app/logo.svg"/>
   </ng-template>
   <ng-template aocAppHeader="right">
-    <div style="margin-right: .5rem;">
-      <ng-container *ngIf="naceConnectorService.extensionInstalled">
-        <button *ngIf="!naceConnectorService.extensionUpdateable" aocUiButton icon="extension" label="Conector Nace instalado ({{ naceConnectorService.extensionVersionName }})" routerLink="nace"></button>
-        <button *ngIf="naceConnectorService.extensionUpdateable" aocUiButton icon="warning" label="Actualización de Conector Nace ({{ naceConnectorService.extensionVersionName }} a {{ naceConnectorService.extensionUpdateVersionName }})" routerLink="nace"></button>
-      </ng-container>
-      <ng-container *ngIf="!naceConnectorService.extensionInstalled">
-        <button aocUiButton icon="cloud_download" label="Descargar Conector Nace" routerLink="nace"></button>
-      </ng-container>
-      <!--
-      <a *ngIf="naceConnectorService.extensionInstalled" href="#"></a>
-      <a *ngIf="!naceConnectorService.extensionInstalled" href="https://chrome.google.com/webstore/category/extensions?hl=es" target="_blank" style="color: #cd2d2d;">Conector Nace no instalado</a>
-      -->
-    </div>
   </ng-template>
 </aoc-app>

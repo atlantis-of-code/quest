@@ -17,61 +17,22 @@ const routes: Routes = [
       title: of('Login')
     } as AocTabConfig
   },
+  //TODO: Path of First time company configuration, if still no company, wizard
   {
     path: '',
     canActivate: [AocAuthGuard, questDefaultsGuard],
     children: [
-      // EMPTY COMPONENT: we don't need it because we want the dashboard to be always open
-      // {
-      //  path: '',
-      //  component: AocEmptyComponent
-      // },
-      { // DASHBOARD
+      {
         path: 'dashboard',
-        loadComponent: () => import('./components/dashboard/dashboard.component'),
+        loadComponent: () => import('./components/dashboard.component'),
         data: {
           title: of('Dashboard'),
           closable: false
         } as AocTabConfig
       },
       {
-        path: 'clientes',
-        loadChildren: () => import('./modules/schemas/clientes/clientes-routing.module')
-      },
-      {
-        path: 'contratos',
-        loadChildren: () => import('./modules/schemas/contratos/contratos-routing.module')
-      },
-      {
-        path: 'common',
-        loadChildren: () => import('./modules/schemas/common/common-routing.module')
-      },
-      {
-        path: 'articulos',
-        loadChildren: () => import('./modules/schemas/articulos/articulos-routing.module')
-      },
-      {
-        path: 'configuracion',
-        loadChildren: () => import('./modules/schemas/configuracion/configuracion-routing.module')
-      },{
-        path: 'facturacion',
-        loadChildren: () => import('./modules/schemas/facturacion/facturacion-routing.module')
-      },
-      {
-        path: 'tecnicos',
-        loadChildren: () => import('./modules/schemas/tecnicos/tecnicos-routing.module')
-      },
-      {
-        path: 'pedidos',
-        loadChildren: () => import('./modules/schemas/pedidos/pedidos-routing.module')
-      },
-      {
-        path: 'abstract',
-        loadChildren: () => import('./modules/schemas/abstract/abstract-routing.module')
-      },
-      {
-        path: 'usuarios',
-        loadChildren: () => import('./modules/schemas/usuarios/usuario-routing.module')
+        path: 'customers',
+        loadChildren: () => import('./features/schemas/customers/customers.module')
       },
       {
         path: 'print_pdf_window',
