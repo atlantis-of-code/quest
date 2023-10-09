@@ -1,3 +1,4 @@
+import { AocModelI18n } from '@atlantis-of-code/aoc-client/core/models';
 // QuestModel import
 import { QuestModel } from '../quest-model';
 // Model imports
@@ -56,6 +57,22 @@ export class DeliveryNote extends QuestModel {
   fileCollection: File[];
   stockLineLineCollection: StockLine[];
   //endregion
+
+  //region I18N
+  static readonly i18n: AocModelI18n<typeof this['field']> = {
+    s: 'delivery note',
+    p: 'delivery notes',
+    g: 'm',
+    //region Fields for i18n (1 field per line)
+    DATE: 'Date',
+    NUMBER: 'Number',
+    OBSERVATIONS: 'Observations',
+    TOTAL: 'Total',
+    TOTAL_BASE: 'Total base',
+    TOTAL_TAXES: 'Total taxes',
+    //endregion Fields for i18n
+  }
+  //endregion I18N
 
   //region CUSTOM
   // TODO: Implement your own toString method

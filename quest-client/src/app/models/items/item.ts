@@ -1,3 +1,4 @@
+import { AocModelI18n } from '@atlantis-of-code/aoc-client/core/models';
 // QuestModel import
 import { QuestModel } from '../quest-model';
 // Model imports
@@ -60,6 +61,20 @@ export class Item extends QuestModel {
   stockLineCollection: StockLine[];
   stockTransferCollection: StockTransfer[];
   //endregion
+
+  //region I18N
+  static readonly i18n: AocModelI18n<typeof this['field']> = {
+    s: 'item',
+    p: 'items',
+    g: 'm',
+    //region Fields for i18n (1 field per line)
+    BASE_PRICE: 'Base price',
+    CODE: 'Code',
+    IS_ENABLED: 'Is enabled',
+    NAME: 'Name',
+    //endregion Fields for i18n
+  }
+  //endregion I18N
 
   //region CUSTOM
   // TODO: Implement your own toString method

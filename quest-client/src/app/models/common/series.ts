@@ -1,3 +1,5 @@
+import { AocModelI18n } from '@atlantis-of-code/aoc-client/core/models';
+import { AocUiDataDropdown } from '@atlantis-of-code/aoc-client/ui/common/types';
 // QuestModel import
 import { QuestModel } from '../quest-model';
 // Model imports
@@ -8,13 +10,14 @@ import { Ticket } from '../invoicing/ticket';
 
 // Enums as constant objects
 
-export const SeriesType = {
-  INVOICE: 'Invoice',
-  DELIVERY_NOTE: 'Delivery note',
-  BUDGET: 'Budget',
-  TICKET: 'Ticket',
+export const SeriesTypeConst = {
+  INVOICE: { label: 'Invoice', value: 'Invoice' },
+  DELIVERY_NOTE: { label: 'Delivery note', value: 'Delivery note' },
+  BUDGET: { label: 'Budget', value: 'Budget' },
+  TICKET: { label: 'Ticket', value: 'Ticket' },
 } as const;
-export type SeriesTypeType = typeof SeriesType[keyof typeof SeriesType];
+export type SeriesType = typeof SeriesTypeConst[keyof typeof SeriesTypeConst]['value'];
+export const SeriesTypeAocUiDataDropdown: AocUiDataDropdown = Object.values(SeriesTypeConst);
 
 export class Series extends QuestModel {
   //region Field names
@@ -37,7 +40,7 @@ export class Series extends QuestModel {
   //region Fields
   is_default?: boolean;
   name!: string;
-  type!: SeriesTypeType;
+  type!: SeriesType;
   //endregion
 
   //region Mapped collections and inversed models
@@ -46,6 +49,19 @@ export class Series extends QuestModel {
   invoiceCollection: Invoice[];
   ticketCollection: Ticket[];
   //endregion
+
+  //region I18N
+  static readonly i18n: AocModelI18n<typeof this['field']> = {
+    s: 'series',
+    p: 'series',
+    g: 'm',
+    //region Fields for i18n (1 field per line)
+    IS_DEFAULT: 'Is default',
+    NAME: 'Name',
+    TYPE: 'Type',
+    //endregion Fields for i18n
+  }
+  //endregion I18N
 
   //region CUSTOM
   // TODO: Implement your own toString method

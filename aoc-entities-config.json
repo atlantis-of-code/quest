@@ -1,6 +1,9 @@
 {
   "$schema": "../aoc/aoc-cli/src/lib/entity-generator/config/aoc-entities-config.schema.json",
   "schemas": ["common", "configuration", "contacts", "customers", "files", "invoicing", "items", "public", "templates", "users"],
+  "modelTargetPath": "./quest-client/src/app/models",
+  "modelConfigTargetPath": "./quest-client/src/app/model-configs",
+  "entityTargetPath": "./quest-server/src/entities",
   "entityBaseClass": {
     "name": "QuestEntity",
     "path": "../quest-entity",
@@ -77,50 +80,14 @@
     "templates.address": ["street_suffix_id", "country_id"],
     "common.legal_data": ["identity_document_type_id"]
   },
-  "enums": {
+  "constEnums": {
     "common.series.type": {
-      "enumName": "SeriesType",
-      "useConstantObjects": true,
-      "items": [
-        {
-          "name": "INVOICE",
-          "value": "Invoice"
-        },
-        {
-          "name": "DELIVERY_NOTE",
-          "value": "Delivery note"
-        },
-        {
-          "name": "BUDGET",
-          "value": "Budget"
-        },
-        {
-          "name": "TICKET",
-          "value": "Ticket"
-        }
-      ]
+      "name": "SeriesType",
+      "items": ["Invoice", "Delivery note", "Budget", "Ticket"]
     },
     "items.stock_transfer.type": {
-      "enumName": "StockTransferType",
-      "useConstantObjects": true,
-      "items": [
-        {
-          "name": "DELIVERY_NOTE",
-          "value": "Delivery note"
-        },
-        {
-          "name": "TICKET",
-          "value": "Ticket"
-        },
-        {
-          "name": "TRANSFER",
-          "value": "Transfer"
-        },
-        {
-          "name": "RECOUNT",
-          "value": "Re-count"
-        }
-      ]
+      "name": "StockTransferType",
+      "items": ["Delivery note", "Ticket", "Transfer", "Re-count"]
     }
   },
   "embedTables": ["templates.legal_data_template", "templates.address_template", "templates.contact_template", "templates.document_template", "templates.document_line_template"],

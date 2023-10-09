@@ -1,3 +1,5 @@
+import { AocModelI18n } from '@atlantis-of-code/aoc-client/core/models';
+import { AocUiDataDropdown } from '@atlantis-of-code/aoc-client/ui/common/types';
 // QuestModel import
 import { QuestModel } from '../quest-model';
 // Model imports
@@ -8,13 +10,14 @@ import { Store } from './store';
 
 // Enums as constant objects
 
-export const StockTransferType = {
-  DELIVERY_NOTE: 'Delivery note',
-  TICKET: 'Ticket',
-  TRANSFER: 'Transfer',
-  RECOUNT: 'Re-count',
+export const StockTransferTypeConst = {
+  DELIVERY_NOTE: { label: 'Delivery note', value: 'Delivery note' },
+  TICKET: { label: 'Ticket', value: 'Ticket' },
+  TRANSFER: { label: 'Transfer', value: 'Transfer' },
+  RE-COUNT: { label: 'Re-count', value: 'Re-count' },
 } as const;
-export type StockTransferTypeType = typeof StockTransferType[keyof typeof StockTransferType];
+export type StockTransferType = typeof StockTransferTypeConst[keyof typeof StockTransferTypeConst]['value'];
+export const StockTransferTypeAocUiDataDropdown: AocUiDataDropdown = Object.values(StockTransferTypeConst);
 
 export class StockTransfer extends QuestModel {
   //region Field names
@@ -48,7 +51,7 @@ export class StockTransfer extends QuestModel {
   document_operation?: string;
   previous_stock?: string;
   quantity?: string;
-  type!: StockTransferTypeType;
+  type!: StockTransferType;
   //endregion
 
   //region Models
@@ -58,6 +61,24 @@ export class StockTransfer extends QuestModel {
   stockLine?: StockLine;
   store!: Store;
   //endregion
+
+  //region I18N
+  static readonly i18n: AocModelI18n<typeof this['field']> = {
+    s: 'stock transfer',
+    p: 'stock transfers',
+    g: 'm',
+    //region Fields for i18n (1 field per line)
+    CUSTOMER_NAME: 'Customer name',
+    DATE: 'Date',
+    DESCRIPTION: 'Description',
+    DOCUMENT_NAME: 'Document name',
+    DOCUMENT_OPERATION: 'Document operation',
+    PREVIOUS_STOCK: 'Previous stock',
+    QUANTITY: 'Quantity',
+    TYPE: 'Type',
+    //endregion Fields for i18n
+  }
+  //endregion I18N
 
   //region CUSTOM
   // TODO: Implement your own toString method

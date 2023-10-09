@@ -13,13 +13,13 @@ import { Store } from './store';
 
 // Enums as constant objects
 
-export const StockTransferType = {
-  DELIVERY_NOTE: 'Delivery note',
-  TICKET: 'Ticket',
-  TRANSFER: 'Transfer',
-  RECOUNT: 'Re-count',
+export const StockTransferTypeConst = {
+  DELIVERY_NOTE: { label: 'Delivery note', value: 'Delivery note' },
+  TICKET: { label: 'Ticket', value: 'Ticket' },
+  TRANSFER: { label: 'Transfer', value: 'Transfer' },
+  RE-COUNT: { label: 'Re-count', value: 'Re-count' },
 } as const;
-export type StockTransferTypeType = typeof StockTransferType[keyof typeof StockTransferType];
+export type StockTransferType = typeof StockTransferTypeConst[keyof typeof StockTransferTypeConst]['value'];
 
 @Entity({ tableName: 'items.stock_transfer' })
 export class StockTransfer extends QuestEntity {
@@ -62,7 +62,7 @@ export class StockTransfer extends QuestEntity {
   @Property()
   quantity?: string;
   @Property()
-  type!: StockTransferTypeType;
+  type!: StockTransferType;
   //endregion
 
   //region Entities

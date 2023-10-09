@@ -139,7 +139,7 @@ meta.set(Series, {
   fields: {
     is_default: { type: 'boolean', isEntity: false, isCollection: false, isEmbedded: false, },
     name: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
-    type: { type: 'string', enum: 'SeriesTypeType', isEntity: false, isCollection: false, isEmbedded: false, },
+    type: { type: 'string', enum: 'SeriesType', isEntity: false, isCollection: false, isEmbedded: false, },
     budgetCollection: { type: Budget, isEntity: false, isCollection: true, isEmbedded: false, },
     deliveryNoteCollection: { type: DeliveryNote, isEntity: false, isCollection: true, isEmbedded: false, },
     invoiceCollection: { type: Invoice, isEntity: false, isCollection: true, isEmbedded: false, },
@@ -408,7 +408,7 @@ meta.set(StockTransfer, {
     document_operation: { type: 'string', isEntity: false, isCollection: false, isEmbedded: false, },
     previous_stock: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
     quantity: { type: 'big', isEntity: false, isCollection: false, isEmbedded: false, },
-    type: { type: 'string', enum: 'StockTransferTypeType', isEntity: false, isCollection: false, isEmbedded: false, },
+    type: { type: 'string', enum: 'StockTransferType', isEntity: false, isCollection: false, isEmbedded: false, },
     auxStore: { type: Store, isEntity: true, isCollection: false, isEmbedded: false, },
     item: { type: Item, isEntity: true, isCollection: false, isEmbedded: false, },
     manualStockTransferLine: { type: ManualStockTransferLine, isEntity: true, isCollection: false, isEmbedded: false, },

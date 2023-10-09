@@ -1,3 +1,4 @@
+import { AocModelI18n } from '@atlantis-of-code/aoc-client/core/models';
 // AocEmbeddedModel import
 import { AocEmbeddedModel } from '@atlantis-of-code/aoc-client/core/models';
 // Model imports
@@ -38,6 +39,23 @@ export class DocumentLineTemplate extends AocEmbeddedModel {
   item?: Item;
   store?: Store;
   //endregion
+
+  //region I18N
+  static readonly i18n: AocModelI18n<typeof this['field']> = {
+    s: 'document line template',
+    p: 'document line templates',
+    g: 'm',
+    //region Fields for i18n (1 field per line)
+    BASE_PRICE: 'Base price',
+    DISCOUNT: 'Discount',
+    ITEM_CODE: 'Item code',
+    ITEM_NAME: 'Item name',
+    ORDER: 'Order',
+    QUANTITY: 'Quantity',
+    TOTAL_BASE: 'Total base',
+    //endregion Fields for i18n
+  }
+  //endregion I18N
 
   //region CUSTOM
   // TODO: Implement your own toString method

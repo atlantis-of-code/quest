@@ -1,3 +1,4 @@
+import { AocModelI18n } from '@atlantis-of-code/aoc-client/core/models';
 // QuestModel import
 import { QuestModel } from '../quest-model';
 // Model imports
@@ -78,6 +79,23 @@ export class Customer extends QuestModel {
   addressTemplate: AddressTemplate = new AddressTemplate();
   legalDataTemplate: LegalDataTemplate = new LegalDataTemplate();
   //endregion
+
+  //region I18N
+  static readonly i18n: AocModelI18n<typeof this['field']> = {
+    s: 'customer',
+    p: 'customers',
+    g: 'm',
+    //region Fields for i18n (1 field per line)
+    BIRTHDATE: 'Birthdate',
+    CODE: 'Code',
+    EMAIL: 'Email',
+    FAX: 'Fax',
+    PHONE1: 'Phone1',
+    PHONE2: 'Phone2',
+    TRADE_NAME: 'Trade name',
+    //endregion Fields for i18n
+  }
+  //endregion I18N
 
   //region CUSTOM
   // TODO: Implement your own toString method

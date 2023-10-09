@@ -1,3 +1,4 @@
+import { AocModelI18n } from '@atlantis-of-code/aoc-client/core/models';
 // AocEmbeddedModel import
 import { AocEmbeddedModel } from '@atlantis-of-code/aoc-client/core/models';
 // Model imports
@@ -39,6 +40,22 @@ export class DocumentTemplate extends AocEmbeddedModel {
   fiscalYear?: FiscalYear;
   series?: Series;
   //endregion
+
+  //region I18N
+  static readonly i18n: AocModelI18n<typeof this['field']> = {
+    s: 'document template',
+    p: 'document templates',
+    g: 'm',
+    //region Fields for i18n (1 field per line)
+    DATE: 'Date',
+    NUMBER: 'Number',
+    OBSERVATIONS: 'Observations',
+    TOTAL: 'Total',
+    TOTAL_BASE: 'Total base',
+    TOTAL_TAXES: 'Total taxes',
+    //endregion Fields for i18n
+  }
+  //endregion I18N
 
   //region CUSTOM
   // TODO: Implement your own toString method

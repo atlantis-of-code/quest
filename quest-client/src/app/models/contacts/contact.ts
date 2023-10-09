@@ -1,3 +1,4 @@
+import { AocModelI18n } from '@atlantis-of-code/aoc-client/core/models';
 // QuestModel import
 import { QuestModel } from '../quest-model';
 // Model imports
@@ -31,6 +32,21 @@ export class Contact extends QuestModel {
   //region Mapped collections and inversed models
   customerCollection: Customer[];
   //endregion
+
+  //region I18N
+  static readonly i18n: AocModelI18n<typeof this['field']> = {
+    s: 'contact',
+    p: 'contacts',
+    g: 'm',
+    //region Fields for i18n (1 field per line)
+    EMAIL: 'Email',
+    FAX: 'Fax',
+    NAME: 'Name',
+    PHONE1: 'Phone1',
+    PHONE2: 'Phone2',
+    //endregion Fields for i18n
+  }
+  //endregion I18N
 
   //region CUSTOM
   // TODO: Implement your own toString method

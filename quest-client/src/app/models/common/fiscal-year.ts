@@ -1,3 +1,4 @@
+import { AocModelI18n } from '@atlantis-of-code/aoc-client/core/models';
 // QuestModel import
 import { QuestModel } from '../quest-model';
 // Model imports
@@ -34,6 +35,18 @@ export class FiscalYear extends QuestModel {
   invoiceCollection: Invoice[];
   ticketCollection: Ticket[];
   //endregion
+
+  //region I18N
+  static readonly i18n: AocModelI18n<typeof this['field']> = {
+    s: 'fiscal year',
+    p: 'fiscal years',
+    g: 'm',
+    //region Fields for i18n (1 field per line)
+    IS_CURRENT: 'Is current',
+    YEAR: 'Year',
+    //endregion Fields for i18n
+  }
+  //endregion I18N
 
   //region CUSTOM
   // TODO: Implement your own toString method

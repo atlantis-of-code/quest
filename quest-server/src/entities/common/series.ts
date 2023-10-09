@@ -14,13 +14,13 @@ import { Ticket } from '../invoicing/ticket';
 
 // Enums as constant objects
 
-export const SeriesType = {
-  INVOICE: 'Invoice',
-  DELIVERY_NOTE: 'Delivery note',
-  BUDGET: 'Budget',
-  TICKET: 'Ticket',
+export const SeriesTypeConst = {
+  INVOICE: { label: 'Invoice', value: 'Invoice' },
+  DELIVERY_NOTE: { label: 'Delivery note', value: 'Delivery note' },
+  BUDGET: { label: 'Budget', value: 'Budget' },
+  TICKET: { label: 'Ticket', value: 'Ticket' },
 } as const;
-export type SeriesTypeType = typeof SeriesType[keyof typeof SeriesType];
+export type SeriesType = typeof SeriesTypeConst[keyof typeof SeriesTypeConst]['value'];
 
 @Entity({ tableName: 'common.series' })
 export class Series extends QuestEntity {
@@ -47,7 +47,7 @@ export class Series extends QuestEntity {
   @Property()
   name!: string;
   @Property()
-  type!: SeriesTypeType;
+  type!: SeriesType;
   //endregion
 
   //region Mapped collections and inversed entities
