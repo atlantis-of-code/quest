@@ -4,7 +4,7 @@ import { combineLatest } from 'rxjs';
 import { Country } from '../models/common/country';
 import { FiscalYear } from '../models/common/fiscal-year';
 import { IdentityDocumentType } from '../models/common/identity-document-type';
-import { Series, SeriesTypeType } from '../models/common/series';
+import { Series, SeriesType } from '../models/common/series';
 import { StreetSuffix } from '../models/common/street-suffix';
 import {Gender} from '../models/common/gender';
 import {Language} from '../models/common/language';
@@ -90,7 +90,7 @@ export class QuestDefaultsService {
 
   // Some helper methods
 
-  seriesFor(type: SeriesTypeType) {
+  seriesFor(type: SeriesType) {
     switch (type) {
       case 'Invoice':
         return this.seriesForInvoice;

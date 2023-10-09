@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AocFormGroupType} from '@atlantis-of-code/aoc-client/core/types';
-import {SeriesTypeType} from '../models/common/series';
+import {SeriesType} from '../models/common/series';
 import {Customer} from '../models/customers/customer';
 import {AddressTemplate} from '../models/templates/address-template';
 import {ContactTemplate} from '../models/templates/contact-template';
@@ -19,7 +19,7 @@ export class QuestUtilsService {
     private questDefaultsService: QuestDefaultsService
   ) {}
 
-  addControlsForDocumentTemplate(formGroup: FormGroup<AocFormGroupType<DocumentTemplate>>, seriesType: SeriesTypeType) {
+  addControlsForDocumentTemplate(formGroup: FormGroup<AocFormGroupType<DocumentTemplate>>, seriesType: SeriesType) {
     formGroup.addControl(DocumentTemplate.field.DATE, new FormControl<Date>(null));
     formGroup.addControl(DocumentTemplate.field.NUMBER, new FormControl<number>(null));
     formGroup.addControl(DocumentTemplate.field.TOTAL_BASE, new FormControl<string>('0.00', Validators.required));

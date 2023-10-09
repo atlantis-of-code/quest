@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
-  AocGender,
   AocModelConfig,
   AocModelConfigAllow,
   AocModelConfigFormImport,
   AocModelConfigFormResolver,
-  AocModelConfigName,
   AocModelConfigPath,
   AocModelConfigClientPayload,
   AocModelConfigServerPayload
@@ -20,12 +18,6 @@ export class CustomerModelConfig extends AocModelConfig<Customer> {
   constructor() {
     super(Customer);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'customer',
-    plural: 'customers',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';

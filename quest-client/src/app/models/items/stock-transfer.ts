@@ -14,7 +14,7 @@ export const StockTransferTypeConst = {
   DELIVERY_NOTE: { label: 'Delivery note', value: 'Delivery note' },
   TICKET: { label: 'Ticket', value: 'Ticket' },
   TRANSFER: { label: 'Transfer', value: 'Transfer' },
-  RE-COUNT: { label: 'Re-count', value: 'Re-count' },
+  RE_COUNT: { label: 'Re-count', value: 'Re-count' },
 } as const;
 export type StockTransferType = typeof StockTransferTypeConst[keyof typeof StockTransferTypeConst]['value'];
 export const StockTransferTypeAocUiDataDropdown: AocUiDataDropdown = Object.values(StockTransferTypeConst);
