@@ -32,7 +32,7 @@
       }
     },
     "custom": {
-      "pathFicheros": "H:\\quest\\ficheros"
+      "filePath": "H:\\quest\\ficheros"
     }
   },
   "jeroni": {
@@ -58,7 +58,7 @@
       }
     },
     "custom": {
-      "pathFicheros": "/home/jeroni/Dropbox/Management/Atlantis of Code/Quest/ficheros"
+      "filePath": "/home/jeroni/Dropbox/Management/Atlantis of Code/Quest/files"
     }
   },
   "jeroni-win": {

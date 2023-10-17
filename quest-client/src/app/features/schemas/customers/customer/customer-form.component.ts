@@ -14,6 +14,7 @@ import { QuestUtilsService } from '../../../../services/quest-utils.service';
 import { GenderAutocompleteComponent } from '../../common/gender/gender-autocomplete.component';
 import { LanguageAutocompleteComponent } from '../../common/language/language-autocomplete.component';
 import { ContactGridFieldComponent } from '../../contacts/contact-grid-field.component';
+import { FileGridFieldComponent } from '../../files/file-grid-field.component';
 import { AddressTemplateSubformComponent } from '../../templates/address-template/address-template-subform.component';
 import { ContactTemplateSubformComponent } from '../../templates/contact-template/contact-template-subform.component';
 import {
@@ -36,7 +37,8 @@ import {
     AddressTemplateSubformComponent,
     AocUiTabPanelModule,
     ContactTemplateSubformComponent,
-    ContactGridFieldComponent
+    ContactGridFieldComponent,
+    FileGridFieldComponent
   ],
   template: `
     <aoc-form [modelConfig]="modelConfig" [formGroup]="formGroup" [restOptions]="restOptions">
@@ -67,6 +69,18 @@ import {
               </aoc-ui-form-row>
             </aoc-ui-form-page>
           </aoc-ui-tab-panel-content>
+          <aoc-ui-tab-panel-content header="Files">
+            <aoc-ui-form-page>
+              <aoc-ui-form-row aocUiFormRowHeight="stretch">
+                <app-file-grid-field
+                  aocUiFormField="Customer files (documents...)"
+                  [formControlName]="CustomerClass.collection.FILE"
+                  [fileParentClass]="CustomerClass"
+                  fileDirectory="Customers"
+                ></app-file-grid-field>
+              </aoc-ui-form-row>
+            </aoc-ui-form-page>
+          </aoc-ui-tab-panel-content>
         </aoc-ui-tab-panel>
       </ng-template>
     </aoc-form>
@@ -94,7 +108,8 @@ export default class CustomerFormComponent implements OnInit {
       language: new FormControl(this.questDefaultsService.language, Validators.required),
       legalDataTemplate: this.questUtilsService.addControlsForLegalDataTemplate(new FormGroup({})), // Embedded
       addressTemplate: this.questUtilsService.addControlsForAddressTemplate(new FormGroup({})), // Embedded
-      contactCollection: new FormControl([])
+      contactCollection: new FormControl([]),
+      fileCollection: new FormControl([])
     });
 
     // Inline
@@ -104,7 +119,8 @@ export default class CustomerFormComponent implements OnInit {
       populate: {
         language: true,
         gender: true,
-        contactCollection: true
+        contactCollection: true,
+        fileCollection: true
       }
     }
   }

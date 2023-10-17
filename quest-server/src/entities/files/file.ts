@@ -84,9 +84,8 @@ export class File extends QuestEntity {
   //endregion
 
   //region CUSTOM
-  // TODO: Implement your own toString method
   toString(): string {
-    return `File_${this.id}`;
+    return this.name;
   }
   //endregion
 }
