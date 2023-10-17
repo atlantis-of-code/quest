@@ -24,7 +24,7 @@ import { StreetSuffixAutocompleteComponent } from '../../common/street-suffix/st
           <ng-container [formGroup]="formGroup">
             <aoc-ui-form-fieldset title="Address">
               <aoc-ui-form-row>
-                <input aocUiInputText aocUiFormField="St.Number" [formControlName]="AddressTemplateClass.field.STREET_NAME" [span]="4">
+                <input aocUiInputText aocUiFormField="St.Number" [formControlName]="AddressTemplateClass.field.STREET_NUMBER" [span]="4">
                 <input aocUiInputText aocUiFormField="St.Name" [formControlName]="AddressTemplateClass.field.STREET_NAME">
                 <app-street-suffix-autocomplete
                   aocUiFormField="St.Suffix"
