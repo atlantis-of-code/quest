@@ -32,7 +32,13 @@ export class ContactModelConfig extends AocModelConfig<Contact> {
    * AocModelConfigFormPath: route path to this model form
    * AocModelConfigFormImport: lazy loading import a form using its path (recommended)
    */
-  readonly form: AocModelConfigFormResolver<Contact> | AocModelConfigPath | AocModelConfigFormImport;
+  readonly form: AocModelConfigFormResolver<Contact> | AocModelConfigPath | AocModelConfigFormImport = {
+    loadComponent: () => import('../../features/schemas/contacts/contact-form.component'),
+    aocUiWindowDynConfig: {
+      width: 640,
+      height: 200
+    }
+  };
 
   // Filter definition for payloads sent by grids and autocompletes
   // AocModelConfigClientPayload is used to define here the AocFilterQuery for a given payload search term

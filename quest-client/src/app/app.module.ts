@@ -47,9 +47,9 @@ import { AocUser } from './models/users/aoc-user';
         dateTimePicker: {
           mode: 'dateTime',
           formats: {
-            date: 'dd/MM/y',
-            dateTime: 'dd/MM/y HH:mm:ss',
-            time: 'HH:mm:ss'
+            date: 'MM/dd/y',
+            dateTime: 'MM/dd/y h:mm a',
+            time: 'h:mm a'
           }
         }
       }

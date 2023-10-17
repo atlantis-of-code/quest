@@ -56,10 +56,10 @@ export class QuestUtilsService {
   }
 
   addControlsForContactTemplate(formGroup: FormGroup<AocFormGroupType<ContactTemplate>>) {
-    formGroup.addControl(ContactTemplate.field.EMAIL, new FormControl<string>(null));
-    formGroup.addControl(ContactTemplate.field.FAX, new FormControl<string>(null));
     formGroup.addControl(ContactTemplate.field.PHONE1, new FormControl<string>(null));
     formGroup.addControl(ContactTemplate.field.PHONE2, new FormControl<string>(null));
+    formGroup.addControl(ContactTemplate.field.EMAIL, new FormControl<string>(null));
+    formGroup.addControl(ContactTemplate.field.FAX, new FormControl<string>(null));
     return formGroup;
   }
 

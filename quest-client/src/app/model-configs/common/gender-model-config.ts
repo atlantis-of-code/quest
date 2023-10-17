@@ -24,7 +24,7 @@ export class GenderModelConfig extends AocModelConfig<Gender> {
   }
 
   // Default read, write, delete and clone permissions
-  readonly allow: AocModelConfigAllow = 'all';
+  readonly allow: AocModelConfigAllow = 'none';
 
   /*
    * Form options:

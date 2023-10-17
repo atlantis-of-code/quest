@@ -36,7 +36,7 @@ export class CustomerModelConfig extends AocModelConfig<Customer> {
     loadComponent: () => import('../../features/schemas/customers/customer/customer-form.component'),
     aocUiWindowDynConfig: {
       width: 800,
-      height: 640
+      height: 500
     }
   };
 

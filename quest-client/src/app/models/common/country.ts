@@ -48,7 +48,7 @@ export class Country extends QuestModel {
   //region CUSTOM
   // TODO: Implement your own toString method
   toString(): string {
-    return `Country_${this.id}`;
+    return this.name;
   }
   //endregion
 }

@@ -100,7 +100,7 @@ export class Customer extends QuestModel {
   //region CUSTOM
   // TODO: Implement your own toString method
   toString(): string {
-    return `Customer_${this.id}`;
+    return this.legalDataTemplate.legal_name;
   }
   //endregion
 }
