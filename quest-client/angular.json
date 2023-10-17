@@ -20,12 +20,14 @@
         }
       },
       "i18n": {
+        /*
         "sourceLocale": "es-x-source",
         "locales": {
           "es": {
             "translation": "src/locale/aoc-client-EN_ES.xlf"
           }
         }
+        */
       },
       "root": "",
       "sourceRoot": "src",
@@ -39,9 +41,11 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            /*
             "localize": [
               "es"
             ],
+            */
             "allowedCommonJsDependencies": [
               "big.js",
               "pdfobject",

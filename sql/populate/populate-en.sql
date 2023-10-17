@@ -274,3 +274,20 @@ VALUES
     ('Male', false),
     ('Female', false),
     ('Neuter', true); -- Neuter is the default gender
+
+INSERT INTO common.identity_document_type (name, is_default)
+VALUES
+    ('Passport', true),
+    ('Driver''s License', false),
+    ('Social Security Card', false),
+    ('Birth Certificate', false),
+    ('Marriage Certificate', false),
+    ('Green Card', false),
+    ('Naturalization Certificate', false),
+    ('Visa', false),
+    ('State ID Card', false),
+    ('Vehicle Registration', false),
+    ('Concealed Carry Permit', false),
+    ('Professional License', false),
+    ('Academic Transcript', false),
+    ('Financial Document', false);

@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
-  AocGender,
   AocModelConfig,
   AocModelConfigAllow,
+  AocModelConfigClientPayload,
   AocModelConfigFormImport,
   AocModelConfigFormResolver,
-  AocModelConfigName,
   AocModelConfigPath,
-  AocModelConfigClientPayload,
   AocModelConfigServerPayload
 } from '@atlantis-of-code/aoc-client/core/configs';
 
@@ -26,7 +24,7 @@ export class StreetSuffixModelConfig extends AocModelConfig<StreetSuffix> {
   }
 
   // Default read, write, delete and clone permissions
-  readonly allow: AocModelConfigAllow = 'all';
+  readonly allow: AocModelConfigAllow = 'none';
 
   /*
    * Form options:
@@ -39,7 +37,11 @@ export class StreetSuffixModelConfig extends AocModelConfig<StreetSuffix> {
   // Filter definition for payloads sent by grids and autocompletes
   // AocModelConfigClientPayload is used to define here the AocFilterQuery for a given payload search term
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
-  readonly payload: AocModelConfigClientPayload<StreetSuffix> | AocModelConfigServerPayload;
+  readonly payload: AocModelConfigClientPayload<StreetSuffix> | AocModelConfigServerPayload = payload => {
+    return {
+      name: { $startsWith: payload }
+    }
+  };
 
   /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
   override transform(streetSuffix: StreetSuffix): string {

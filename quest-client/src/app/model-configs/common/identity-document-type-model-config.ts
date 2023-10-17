@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
-  AocGender,
   AocModelConfig,
   AocModelConfigAllow,
+  AocModelConfigClientPayload,
   AocModelConfigFormImport,
   AocModelConfigFormResolver,
-  AocModelConfigName,
   AocModelConfigPath,
-  AocModelConfigClientPayload,
   AocModelConfigServerPayload
 } from '@atlantis-of-code/aoc-client/core/configs';
 
@@ -26,7 +24,7 @@ export class IdentityDocumentTypeModelConfig extends AocModelConfig<IdentityDocu
   }
 
   // Default read, write, delete and clone permissions
-  readonly allow: AocModelConfigAllow = 'all';
+  readonly allow: AocModelConfigAllow = 'none';
 
   /*
    * Form options:
@@ -34,12 +32,22 @@ export class IdentityDocumentTypeModelConfig extends AocModelConfig<IdentityDocu
    * AocModelConfigFormPath: route path to this model form
    * AocModelConfigFormImport: lazy loading import a form using its path (recommended)
    */
-  readonly form: AocModelConfigFormResolver<IdentityDocumentType> | AocModelConfigPath | AocModelConfigFormImport;
+  readonly form: AocModelConfigFormResolver<IdentityDocumentType> | AocModelConfigPath | AocModelConfigFormImport = {
+    loadComponent: () => import('../../features/schemas/common/identity-document-type/identity-document-type-form.component'),
+    aocUiWindowDynConfig: {
+      width: 480,
+      height: 150
+    }
+  };
 
   // Filter definition for payloads sent by grids and autocompletes
   // AocModelConfigClientPayload is used to define here the AocFilterQuery for a given payload search term
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
-  readonly payload: AocModelConfigClientPayload<IdentityDocumentType> | AocModelConfigServerPayload;
+  readonly payload: AocModelConfigClientPayload<IdentityDocumentType> | AocModelConfigServerPayload = payload => {
+    return {
+      name: { $startsWith: payload }
+    }
+  };
 
   /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
   override transform(identityDocumentType: IdentityDocumentType): string {

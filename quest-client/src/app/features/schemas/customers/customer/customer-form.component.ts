@@ -1,23 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AocFormGroupType} from '@atlantis-of-code/aoc-client/core/types';
-import {Customer} from '../../../../models/customers/customer';
-import {AocRestOptions} from '@atlantis-of-code/aoc-client/aoc-common';
-import {CustomerModelConfig} from '../../../../model-configs/customers/customer-model-config';
-import {AocFormController, AocFormModule} from '@atlantis-of-code/aoc-client/components/aoc-form';
-import {AocUiFormModule} from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-form';
-import {AocUiInputTextModule} from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-input-text';
-import {QuestDefaultsService} from '../../../../services/quest-defaults-service';
-import {AocUiDatetimePickerModule} from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-datetime-picker';
-import {GenderAutocompleteComponent} from '../../common/gender/gender-autocomplete.component';
-import {LanguageAutocompleteComponent} from '../../common/language/language-autocomplete.component';
-import {QuestUtilsService} from '../../../../services/quest-utils.service';
-import {LegalDataTemplate} from '../../../../models/templates/legal-data-template';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AocRestOptions } from '@atlantis-of-code/aoc-client/aoc-common';
+import { AocFormController, AocFormModule } from '@atlantis-of-code/aoc-client/components/aoc-form';
+import { AocFormGroupType } from '@atlantis-of-code/aoc-client/core/types';
+import { AocUiDatetimePickerModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-datetime-picker';
+import { AocUiFormModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-form';
+import { AocUiInputTextModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-input-text';
+import { CustomerModelConfig } from '../../../../model-configs/customers/customer-model-config';
+import { Customer } from '../../../../models/customers/customer';
+import { QuestDefaultsService } from '../../../../services/quest-defaults-service';
+import { QuestUtilsService } from '../../../../services/quest-utils.service';
+import { GenderAutocompleteComponent } from '../../common/gender/gender-autocomplete.component';
+import { LanguageAutocompleteComponent } from '../../common/language/language-autocomplete.component';
+import { AddressTemplateSubformComponent } from '../../templates/address-template/address-template-subform.component';
 import {
   LegalDataTemplateSubformComponent
 } from '../../templates/legal-data-template/legal-data-template-subform.component';
-import {AddressTemplate} from '../../../../models/templates/address-template';
-import {AddressTemplateSubformComponent} from '../../templates/address-template/address-template-subform.component';
 
 @Component({
   selector: 'app-customer-form',

@@ -42,7 +42,7 @@ export class IdentityDocumentType extends QuestModel {
   //region CUSTOM
   // TODO: Implement your own toString method
   toString(): string {
-    return `IdentityDocumentType_${this.id}`;
+    return this.name;
   }
   //endregion
 }

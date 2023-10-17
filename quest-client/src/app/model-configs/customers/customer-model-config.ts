@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import {
   AocModelConfig,
   AocModelConfigAllow,
+  AocModelConfigClientPayload,
   AocModelConfigFormImport,
   AocModelConfigFormResolver,
   AocModelConfigPath,
-  AocModelConfigClientPayload,
   AocModelConfigServerPayload
 } from '@atlantis-of-code/aoc-client/core/configs';
 
@@ -32,7 +32,13 @@ export class CustomerModelConfig extends AocModelConfig<Customer> {
    * AocModelConfigFormPath: route path to this model form
    * AocModelConfigFormImport: lazy loading import a form using its path (recommended)
    */
-  readonly form: AocModelConfigFormResolver<Customer> | AocModelConfigPath | AocModelConfigFormImport;
+  readonly form: AocModelConfigFormResolver<Customer> | AocModelConfigPath | AocModelConfigFormImport = {
+    loadComponent: () => import('../../features/schemas/customers/customer/customer-form.component'),
+    aocUiWindowDynConfig: {
+      width: 800,
+      height: 640
+    }
+  };
 
   // Filter definition for payloads sent by grids and autocompletes
   // AocModelConfigClientPayload is used to define here the AocFilterQuery for a given payload search term

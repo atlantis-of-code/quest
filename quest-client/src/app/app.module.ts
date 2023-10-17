@@ -41,6 +41,9 @@ import { AocUser } from './models/users/aoc-user';
       {
         autoConvertEmptyStringsToNullInControls: true,
         autoTrimStringsInControls: true,
+        paginator: {
+          autocompletePaginatorOptionsPerPage: 20
+        },
         dateTimePicker: {
           mode: 'dateTime',
           formats: {
