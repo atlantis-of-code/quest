@@ -37,7 +37,11 @@ export class LanguageModelConfig extends AocModelConfig<Language> {
   // Filter definition for payloads sent by grids and autocompletes
   // AocModelConfigClientPayload is used to define here the AocFilterQuery for a given payload search term
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
-  readonly payload: AocModelConfigClientPayload<Language> | AocModelConfigServerPayload;
+  readonly payload: AocModelConfigClientPayload<Language> | AocModelConfigServerPayload = payload => {
+    return {
+      name: { $startsWith: payload }
+    }
+  };
 
   /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
   override transform(language: Language): string {
