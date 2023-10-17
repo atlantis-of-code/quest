@@ -13,6 +13,10 @@ import {
 
 import { LegalDataTemplate } from '../../models/templates/legal-data-template';
 
+/*@Pipe({
+  name: 'LegalDataTemplate',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class LegalDataTemplateModelConfig extends AocModelConfig<LegalDataTempla
   constructor() {
     super(LegalDataTemplate);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'legal data template',
-    plural: 'legal data templates',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class LegalDataTemplateModelConfig extends AocModelConfig<LegalDataTempla
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<LegalDataTemplate> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(legalDataTemplate: LegalDataTemplate): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(legalDataTemplate: LegalDataTemplate): string {
     return legalDataTemplate?.toString() ?? '';
-  }
+  }*/
 }

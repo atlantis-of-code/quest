@@ -13,6 +13,10 @@ import {
 
 import { File } from '../../models/files/file';
 
+/*@Pipe({
+  name: 'File',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class FileModelConfig extends AocModelConfig<File> {
   constructor() {
     super(File);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'file',
-    plural: 'files',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class FileModelConfig extends AocModelConfig<File> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<File> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(file: File): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(file: File): string {
     return file?.toString() ?? '';
-  }
+  }*/
 }

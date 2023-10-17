@@ -13,6 +13,10 @@ import {
 
 import { Company } from '../../models/configuration/company';
 
+/*@Pipe({
+  name: 'Company',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class CompanyModelConfig extends AocModelConfig<Company> {
   constructor() {
     super(Company);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'company',
-    plural: 'companies',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class CompanyModelConfig extends AocModelConfig<Company> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Company> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(company: Company): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(company: Company): string {
     return company?.toString() ?? '';
-  }
+  }*/
 }

@@ -13,6 +13,10 @@ import {
 
 import { Contact } from '../../models/contacts/contact';
 
+/*@Pipe({
+  name: 'Contact',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class ContactModelConfig extends AocModelConfig<Contact> {
   constructor() {
     super(Contact);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'contact',
-    plural: 'contacts',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class ContactModelConfig extends AocModelConfig<Contact> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Contact> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(contact: Contact): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(contact: Contact): string {
     return contact?.toString() ?? '';
-  }
+  }*/
 }

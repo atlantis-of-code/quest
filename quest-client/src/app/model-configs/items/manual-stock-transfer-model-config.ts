@@ -13,6 +13,10 @@ import {
 
 import { ManualStockTransfer } from '../../models/items/manual-stock-transfer';
 
+/*@Pipe({
+  name: 'ManualStockTransfer',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class ManualStockTransferModelConfig extends AocModelConfig<ManualStockTr
   constructor() {
     super(ManualStockTransfer);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'manual stock transfer',
-    plural: 'manual stock transfers',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class ManualStockTransferModelConfig extends AocModelConfig<ManualStockTr
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<ManualStockTransfer> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(manualStockTransfer: ManualStockTransfer): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(manualStockTransfer: ManualStockTransfer): string {
     return manualStockTransfer?.toString() ?? '';
-  }
+  }*/
 }

@@ -13,6 +13,10 @@ import {
 
 import { Series } from '../../models/common/series';
 
+/*@Pipe({
+  name: 'Series',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class SeriesModelConfig extends AocModelConfig<Series> {
   constructor() {
     super(Series);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'series',
-    plural: 'series',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class SeriesModelConfig extends AocModelConfig<Series> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Series> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(series: Series): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(series: Series): string {
     return series?.toString() ?? '';
-  }
+  }*/
 }

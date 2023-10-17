@@ -11,6 +11,10 @@ import {
 
 import { Gender } from '../../models/common/gender';
 
+/*@Pipe({
+  name: 'Gender',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +24,7 @@ export class GenderModelConfig extends AocModelConfig<Gender> {
   }
 
   // Default read, write, delete and clone permissions
-  readonly allow: AocModelConfigAllow = 'none';
+  readonly allow: AocModelConfigAllow = 'all';
 
   /*
    * Form options:
@@ -35,8 +39,8 @@ export class GenderModelConfig extends AocModelConfig<Gender> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Gender> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(gender: Gender): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(gender: Gender): string {
     return gender?.toString() ?? '';
-  }
+  }*/
 }

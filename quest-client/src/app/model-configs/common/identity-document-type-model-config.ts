@@ -11,6 +11,10 @@ import {
 
 import { IdentityDocumentType } from '../../models/common/identity-document-type';
 
+/*@Pipe({
+  name: 'IdentityDocumentType',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -35,8 +39,8 @@ export class IdentityDocumentTypeModelConfig extends AocModelConfig<IdentityDocu
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<IdentityDocumentType> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(identityDocumentType: IdentityDocumentType): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(identityDocumentType: IdentityDocumentType): string {
     return identityDocumentType?.toString() ?? '';
-  }
+  }*/
 }

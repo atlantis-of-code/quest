@@ -13,6 +13,10 @@ import {
 
 import { Invoice } from '../../models/invoicing/invoice';
 
+/*@Pipe({
+  name: 'Invoice',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class InvoiceModelConfig extends AocModelConfig<Invoice> {
   constructor() {
     super(Invoice);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'invoice',
-    plural: 'invoices',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class InvoiceModelConfig extends AocModelConfig<Invoice> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Invoice> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(invoice: Invoice): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(invoice: Invoice): string {
     return invoice?.toString() ?? '';
-  }
+  }*/
 }

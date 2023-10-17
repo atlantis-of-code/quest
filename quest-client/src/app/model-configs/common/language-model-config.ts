@@ -11,6 +11,10 @@ import {
 
 import { Language } from '../../models/common/language';
 
+/*@Pipe({
+  name: 'Language',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +24,7 @@ export class LanguageModelConfig extends AocModelConfig<Language> {
   }
 
   // Default read, write, delete and clone permissions
-  readonly allow: AocModelConfigAllow = 'none';
+  readonly allow: AocModelConfigAllow = 'all';
 
   /*
    * Form options:
@@ -33,14 +37,10 @@ export class LanguageModelConfig extends AocModelConfig<Language> {
   // Filter definition for payloads sent by grids and autocompletes
   // AocModelConfigClientPayload is used to define here the AocFilterQuery for a given payload search term
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
-  readonly payload: AocModelConfigClientPayload<Language> | AocModelConfigServerPayload = p => {
-    return {
-      name: { $startsWith: p }
-    }
-  };
+  readonly payload: AocModelConfigClientPayload<Language> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(language: Language): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(language: Language): string {
     return language?.toString() ?? '';
-  }
+  }*/
 }

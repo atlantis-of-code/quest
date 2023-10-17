@@ -13,6 +13,10 @@ import {
 
 import { Category } from '../../models/items/category';
 
+/*@Pipe({
+  name: 'Category',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class CategoryModelConfig extends AocModelConfig<Category> {
   constructor() {
     super(Category);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'category',
-    plural: 'categories',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class CategoryModelConfig extends AocModelConfig<Category> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Category> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(category: Category): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(category: Category): string {
     return category?.toString() ?? '';
-  }
+  }*/
 }

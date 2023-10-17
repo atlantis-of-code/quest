@@ -13,6 +13,10 @@ import {
 
 import { AddressTemplate } from '../../models/templates/address-template';
 
+/*@Pipe({
+  name: 'AddressTemplate',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class AddressTemplateModelConfig extends AocModelConfig<AddressTemplate> 
   constructor() {
     super(AddressTemplate);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'address template',
-    plural: 'address templates',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class AddressTemplateModelConfig extends AocModelConfig<AddressTemplate> 
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<AddressTemplate> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(addressTemplate: AddressTemplate): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(addressTemplate: AddressTemplate): string {
     return addressTemplate?.toString() ?? '';
-  }
+  }*/
 }

@@ -13,6 +13,10 @@ import {
 
 import { Item } from '../../models/items/item';
 
+/*@Pipe({
+  name: 'Item',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class ItemModelConfig extends AocModelConfig<Item> {
   constructor() {
     super(Item);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'item',
-    plural: 'items',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class ItemModelConfig extends AocModelConfig<Item> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Item> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(item: Item): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(item: Item): string {
     return item?.toString() ?? '';
-  }
+  }*/
 }

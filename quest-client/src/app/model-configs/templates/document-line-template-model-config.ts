@@ -13,6 +13,10 @@ import {
 
 import { DocumentLineTemplate } from '../../models/templates/document-line-template';
 
+/*@Pipe({
+  name: 'DocumentLineTemplate',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class DocumentLineTemplateModelConfig extends AocModelConfig<DocumentLine
   constructor() {
     super(DocumentLineTemplate);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'document line template',
-    plural: 'document line templates',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class DocumentLineTemplateModelConfig extends AocModelConfig<DocumentLine
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<DocumentLineTemplate> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(documentLineTemplate: DocumentLineTemplate): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(documentLineTemplate: DocumentLineTemplate): string {
     return documentLineTemplate?.toString() ?? '';
-  }
+  }*/
 }

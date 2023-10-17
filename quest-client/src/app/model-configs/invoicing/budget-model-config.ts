@@ -13,6 +13,10 @@ import {
 
 import { Budget } from '../../models/invoicing/budget';
 
+/*@Pipe({
+  name: 'Budget',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class BudgetModelConfig extends AocModelConfig<Budget> {
   constructor() {
     super(Budget);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'budget',
-    plural: 'budgets',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class BudgetModelConfig extends AocModelConfig<Budget> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Budget> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(budget: Budget): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(budget: Budget): string {
     return budget?.toString() ?? '';
-  }
+  }*/
 }

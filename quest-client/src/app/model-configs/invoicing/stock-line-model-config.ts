@@ -13,6 +13,10 @@ import {
 
 import { StockLine } from '../../models/invoicing/stock-line';
 
+/*@Pipe({
+  name: 'StockLine',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class StockLineModelConfig extends AocModelConfig<StockLine> {
   constructor() {
     super(StockLine);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'stock line',
-    plural: 'stock lines',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class StockLineModelConfig extends AocModelConfig<StockLine> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<StockLine> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(stockLine: StockLine): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(stockLine: StockLine): string {
     return stockLine?.toString() ?? '';
-  }
+  }*/
 }

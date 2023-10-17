@@ -13,6 +13,10 @@ import {
 
 import { Country } from '../../models/common/country';
 
+/*@Pipe({
+  name: 'Country',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class CountryModelConfig extends AocModelConfig<Country> {
   constructor() {
     super(Country);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'country',
-    plural: 'countries',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class CountryModelConfig extends AocModelConfig<Country> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Country> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(country: Country): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(country: Country): string {
     return country?.toString() ?? '';
-  }
+  }*/
 }

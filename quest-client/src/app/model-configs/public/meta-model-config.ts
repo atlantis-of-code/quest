@@ -13,6 +13,10 @@ import {
 
 import { Meta } from '../../models/public/meta';
 
+/*@Pipe({
+  name: 'Meta',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class MetaModelConfig extends AocModelConfig<Meta> {
   constructor() {
     super(Meta);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'meta',
-    plural: 'metas',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class MetaModelConfig extends AocModelConfig<Meta> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<Meta> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(meta: Meta): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(meta: Meta): string {
     return meta?.toString() ?? '';
-  }
+  }*/
 }

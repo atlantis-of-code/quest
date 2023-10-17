@@ -13,6 +13,10 @@ import {
 
 import { PaymentSystem } from '../../models/common/payment-system';
 
+/*@Pipe({
+  name: 'PaymentSystem',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -20,12 +24,6 @@ export class PaymentSystemModelConfig extends AocModelConfig<PaymentSystem> {
   constructor() {
     super(PaymentSystem);
   }
-
-  readonly name: AocModelConfigName = {
-    singular: 'payment system',
-    plural: 'payment systems',
-    gender: AocGender.Masculine
-  };
 
   // Default read, write, delete and clone permissions
   readonly allow: AocModelConfigAllow = 'all';
@@ -43,8 +41,8 @@ export class PaymentSystemModelConfig extends AocModelConfig<PaymentSystem> {
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
   readonly payload: AocModelConfigClientPayload<PaymentSystem> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(paymentSystem: PaymentSystem): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(paymentSystem: PaymentSystem): string {
     return paymentSystem?.toString() ?? '';
-  }
+  }*/
 }

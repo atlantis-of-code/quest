@@ -11,6 +11,10 @@ import {
 
 import { StreetSuffix } from '../../models/common/street-suffix';
 
+/*@Pipe({
+  name: 'StreetSuffix',
+  standalone: true
+})*/
 @Injectable({
   providedIn: 'root'
 })
@@ -33,17 +37,10 @@ export class StreetSuffixModelConfig extends AocModelConfig<StreetSuffix> {
   // Filter definition for payloads sent by grids and autocompletes
   // AocModelConfigClientPayload is used to define here the AocFilterQuery for a given payload search term
   // AocModelConfigServer if a server side filter or query builder must be used to filter for a given payload search term
-  readonly payload: AocModelConfigClientPayload<StreetSuffix> | AocModelConfigServerPayload = p => {
-    return {
-      $or: [
-        { abbrv: { $startsWith: p }},
-        { name: { $startsWith: p }}
-      ]
-    }
-  };
+  readonly payload: AocModelConfigClientPayload<StreetSuffix> | AocModelConfigServerPayload;
 
-  // This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
-  transform(streetSuffix: StreetSuffix): string {
+  /* This method is compatible with Angular Pipe, so the model config can be also used as a @Pipe
+  override transform(streetSuffix: StreetSuffix): string {
     return streetSuffix?.toString() ?? '';
-  }
+  }*/
 }
