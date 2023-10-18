@@ -15,8 +15,22 @@ export class FileRouter {
 
   constructor() {
     this._router = Router();
-
+    this._router.get('/get/:id', AocMikroRequestContext.get(), this.get());
     this._router.get('/download/:id', AocMikroRequestContext.get(), this.download());
+  }
+
+  private get() {
+    return async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const em = RequestContext.getEntityManager();
+        const appFile = await em.findOneOrFail(File, {id: req.params.id});
+        res.setHeader('Content-disposition', 'inline; filename="' + appFile.name + '"');
+        res.setHeader('Content-type', appFile.mime);
+        res.download(this.getPath(appFile), next)
+      } catch (e) {
+        next(e);
+      }
+    }
   }
 
   private download() {
