@@ -41,14 +41,16 @@ import { FilesService } from '../../../services/files.service';
       (filesDrop)="processFiles($event)"
     >
       <ng-template aocUiToolbar="left">
-        <aoc-ui-item *ngIf="fileSubdirectory">
-          <strong>{{ fileSubdirectory | titlecase }}</strong>
+        <aoc-ui-item>
+          <button aocUiButton label="Click to add files or drag and drop onto the grid..." icon="upload_file"
+                  (aocUiFileSelect)="procesarClick($event)"
+                  [multiple]="true"></button>
         </aoc-ui-item>
       </ng-template>
+
       <ng-template aocUiToolbar="right">
-        <aoc-ui-item>
-          <button aocUiButton label="Añadir ficheros" icon="file_open" (aocUiFileSelect)="procesarClick($event)"
-                  [multiple]="true"></button>
+        <aoc-ui-item *ngIf="fileSubdirectory">
+          <strong>{{ fileSubdirectory | titlecase }}</strong>
         </aoc-ui-item>
       </ng-template>
 
@@ -57,10 +59,10 @@ import { FilesService } from '../../../services/files.service';
       </ng-template>
 
       <ng-template aocGridCell="download" let-fichero="model">
-        <i class="cloud_download" (click)="descargarFichero(fichero)"></i>
+        <i class="cloud_download" (click)="downloadFile(fichero)"></i>
       </ng-template>
 
-      <ng-template aocGridCell="edicionNombre" let-formControl="formControl">
+      <ng-template aocGridCell="nameEdit" let-formControl="formControl">
         <input aocUiInputText [formControl]="formControl">
       </ng-template>
     </aoc-grid-field>
@@ -98,12 +100,12 @@ export class FileGridFieldComponent implements OnInit {
         display: AppFile.field.NAME,
         defaultSort: 'asc',
         // size: '30rem',
-        editable: [aocUiTplRef('edicionNombre'), new UntypedFormControl(null, Validators.required)]
+        editable: [aocUiTplRef('nameEdit'), new UntypedFormControl(null, Validators.required)]
       }, {
         header: 'Path',
         display: (file) => +file.id > 0 ?
           `/${file.directory}/${file.ref_id}/${file.name}` :
-          'Pendiente de guardar a disco',
+          'Pending upload...',
         sortable: false
       },
       {
@@ -165,7 +167,7 @@ export class FileGridFieldComponent implements OnInit {
     }
   }
 
-  descargarFichero(appFile: AppFile) {
+  downloadFile(appFile: AppFile) {
     this.filesService.download(appFile)
   }
 }

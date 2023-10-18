@@ -73,7 +73,7 @@ import {
             <aoc-ui-form-page>
               <aoc-ui-form-row aocUiFormRowHeight="stretch">
                 <app-file-grid-field
-                  aocUiFormField="Customer files (documents...)"
+                  aocUiFormField="Customer files (documents, contracts...)"
                   [formControlName]="CustomerClass.collection.FILE"
                   [fileParentClass]="CustomerClass"
                   fileDirectory="Customers"
