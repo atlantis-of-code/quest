@@ -1,5 +1,5 @@
 import { NgIf, TitleCasePipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgControl, ReactiveFormsModule, UntypedFormControl, Validators } from '@angular/forms';
 import { AocGridModule } from '@atlantis-of-code/aoc-client/components/aoc-grid';
 import { AocModel, AocModelManager } from '@atlantis-of-code/aoc-client/core/models';
@@ -11,11 +11,13 @@ import { AocUiFileSelectModule } from '@atlantis-of-code/aoc-client/ui/common/di
 import { aocUiTplRef } from '@atlantis-of-code/aoc-client/ui/common/types';
 import { AocUiInputTextModule } from '@atlantis-of-code/aoc-client/ui/form/aoc-ui-input-text';
 import { AocUiDialogService } from '@atlantis-of-code/aoc-client/ui/overlay/aoc-ui-dialog';
+import { AocUiWindowDynService } from '@atlantis-of-code/aoc-client/ui/overlay/aoc-ui-window';
 import { AocUiToolbarModule } from '@atlantis-of-code/aoc-client/ui/panel/aoc-ui-toolbar';
 import { FileModelConfig } from '../../../model-configs/files/file-model-config';
 import { File as AppFile } from '../../../models/files/file';
 import { MimeToIconPipe } from '../../../pipes/mime-to-icon.pipe';
 import { FilesService } from '../../../services/files.service';
+import { FilePreviewComponent } from './file-preview.component';
 
 @Component({
   selector: 'app-file-grid-field',
@@ -31,7 +33,8 @@ import { FilesService } from '../../../services/files.service';
     AocUiInputTextModule,
     AocUiDropModule,
     MimeToIconPipe,
-    TitleCasePipe
+    TitleCasePipe,
+    FilePreviewComponent
   ],
   template: `
     <aoc-grid-field
@@ -54,8 +57,8 @@ import { FilesService } from '../../../services/files.service';
         </aoc-ui-item>
       </ng-template>
 
-      <ng-template aocGridCell="mime" let-mime="value">
-        <i style="font-size: 1.37rem" class="material-symbols-rounded">{{mime | mimeToIcon}}</i>
+      <ng-template aocGridCell="mime" let-mime="value" let-appFile="model">
+        <i style="font-size: 1.37rem" class="material-symbols-rounded" (click)="preview(appFile)">{{mime | mimeToIcon}}</i>
       </ng-template>
 
       <ng-template aocGridCell="download" let-appFile="model">
@@ -66,25 +69,35 @@ import { FilesService } from '../../../services/files.service';
         <input aocUiInputText [formControl]="formControl">
       </ng-template>
     </aoc-grid-field>
+
+    <ng-template #previewWindow>
+      <app-file-preview [files]="ngControl.value" [index]="previewFileIndex"></app-file-preview>
+    </ng-template>
   `
 })
 export class FileGridFieldComponent implements OnInit {
   @Input()
-  fileParentClass: new() => AocModel;
+  private fileParentClass: new() => AocModel;
 
   @Input()
-  fileDirectory: string;
+  private fileDirectory: string;
 
   @Input()
-  fileSubdirectory: string;
+  protected fileSubdirectory: string;
 
-  columns: AocGridColumn<AppFile>[];
+  @ViewChild('previewWindow', { read: TemplateRef }) private previewWindowTemplateRef: TemplateRef<any>;
+
+  protected columns: AocGridColumn<AppFile>[];
+
+  protected previewFileIndex = 0;
 
   constructor(
-    public modelConfig: FileModelConfig,
-    private ngControl: NgControl,
+    protected modelConfig: FileModelConfig,
+    protected ngControl: NgControl,
     private aocUiDialogService: AocUiDialogService,
-    private filesService: FilesService
+    private filesService: FilesService,
+    private aocUiWindowDynService: AocUiWindowDynService,
+
   ) { }
 
   ngOnInit(): void {
@@ -165,6 +178,17 @@ export class FileGridFieldComponent implements OnInit {
       }
       this.ngControl.control.setValue(currentAppFiles);
     }
+  }
+
+  protected async preview(file: AppFile) {
+    const files: AppFile[] = this.ngControl.control.value;
+    this.previewFileIndex = files.findIndex(f => f.id === file.id);
+    this.aocUiWindowDynService.open(this.previewWindowTemplateRef, {
+      header: `Previsualización de ficheros`,
+      modal: true,
+      height: 800,
+      width: 1024
+    });
   }
 
   protected downloadFile(appFile: AppFile) {
