@@ -22,7 +22,7 @@ export class FilesService {
   }
 
   getDownloadLink(file: QuestFile, addModificationTime = false) {
-    return `${this.aocConfig.SERVER_URL}ficheros/download/${file.id}${addModificationTime ? '?' + file.modification_time : ''}`;
+    return `${this.aocConfig.SERVER_URL}file/download/${file.id}${addModificationTime ? '?' + file.modification_time : ''}`;
   }
 
   download(file: QuestFile) {

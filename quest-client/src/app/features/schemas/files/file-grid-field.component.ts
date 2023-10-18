@@ -58,8 +58,8 @@ import { FilesService } from '../../../services/files.service';
         <i style="font-size: 1.37rem" class="material-symbols-rounded">{{mime | mimeToIcon}}</i>
       </ng-template>
 
-      <ng-template aocGridCell="download" let-fichero="model">
-        <i class="cloud_download" (click)="downloadFile(fichero)"></i>
+      <ng-template aocGridCell="download" let-appFile="model">
+        <i class="material-symbols-rounded" (click)="downloadFile(appFile)">cloud_download</i>
       </ng-template>
 
       <ng-template aocGridCell="nameEdit" let-formControl="formControl">
@@ -167,7 +167,7 @@ export class FileGridFieldComponent implements OnInit {
     }
   }
 
-  downloadFile(appFile: AppFile) {
+  protected downloadFile(appFile: AppFile) {
     this.filesService.download(appFile)
   }
 }
