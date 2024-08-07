@@ -7,14 +7,18 @@
  *
  */
 
-@forward 'theme.forward';
-
-/*@forward 'theme.forward' with (
+@forward "../../node_modules/@atlantis-of-code/aoc-client/aoc-design/misc/variables/variables";
+/* Use this block to customize theme
+@forward "../../node_modules/@atlantis-of-code/aoc-client/aoc-design/misc/variables/variables";
+with (
   $aocPrimaryColor: #dfdfec,
-  $aocPrimaryLightColor: #f6f6f9, //#ecedf2,
-  $aocPrimaryDarkColor: #b6b6d3, // #c8c7c6,
+  $aocPrimaryLightColor: #f6f6f9,
+  $aocPrimaryDarkColor: #b6b6d3,
   $aocPrimaryAccentColor: #ffcaa8,
-  $aocInputFocusBorderColor: #ffaa00, // #3500ff #3808ed
+  $aocInputFocusBorderColor: #ffaa00,
   $aocInputFocusBoxShadowColor: #ffd980,
   $aocAppBackgroundColor: #fefeff
-);*/
+);
+ */
+@use 'sass:meta';
+@include meta.load-css("../../node_modules/@atlantis-of-code/aoc-client/aoc-design/aoc.scss");

@@ -4,7 +4,6 @@ COPY quest-client /quest/quest-client
 RUN \
 	cd /quest/quest-client && \
 	npm install && \
-    cp /quest/quest-client/src/theme/theme.forward.prod.scss /quest/quest-client/src/theme/theme.forward.scss && \
 	npm run build
 
 # Server side compilation
