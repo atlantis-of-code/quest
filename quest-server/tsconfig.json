@@ -1,0 +1,23 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "target": "es2020",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types"],
+    "emitDecoratorMetadata": true,
+    "outDir": "dist",
+    "allowJs": true,
+    "paths": {}
+  },
+  "include": [
+    "typings.d.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

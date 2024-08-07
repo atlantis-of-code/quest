@@ -1,0 +1,4 @@
+// development (only for our internal development)
+@forward "../../../../aoc/aoc-client/aoc-design/misc/variables/variables";
+@use 'sass:meta';
+@include meta.load-css("../../../../aoc/aoc-client/aoc-design/aoc.scss");

@@ -1,0 +1,88 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Add only application styles, not framework:
+
+body aoc-ui-app {
+
+  // Login:
+
+  aoc-login {
+    background-attachment: fixed;
+    background-color: #EEEEFF;
+    background-image: url('./assets/app/background.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+}
+
+// Colores Facturas, Pres, Alb, Ticket
+
+app-factura-form {
+  aoc-ui-tab-panel-content {
+    background-color: #e7f9ff;
+
+    aoc-ui-form-page {
+      background-color: #e7f9ff !important;
+    }
+  }
+}
+
+app-budget-form {
+  aoc-ui-tab-panel-content {
+    background-color: #ecffec;
+
+    aoc-ui-form-page {
+      background-color: #ecffec !important;
+    }
+  }
+}
+
+app-delivery-note-form {
+  aoc-ui-tab-panel-content {
+    background-color: lightyellow;
+    aoc-ui-form-page {
+      background-color: lightyellow !important;
+    }
+  }
+}
+
+app-ticket-form {
+  aoc-ui-tab-panel-content {
+    background-color: #f5e2e2;
+    aoc-ui-form-page {
+      background-color: #f5e2e2 !important;
+    }
+  }
+}
+
+// Albaranes / Facturación de albaranes
+
+.lineas-de-albaranes-table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: initial;
+
+  tr {
+    &.header1 {
+      background-color: lightyellow; /*#cfffd0;*/
+    }
+
+    &.header2 {
+      background-color: #f4f4f4;
+    }
+
+    th.col-width {
+      width: 8rem;
+    }
+  }
+
+  td, th {
+    padding: 0.25rem 0.857rem;
+  }
+}
+
+.baja {
+  color: #8a8a8a !important;
+}

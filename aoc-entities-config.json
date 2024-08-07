@@ -1,0 +1,167 @@
+{
+  "$schema": "../aoc/aoc-cli/src/lib/entity-generator/config/aoc-entities-config.schema.json",
+  "schemas": ["common", "configuration", "contacts", "customers", "files", "invoicing", "items", "public", "templates", "users", "accounting"],
+  "db": {
+    "host": "localhost",
+    "database": "quest",
+    "port": 5432,
+    "password": "dev",
+    "user": "postgres"
+  },
+  "modelTargetPath": "./quest-client/src/app/models",
+  "modelConfigTargetPath": "./quest-client/src/app/model-configs",
+  "entityTargetPath": "./quest-server/src/entities"
+  "entityBaseClass": {
+    "name": "QuestEntity",
+    "path": "../quest-entity",
+    "implementedProperties": [
+      "id", "creation_user", "creation_time","modification_time", "modification_user"
+    ]
+  },
+  "modelBaseClass": {
+    "name": "QuestModel",
+    "path": "../quest-model",
+    "implementedProperties": [
+      "id", "creation_user", "creation_time", "modification_time", "modification_user"
+    ]
+  },
+  "pivotTables": {
+    "customers.customer_contact": {
+      "owningSideColumn": "customer_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "invoicing.budget_file": {
+      "owningSideColumn": "budget_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "invoicing.delivery_note_file": {
+      "owningSideColumn": "delivery_note_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "invoicing.invoice_file": {
+      "owningSideColumn": "invoice_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "invoicing.delivery_note_line": {
+      "owningSideColumn": "delivery_note_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "invoicing.ticket_file": {
+      "owningSideColumn": "ticket_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "invoicing.ticket_line": {
+      "owningSideColumn": "ticket_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "customers.customer_file": {
+      "owningSideColumn": "customer_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "items.item_file": {
+      "owningSideColumn": "item_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "accounting.invoice_payment": {
+      "owningSideColumn": "invoice_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    },
+    "accounting.ticket_payment": {
+      "owningSideColumn": "ticket_id",
+      "keepEntity": false,
+      "cascade": ["remove"]
+    }
+  },
+  "virtualProperties": {
+    "files.file": {
+      "raw": {
+        "type": "string"
+      }
+    },
+    "invoicing.invoice": {
+      "total_payment": {
+        "type": "string",
+        "defaultValue": "0"
+      }
+    },
+    "invoicing.ticket": {
+      "total_payment": {
+        "type": "string",
+        "defaultValue": "0"
+      }
+    }
+  },
+  "eager": {
+    "templates.address_template": ["street_suffix_id", "country_id"],
+    "templates.legal_data_template": ["identity_document_type_id"],
+    "templates.document_template": ["fiscal_year_id", "customer_id", "series_id"],
+    "templates_document_line_template": ["item_id", "store_id"],
+    "templates.address": ["street_suffix_id", "country_id"],
+    "common.legal_data": ["identity_document_type_id"]
+  },
+  "constEnums": {
+    "common.series.type": {
+      "name": "SeriesType",
+      "items": ["Invoice", "Delivery note", "Budget", "Ticket"]
+    },
+    "items.stock_log.type": {
+      "name": "StockTransferType",
+      "items": ["Delivery note", "Ticket", "Transfer", "Count"]
+    }
+  },
+  "embedTables": ["templates.legal_data_template", "templates.address_template", "templates.contact_template", "templates.document_template", "templates.document_line_template"],
+  "embedMap": {
+    "customers.customer": [
+      { "embedTable": "templates.legal_data_template", "inline":  false },
+      { "embedTable": "templates.address_template", "inline":  false },
+      { "embedTable": "template.contact_template", "inline":  false }
+    ],
+    "common.address": [
+      { "embedTable": "templates.address_template", "inline":  true }
+    ],
+    "common.legal_data": [
+      { "embedTable": "templates.legal_data_template", "inline": true }
+    ],
+    "contacts.contact": [
+      { "embedTable":  "templates.contact_template", "inline": true }
+    ],
+    "configuration.company": [
+      { "embedTable":  "templates.legal_data_template", "inline":  false },
+      { "embedTable":  "templates.address_template", "inline":  false },
+      { "embedTable":  "templates.contact_template", "inline":  false }
+    ],
+    "invoicing.budget": [
+      { "embedTable":  "templates.document_template", "inline": true }
+    ],
+    "invoicing.budget_line": [
+      { "embedTable": "templates.document_line_template", "inline": true }
+    ],
+    "invoicing.delivery_note": [
+      { "embedTable":  "templates.document_template", "inline": true }
+    ],
+    "invoicing.invoice": [
+      { "embedTable":  "templates.document_template", "inline": true }
+    ],
+    "invoicing.ticket": [
+      { "embedTable": "templates.document_template", "inline": true }
+    ]
+  },
+  "cascades": {
+    "items.item": {
+      "photo_id": ["remove"]
+    },
+    "items.stock_count": {
+      "file_id": ["remove"]
+    }
+  }
+}

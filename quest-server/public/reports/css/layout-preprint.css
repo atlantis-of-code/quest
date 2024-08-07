@@ -1,0 +1,256 @@
+body {
+  font-size: 13px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.pages {
+  width: 100%;
+  /* When setting borders, borders are repeated randomly for new pages.
+   * Use border-collapse: separate; border-spacing: 0px; and set borders in td's (not in tr's)
+   */
+}
+.pages table {
+  border-collapse: collapse;
+}
+.pages thead {
+  display: table-header-group;
+}
+.pages tfoot {
+  display: table-footer-group;
+}
+.pages tbody {
+  display: table-row-group;
+}
+.pages .align-right {
+  text-align: right;
+}
+.pages .align-left {
+  text-align: left;
+}
+.pages .align-center {
+  text-align: center;
+}
+.pages .italic {
+  font-style: italic;
+}
+.pages table.container {
+  width: 100%;
+}
+.pages table.container thead table.header {
+  width: 100%;
+}
+.pages table.container tbody.rows tr th {
+  background-color: #808080;
+  color: white;
+  border: 1px solid black;
+}
+.pages table.container tbody.rows tr td {
+  word-wrap: break-word;
+  vertical-align: top;
+}
+
+.final-page {
+  page-break-before: always;
+}
+
+/*body {
+  margin-left: 5mm;
+}*/
+.pages table.container thead {
+  /*div.side {
+    position: absolute;
+  }*/
+}
+.pages table.container thead table.header {
+  margin-bottom: 1cm;
+  /*td.logo-iso {
+    vertical-align: top;
+    padding-top: 18px;
+    padding-left: 15px;
+    padding-right: 45px;
+    img.iso {
+      max-width: 170px;
+    }
+
+    div.iso-number {
+      margin-top: -20px;
+      margin-left: 19px;
+      font-size: 10px;
+    }
+
+    hr {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .social {
+      width: 100%;
+      text-align: center;
+
+      a {
+        display: table;
+        border-collapse: separate;
+        border-spacing: 3px;
+        color: black;
+        text-decoration: none;
+        // font-weight: bold;
+        font-size: 10px;
+        margin: 0 auto;
+      }
+
+      a:hover, a:focus, a:active {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        display: table-cell;
+        vertical-align: middle;
+        max-width: 16px;
+        margin-right: 4px;
+      }
+
+      span {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }*/
+}
+.pages table.container thead table.header td.logo-quest {
+  vertical-align: top;
+  text-align: center;
+}
+.pages table.container thead table.header td.logo-quest img.quest {
+  margin-top: 2mm;
+  max-width: 200px;
+}
+.pages table.container thead table.header td.logo-quest div.nif {
+  font-size: 6pt;
+  letter-spacing: 1px;
+}
+.pages table.container thead table.header td.logo-quest div.nom {
+  font-weight: bold;
+  font-size: 11px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.pages table.container thead table.header td.logo-quest div.direccio {
+  font-size: 13px;
+}
+.pages table.container thead table.header td.spacer {
+  min-width: 1cm;
+}
+.pages table.container thead table.header td.customer {
+  width: 100%;
+  text-align: right;
+  font-size: 15px;
+  vertical-align: top;
+}
+.pages table.container thead table.header td.customer hr {
+  width: 5cm;
+  margin-right: 0;
+}
+.pages table.container thead table.header td.customer p:first-child {
+  margin-top: 0;
+}
+.pages table.container thead table.header td.customer p {
+  margin-top: 0.15em;
+  margin-bottom: 0.15em;
+}
+.pages table.container tbody.rows {
+  font-size: 15px;
+  /*table.palets-obra-empresa {
+    margin-top: 8mm;
+    width: 100%;
+  }*/
+}
+.pages table.container tbody.rows tr {
+  page-break-inside: avoid !important;
+  /*&.enb th {
+    background-color: white;
+    color: black;
+  }*/
+}
+.pages table.container tbody.rows tr td.description {
+  max-width: 10cm;
+}
+.pages table.container tbody.rows tr.albaran {
+  font-weight: bold;
+}
+.pages table.container tbody.rows tr.albaran td:first-child {
+  border-left: 1px solid black;
+}
+.pages table.container tbody.rows tr.albaran td {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.pages table.container tbody.rows tr.albaran td:last-child {
+  border-right: 1px solid black;
+}
+.pages table.container tbody.rows table.summary {
+  margin-top: 8mm;
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: separate;
+  border-spacing: 0;
+  padding: 2mm;
+  /*table.vencimientos_o_pago {
+    border-collapse: separate;
+    border-spacing: 0;
+    tr:not(:first-child) {
+      td {
+        padding-left: 2mm;
+        padding-right: 2mm;
+        text-align: right;
+        border-right: 1px solid black;
+      }
+    }
+  }*/
+}
+.pages table.container tbody.rows table.summary tr td {
+  vertical-align: top;
+}
+.pages table.container tbody.rows table.summary tr td.summary-right {
+  width: 6cm;
+}
+.pages table.container tbody.rows table.summary table.totales {
+  font-size: 15px;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.pages table.container tbody.rows table.summary table.totales tr {
+  /*td:first-child {
+    font-weight: bold;
+  }*/
+}
+.pages table.container tbody.rows table.summary table.totales tr td {
+  padding-left: 1mm;
+  padding-right: 1mm;
+}
+.pages table.container tbody.rows table.summary table.totales tr td:last-child {
+  text-align: right;
+}
+.pages table.container tbody.rows table.summary table.totales tr:last-child {
+  font-weight: bold;
+  /*&.enb {
+    background-color: white;
+    color: black;
+    td {
+      border: 1px solid black;
+    }
+  }*/
+}
+.pages table.container tbody.rows table.summary table.totales tr:last-child td {
+  padding: 1mm;
+}
+
+/*# sourceMappingURL=layout-preprint.css.map */

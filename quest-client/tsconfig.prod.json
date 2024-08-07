@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "paths": {
+      "@atlantis-of-code/aoc-client": [ "node_modules/@atlantis-of-code/aoc-client" ],
+      "@atlantis-of-code/aoc-client/*": [ "node_modules/@atlantis-of-code/aoc-client/*" ]
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "../../aoc/aoc-server/aoc-server-config.schema.json",
+  "base": {
+    "appId": "quest",
+    "programName": "Quest",
+    "locale": "es",
+    "multiTenancy": false,
+    "node": {
+      "port": 3000,
+      "logLevel": "trace",
+      "requestLimit": "500mb",
+      "useAuthHelper": true,
+      "sessionSecret": "3T3RjXAUwmXxCuBN",
+      "corsOrigin": "http://localhost:4200"
+    },
+    "postgres": {
+      "host": "localhost",
+      "port": 5432,
+      "username": "postgres",
+      "password": "dev",
+      "db": "quest",
+      "debug": true
+    },
+    "reports": {
+      "wkhtmltopdfAbsolutePath": "/usr/bin/wkhtmltopdf",
+      "wkhtmltopdfDefaultArgs": ["--enable-local-file-access"],
+      "htmlBaseHref": "",
+      "pdfCache": false,
+      "pdfCacheDirectory": "/tmp",
+      "workflows": {
+        "qpdfAbsolutePath": "/usr/bin/qpdf"
+      }
+    },
+    "custom": {
+      "filePath": "../resources/files"
+    }
+  }
+}
