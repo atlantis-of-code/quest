@@ -12,8 +12,8 @@ COPY quest-server /quest/quest-server
 RUN \
 	cd /quest/quest-server && \
     npm install && \
-	npm run build
-    #npm prune --omit=dev
+	npm run build && \
+    npm prune --omit=dev
 
 # Production image
 FROM atlantisofcode/base AS production
