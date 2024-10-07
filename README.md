@@ -8,7 +8,7 @@
   <strong>Quest for Atlantis</strong>
 </p>
 
-The **Quest for Atlantis** is a tiny ERP application designed as a demonstration for [aoc-dev](https://github.com/atlantis-of-code/aoc-dev). In addition to the framework's documentation and API, it serves as an extremely valuable and up-to-date resource for learning.
+The **Quest for Atlantis** is a tiny ERP application designed as a demonstration for [aoc-dev.io](https://aoc-dev.io). In addition to the framework's documentation and API, it serves as an extremely valuable and up-to-date resource for learning.
 
 ### See it in Action
 
