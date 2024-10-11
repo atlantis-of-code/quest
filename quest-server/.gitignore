@@ -50,4 +50,4 @@ src/config*.json
 src/config.json
 bin/*
 
-aoc-entities-secrets.json
+aoc-server-secrets.json

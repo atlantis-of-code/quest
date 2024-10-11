@@ -14,6 +14,13 @@
     "url": "https://github.com/atlantis-of-code/quest/issues"
   },
   "scripts": {
+    "start": "concurrently \"npm run --prefix quest-client dev\" \"npm run --prefix quest-server dev\"",
+    "update:all": "npm update --fund=false && npm update --fund=false --prefix quest-client && npm update --fund=false --prefix quest-server",
+    "cli:ge": "aoc-cli g e",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@atlantis-of-code/aoc-cli": "^1.0.0",
+    "concurrently": "^7.6.0"
   }
 }
